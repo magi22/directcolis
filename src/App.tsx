@@ -1,0 +1,1308 @@
+import React, { useState } from 'react';
+import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
+import { 
+  Package, MapPin, CheckCircle, ShieldCheck, Smartphone, 
+  BarChart3, Users, QrCode, Camera, FileSignature, 
+  Clock, Truck, ArrowRight, Search, Menu, X, 
+  ChevronDown, Box, FileSpreadsheet, Printer, Database,
+  Check, Navigation, AlertTriangle, RefreshCcw, LayoutDashboard,
+  ChevronUp, Play, Star, Globe, Headset, CheckCircle2, Plane,
+  PhoneCall, PackageOpen, Calendar, MessageSquare, Bike, Car
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+
+// Elegant, smooth easing curve (similar to Apple's spring/ease-out)
+const customEase = [0.16, 1, 0.3, 1];
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: customEase } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12 }
+  }
+};
+
+export default function App() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [openFaqIndex2, setOpenFaqIndex2] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  const toggleFaq2 = (index: number) => {
+    setOpenFaqIndex2(openFaqIndex2 === index ? null : index);
+  };
+
+  return (
+    <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-red-100 selection:text-red-900 overflow-x-hidden">
+      {/* 1. Header */}
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-slate-100/50 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <motion.a
+              href="#accueil"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: customEase }}
+              className="flex items-center"
+            >
+              <img
+                src={logoPaysageCouleur}
+                alt="Direct Colis"
+                className="h-12 w-auto object-contain"
+              />
+            </motion.a>
+
+            {/* Desktop Menu */}
+            <nav className="hidden md:flex items-center gap-8">
+              {['Accueil', 'À propos', 'Services', 'Suivi', 'FAQ', 'Contact'].map((item, i) => (
+                <motion.a
+                  key={item}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.8, ease: customEase }}
+                  href={`#${item.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-')}`}
+                  className="text-sm font-medium text-slate-600 hover:text-blue-950 transition-colors relative group py-2"
+                >
+                  {item}
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* CTA & Mobile Toggle */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: customEase }}
+              className="flex items-center gap-4"
+            >
+              <div className="hidden lg:flex items-center gap-2 mr-2 text-blue-950 font-bold bg-slate-50 px-4 py-2 rounded-lg border border-slate-100">
+                <PhoneCall className="w-4 h-4 text-red-600" />
+                <span className="text-sm">+221 78 642 17 33</span>
+              </div>
+              <button className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5">
+                Demander une démo
+              </button>
+              <button 
+                className="md:hidden p-2 text-slate-600 hover:text-blue-950 transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4, ease: customEase }}
+              className="md:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-4 shadow-xl overflow-hidden"
+            >
+              <a href="#accueil" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Accueil</a>
+              <a href="#a-propos" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">À propos</a>
+              <a href="#services" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Services</a>
+              <a href="#suivi" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Suivi</a>
+              <a href="#faq" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">FAQ</a>
+              <a href="#contact" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Contact</a>
+              <button className="w-full mt-4 px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-md shadow-red-600/10">
+                Demander une démo
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      <main>
+        {/* 2. Hero */}
+        <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white">
+          {/* Elegant Background Elements */}
+          <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/50 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/30 rounded-full blur-3xl -z-10"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="max-w-2xl"
+              >
+                <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.15] tracking-tight mb-6">
+                  Suivez, gérez et livrez vos colis avec une <span className="text-red-600">traçabilité complète.</span>
+                </motion.h1>
+                <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed font-light">
+                  Direct Colis vous permet de piloter chaque étape de vos expéditions grâce à un suivi structuré, un système de scan QR code, une livraison sécurisée et une preuve fiable à l'arrivée.
+                </motion.p>
+                
+                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
+                  <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5">
+                    Suivre un colis
+                  </button>
+                  <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-blue-950 bg-white border border-slate-200 hover:border-blue-950 hover:bg-slate-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                    Demander une démo
+                  </button>
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-500">
+                  {['QR Code', 'Tracking', 'OTP', 'Photo', 'Suivi GPS'].map((item, i) => (
+                    <div key={item} className="flex items-center gap-1.5">
+                      <CheckCircle className="h-4 w-4 text-red-600" /> {item}
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              {/* Hero Visual / Mockup - Elegant Version */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: customEase, delay: 0.2 }}
+                className="relative mx-auto w-full max-w-lg lg:max-w-none"
+              >
+                {/* Decorative offset background */}
+                <div className="absolute inset-0 bg-blue-950/5 rounded-3xl transform rotate-3 scale-105 -z-10 transition-transform duration-700 hover:rotate-6"></div>
+                
+                <motion.div 
+                  animate={{ y: [-8, 8, -8] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                  className="bg-white border border-slate-100 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-8 relative overflow-hidden"
+                >
+                  <div className="flex items-center justify-between mb-6 pb-5 border-b border-slate-100">
+                    <div>
+                      <p className="text-sm text-slate-500 font-medium mb-1">Colis #DC-84729</p>
+                      <h3 className="text-xl font-bold text-blue-950">En cours de livraison</h3>
+                    </div>
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold uppercase tracking-wider">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                      </span>
+                      Suivi en direct
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6 mb-2">
+                    {/* Tracking Steps */}
+                    <div className="flex flex-col justify-center">
+                      <div className="relative pl-8 pb-8 border-l-2 border-red-600 ml-3">
+                        <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-red-600 border-4 border-white shadow-sm"></div>
+                        <p className="text-sm font-bold text-blue-950">Aujourd'hui, 09:45</p>
+                        <p className="text-sm text-slate-600 mt-0.5">Pris en charge par le livreur</p>
+                      </div>
+                      <div className="relative pl-8 pb-8 border-l-2 border-slate-100 ml-3">
+                        <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-slate-200 border-4 border-white"></div>
+                        <p className="text-sm font-bold text-slate-400">Livraison estimée</p>
+                        <p className="text-sm text-slate-400 mt-0.5">Entre 14:00 et 16:00</p>
+                      </div>
+                      <div className="relative pl-8 ml-3">
+                        <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-slate-200 border-4 border-white"></div>
+                        <p className="text-sm font-bold text-slate-400">Remise au destinataire</p>
+                        <p className="text-sm text-slate-400 mt-0.5">Validation par OTP requise</p>
+                      </div>
+                    </div>
+
+                    {/* QR Code / Barcode Scanner */}
+                    <div className="w-full h-full p-4 bg-slate-50 rounded-xl border border-slate-100 flex flex-col justify-center items-center relative overflow-hidden group">
+                      {/* 4 Scanning Lasers */}
+                      <motion.div animate={{ top: ['-10%', '110%'] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} className="absolute left-0 right-0 h-0.5 bg-red-500 shadow-[0_0_10px_2px_rgba(239,68,68,0.5)] z-20" />
+                      <motion.div animate={{ bottom: ['-10%', '110%'] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }} className="absolute left-0 right-0 h-0.5 bg-red-500 shadow-[0_0_10px_2px_rgba(239,68,68,0.5)] z-20" />
+                      <motion.div animate={{ left: ['-10%', '110%'] }} transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }} className="absolute top-0 bottom-0 w-0.5 bg-red-500 shadow-[0_0_10px_2px_rgba(239,68,68,0.5)] z-20" />
+                      <motion.div animate={{ right: ['-10%', '110%'] }} transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }} className="absolute top-0 bottom-0 w-0.5 bg-red-500 shadow-[0_0_10px_2px_rgba(239,68,68,0.5)] z-20" />
+                      
+                      <div className="absolute inset-0 bg-blue-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <QrCode className="h-24 w-24 text-blue-950 opacity-80 mb-4" />
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 bg-white px-3 py-1.5 rounded shadow-sm border border-slate-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                        SCAN
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 p-5 bg-slate-50 rounded-xl flex items-center gap-4 border border-slate-100/50">
+                    <div className="h-12 w-12 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center shrink-0">
+                      <Truck className="h-5 w-5 text-blue-950" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-blue-950">Livreur : Thomas D.</p>
+                      <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
+                        <Navigation className="h-3 w-3 text-red-500" /> Véhicule géolocalisé
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2.5 About Us / Expertise */}
+        <section id="a-propos" className="py-24 bg-white overflow-hidden relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side: Images & Floating Elements */}
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={fadeInUp}
+                className="relative"
+              >
+                {/* Main Image */}
+                <div className="w-11/12 md:w-4/5 h-[450px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
+                  <img 
+                    src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=1000&auto=format&fit=crop" 
+                    alt="Entrepôt logistique" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-blue-950/10"></div>
+                </div>
+
+                {/* Secondary Image */}
+                <div className="absolute bottom-0 right-0 w-3/4 md:w-2/3 h-[280px] rounded-[2rem] overflow-hidden border-[8px] border-white shadow-2xl z-20 translate-y-1/4">
+                  <img 
+                    src="https://images.unsplash.com/photo-1615460549969-36fa19521a4f?q=80&w=1000&auto=format&fit=crop" 
+                    alt="Livraison locale" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Floating Red Card */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3, duration: 0.6, ease: customEase }}
+                  viewport={{ once: true }}
+                  className="absolute top-12 -right-4 md:-right-12 bg-red-600 rounded-[2rem] p-6 md:p-8 text-white shadow-2xl w-64 md:w-72 z-30"
+                >
+                  <div className="flex -space-x-4 mb-4">
+                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=33" alt="Client" />
+                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=47" alt="Client" />
+                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=12" alt="Client" />
+                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=68" alt="Client" />
+                  </div>
+                  <div className="flex text-yellow-400 mb-2">
+                    <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
+                  </div>
+                  <p className="text-sm font-medium mb-6 opacity-90">Clients 4.8 (3,567 Avis)</p>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-5xl font-black tracking-tight">1M+</span>
+                    <span className="text-sm leading-tight font-medium opacity-90">Colis<br/>Livrés</span>
+                  </div>
+                  <button className="flex items-center gap-3 text-sm font-bold hover:opacity-80 transition-opacity group">
+                    <div className="w-12 h-12 bg-white text-red-600 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <Play className="w-5 h-5 ml-1 fill-current" />
+                    </div>
+                    Voir la vidéo
+                  </button>
+                </motion.div>
+
+                {/* Circular Badge */}
+                <motion.div 
+                  initial={{ opacity: 0, rotate: -90 }}
+                  whileInView={{ opacity: 1, rotate: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8, ease: customEase }}
+                  viewport={{ once: true }}
+                  className="absolute -bottom-12 -left-8 md:-left-12 w-40 h-40 z-30 hidden sm:block"
+                >
+                  <div className="w-full h-full bg-white rounded-full shadow-2xl p-2 relative flex items-center justify-center">
+                    <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-red-600 animate-[spin_20s_linear_infinite]">
+                      <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                      <text className="text-[12.5px] font-bold uppercase tracking-[0.15em]" fill="currentColor">
+                        <textPath href="#circlePath">Direct Colis • Logistique • Livraison •</textPath>
+                      </text>
+                    </svg>
+                    <div className="w-16 h-16 bg-blue-950 rounded-full flex items-center justify-center text-white relative z-10">
+                      <Truck className="h-7 w-7" />
+                    </div>
+                  </div>
+                </motion.div>
+                
+                {/* Decorative dashed line */}
+                <svg className="absolute -left-16 top-1/2 w-32 h-32 text-red-600/30 -z-10 hidden md:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4">
+                  <path d="M0 100 Q 50 50, 100 0" />
+                  <Bike className="w-6 h-6 text-red-600 absolute top-0 right-0" />
+                </svg>
+              </motion.div>
+
+              {/* Right Side: Text Content */}
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+                className="lg:pl-12 mt-24 lg:mt-0"
+              >
+                <motion.div variants={fadeInUp} className="flex items-center gap-4 text-red-600 font-bold text-sm uppercase tracking-wider mb-6">
+                  <div className="flex items-center gap-1">
+                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                    <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                    <div className="w-8 h-px bg-red-600"></div>
+                  </div>
+                  À PROPOS DE NOUS
+                  <div className="flex items-center gap-1">
+                    <div className="w-8 h-px bg-red-600"></div>
+                    <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  </div>
+                </motion.div>
+                
+                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-blue-950 mb-6 leading-[1.15]">
+                  Notre expertise au service de vos <span className="text-red-600">livraisons au Sénégal</span>
+                </motion.h2>
+                
+                <motion.p variants={fadeInUp} className="text-slate-600 mb-10 leading-relaxed font-light text-lg">
+                  Direct Colis accompagne les entreprises, e-commerçants et équipes logistiques avec une approche adaptée aux réalités du terrain. Nous assurons une gestion fluide du mouvement des marchandises, de l'origine à la destination finale.
+                </motion.p>
+                
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-8 mb-10">
+                  <div className="flex gap-4">
+                    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                      <Globe className="w-7 h-7 text-red-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-blue-950 mb-1 text-lg">Couverture Nationale</h4>
+                      <p className="text-sm text-slate-500 font-light leading-relaxed">Une présence sur les axes majeurs (Dakar, Thiès, Mbour...).</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                      <Headset className="w-7 h-7 text-red-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-blue-950 mb-1 text-lg">Support Réactif</h4>
+                      <p className="text-sm text-slate-500 font-light leading-relaxed">Une équipe dédiée pour suivre et résoudre vos requêtes.</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-y-4 gap-x-6 mb-12">
+                  {[
+                    "Traçabilité 100% garantie",
+                    "Preuve de livraison sécurisée",
+                    "Flotte adaptée au terrain",
+                    "API & Intégration facile"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-red-600 shrink-0" />
+                      <span className="text-slate-700 font-medium">{item}</span>
+                    </div>
+                  ))}
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-6 border-t border-slate-100 flex-wrap">
+                  <button className="flex items-center gap-4 bg-red-600 text-white pl-8 pr-2 py-2.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5 group shrink-0">
+                    En savoir plus
+                    <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
+                  </button>
+
+                  <div className="h-10 w-px bg-slate-200 hidden sm:block"></div>
+
+                  <div className="flex items-center gap-3">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="CEO" className="w-12 h-12 rounded-full border-2 border-slate-100 shadow-sm" />
+                    <div>
+                      <p className="font-bold text-blue-950">Amadou Fall</p>
+                      <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-0.5">Fondateur & CEO</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Bloc tracking rapide */}
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          id="suivi" 
+          className="py-16 bg-white relative z-20 -mt-10"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 p-8 md:p-12 text-center transition-shadow duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
+              <h2 className="text-2xl md:text-3xl font-bold text-blue-950 mb-4">Suivez votre colis en quelques secondes</h2>
+              <p className="text-slate-600 mb-8 max-w-2xl mx-auto font-light">
+                Entrez votre numéro de suivi pour consulter le statut du colis, son historique et les informations liées à la livraison.
+              </p>
+              
+              <form className="max-w-xl mx-auto" onSubmit={(e) => e.preventDefault()}>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="relative flex-grow group">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-950 transition-colors" />
+                    </div>
+                    <input 
+                      type="text" 
+                      className="block w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-950/20 focus:border-blue-950 transition-all" 
+                      placeholder="Numéro de suivi"
+                    />
+                  </div>
+                  <button 
+                    type="submit" 
+                    className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-xl transition-all duration-300 shadow-md shadow-red-600/10 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 whitespace-nowrap"
+                  >
+                    Rechercher
+                  </button>
+                </div>
+                <p className="text-xs text-slate-500 mt-4">
+                  Recherche par identifiant de colis ou référence client.
+                </p>
+              </form>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* 5. Section services */}
+        <section id="services" className="py-24 bg-slate-50/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center mb-24"
+            >
+              <div className="flex items-center justify-center gap-4 text-red-600 font-bold text-sm uppercase tracking-wider mb-6">
+                <div className="flex items-center gap-1">
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-8 h-px bg-red-600"></div>
+                </div>
+                NOS SERVICES
+                <div className="flex items-center gap-1">
+                  <div className="w-8 h-px bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                </div>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
+                Des services logistiques efficaces
+              </h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-red-600 leading-tight">
+                pour votre entreprise
+              </h2>
+            </motion.div>
+
+            <motion.div 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+            >
+              {[
+                {
+                  icon: <Search className="h-8 w-8 text-white" />,
+                  title: "Suivi de colis",
+                  desc: "Un accès simple au statut, à l'historique et aux informations de livraison en temps réel pour vous et vos clients."
+                },
+                {
+                  icon: <Truck className="h-8 w-8 text-white" />,
+                  title: "Collecte & Acheminement",
+                  desc: "Une gestion claire du colis, de la prise en charge jusqu'au dernier kilomètre avec une flotte adaptée au terrain."
+                },
+                {
+                  icon: <FileSignature className="h-8 w-8 text-white" />,
+                  title: "Preuve de livraison",
+                  desc: "Validation par OTP, photo, signature et géolocalisation pour sécuriser chaque remise au destinataire."
+                },
+                {
+                  icon: <AlertTriangle className="h-8 w-8 text-white" />,
+                  title: "Gestion des échecs",
+                  desc: "Motif détaillé, photo justificative, retour entrepôt sécurisé et reprogrammation fluide des tentatives."
+                },
+                {
+                  icon: <Users className="h-8 w-8 text-white" />,
+                  title: "Gestion grands comptes",
+                  desc: "Import Excel/CSV, double identifiant, génération d'étiquettes QR et reporting complet pour les volumes importants."
+                },
+                {
+                  icon: <LayoutDashboard className="h-8 w-8 text-white" />,
+                  title: "Pilotage des opérations",
+                  desc: "Visibilité totale sur les missions en cours, l'activité des livreurs et les performances globales de livraison."
+                }
+              ].map((service, i) => (
+                <motion.div 
+                  key={i} 
+                  variants={fadeInUp}
+                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] transition-all duration-300 px-8 pb-10 pt-14 relative text-center flex flex-col items-center group"
+                >
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-950 mb-4">{service.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed font-light mb-8 flex-grow">{service.desc}</p>
+                  <a href="#" className="inline-flex items-center gap-2 text-blue-950 font-bold text-sm hover:text-red-600 transition-colors">
+                    En savoir plus <ArrowRight className="w-4 h-4" />
+                  </a>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 6. Section "Comment ça marche" */}
+        <section className="py-24 bg-slate-50 relative overflow-hidden">
+          {/* Subtle dot pattern background */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '30px 30px' }}></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center mb-20"
+            >
+              <div className="flex items-center justify-center gap-3 text-red-600 font-bold text-sm uppercase tracking-wider mb-6">
+                <Box className="w-4 h-4" />
+                <div className="flex items-center gap-1">
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-4 h-px bg-red-600"></div>
+                </div>
+                <Bike className="w-5 h-5" />
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-px bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                </div>
+                PROCESSUS DE TRAVAIL
+                <div className="flex items-center gap-1">
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-4 h-px bg-red-600"></div>
+                </div>
+                <Car className="w-5 h-5" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
+                Un processus optimisé pour
+              </h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-red-600 leading-tight">
+                vos livraisons
+              </h2>
+            </motion.div>
+
+            <div className="relative mt-16">
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10"
+              >
+                {[
+                  { 
+                    num: "01", 
+                    title: "Création & Assignation", 
+                    desc: "Ce processus est dédié à l'enregistrement et l'attribution efficace des colis.",
+                    icon: <PhoneCall className="w-8 h-8" />
+                  },
+                  { 
+                    num: "02", 
+                    title: "Collecte & Scan", 
+                    desc: "Ce processus garantit la prise en charge et la traçabilité dès le premier kilomètre.",
+                    icon: <Box className="w-8 h-8" />
+                  },
+                  { 
+                    num: "03", 
+                    title: "Transit & Hub", 
+                    desc: "Ce processus assure le suivi et le contrôle lors des passages en entrepôt.",
+                    icon: <PackageOpen className="w-8 h-8" />
+                  },
+                  { 
+                    num: "04", 
+                    title: "Livraison & Preuve", 
+                    desc: "Ce processus sécurise la remise finale avec une validation fiable et géolocalisée.",
+                    icon: <Truck className="w-8 h-8" />
+                  }
+                ].map((step, i) => (
+                  <motion.div 
+                    key={i} 
+                    variants={fadeInUp}
+                    className="relative flex flex-col items-center text-center group"
+                  >
+                    {/* Arrow for Desktop */}
+                    {i < 3 && (
+                      <div className="hidden lg:block absolute top-12 left-[calc(50%+4rem)] right-[calc(-50%+4rem)] h-0.5 bg-red-600 z-0">
+                        <div className="absolute right-0 -top-[5px] w-0 h-0 border-t-[6px] border-t-transparent border-l-[8px] border-l-red-600 border-b-[6px] border-b-transparent"></div>
+                      </div>
+                    )}
+
+                    {/* Icon Circle */}
+                    <div className="relative mb-8 z-10">
+                      <div className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform duration-300 border-4 border-white ring-8 ring-red-50">
+                        {step.icon}
+                      </div>
+                      {/* Number Badge */}
+                      <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow-sm">
+                        {step.num}
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-blue-950 mb-4">{step.title}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed font-light px-2">{step.desc}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Bottom Banner */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="mt-24 bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-center shadow-2xl"
+            >
+              {/* Background Map Pattern */}
+              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/world-map.png")' }}></div>
+              
+              {/* Left Content */}
+              <div className="p-10 md:p-16 md:w-3/5 relative z-10">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                  Reconnu comme l'un des leaders de la <span className="text-red-500">Logistique !</span>
+                </h3>
+                <p className="text-slate-300 mb-8 font-light leading-relaxed max-w-md">
+                  Direct Colis joue un rôle central dans l'écosystème de la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises.
+                </p>
+                <button className="flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group">
+                  En savoir plus
+                  <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </div>
+                </button>
+              </div>
+
+              {/* Right Content */}
+              <div className="md:w-2/5 relative h-80 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
+                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden flex items-end justify-center">
+                  <img 
+                    src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=1000&auto=format&fit=crop" 
+                    alt="Livreur Direct Colis" 
+                    className="w-full h-full object-cover mix-blend-luminosity opacity-40 absolute inset-0"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-red-600/80 to-transparent"></div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?q=80&w=1000&auto=format&fit=crop"
+                    alt="Logistique"
+                    className="relative z-10 w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 7. Section "Pourquoi choisir Direct Colis" */}
+        <section className="py-24 bg-blue-950 text-white relative overflow-hidden">
+          {/* Elegant subtle gradient overlay */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/40 via-blue-950 to-blue-950"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="max-w-3xl mb-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">Plus de visibilité. Plus de contrôle. Moins d'incertitude.</h2>
+              <div className="h-1 w-20 bg-red-600 rounded-full"></div>
+            </motion.div>
+
+            <motion.div 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12"
+            >
+              {[
+                {
+                  icon: <QrCode className="h-7 w-7 text-red-500" />,
+                  title: "Chaque étape est tracée",
+                  desc: "Le scan QR code structure le suivi du colis tout au long du parcours."
+                },
+                {
+                  icon: <ShieldCheck className="h-7 w-7 text-red-500" />,
+                  title: "La remise est sécurisée",
+                  desc: "OTP, photo, signature et géolocalisation réduisent les litiges."
+                },
+                {
+                  icon: <Users className="h-7 w-7 text-red-500" />,
+                  title: "Les équipes gagnent en clarté",
+                  desc: "Les responsables ont une meilleure lecture des missions et du flux."
+                },
+                {
+                  icon: <Smartphone className="h-7 w-7 text-red-500" />,
+                  title: "Le client reste informé",
+                  desc: "Le destinataire reçoit les bonnes informations au bon moment."
+                },
+                {
+                  icon: <Box className="h-7 w-7 text-red-500" />,
+                  title: "La solution s'adapte au volume",
+                  desc: "Direct Colis est pensé pour les entreprises qui gèrent beaucoup d'expéditions."
+                }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i} 
+                  variants={fadeInUp}
+                  className="flex flex-col group"
+                >
+                  <div className="mb-5 h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-red-600/10 group-hover:border-red-600/20 transition-colors duration-300">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <p className="text-blue-100/70 leading-relaxed font-light">{item.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 8. Section fonctionnalités clés */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center max-w-3xl mx-auto mb-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 tracking-tight">Les fonctionnalités qui renforcent vos livraisons</h2>
+            </motion.div>
+
+            <motion.div 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {[
+                { title: "Tracking public", icon: Globe, desc: "Lien de suivi en temps réel pour rassurer vos clients." },
+                { title: "Historique des étapes", icon: Clock, desc: "Traçabilité complète de la prise en charge à la livraison." },
+                { title: "QR code unique", icon: QrCode, desc: "Scan rapide pour chaque colis, évitant les erreurs." },
+                { title: "Suivi GPS", icon: Navigation, desc: "Localisation précise des livreurs pendant leurs tournées." },
+                { title: "OTP de validation", icon: ShieldCheck, desc: "Code de sécurité requis pour la remise du colis." },
+                { title: "Preuve visuelle", icon: Camera, desc: "Photo ou signature électronique à la livraison." },
+                { title: "Gestion des échecs", icon: AlertTriangle, desc: "Processus clair en cas d'absence ou de refus." },
+                { title: "Retour entrepôt", icon: RefreshCcw, desc: "Suivi rigoureux des colis non livrés jusqu'au retour." },
+                { title: "Import Excel / CSV", icon: FileSpreadsheet, desc: "Création de colis en masse simplifiée." },
+                { title: "Impression", icon: Printer, desc: "Génération automatique des étiquettes d'expédition." },
+                { title: "Double identifiant", icon: Package, desc: "Recherche par ID système ou référence client." },
+                { title: "Reporting", icon: BarChart3, desc: "Tableaux de bord et export complet des données." }
+              ].map((feature, i) => (
+                <motion.div 
+                  key={i} 
+                  variants={fadeInUp}
+                  className="group relative p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative z-10">
+                    <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-950 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-red-50 group-hover:text-red-600 transition-all duration-300">
+                      <feature.icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-blue-950 mb-2">{feature.title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">{feature.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 9. Section grands comptes / entreprises */}
+        <section className="py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+              >
+                <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 leading-tight tracking-tight">
+                  Pensé pour les entreprises qui veulent mieux piloter leurs expéditions
+                </motion.h2>
+                <motion.p variants={fadeInUp} className="text-lg text-slate-600 mb-10 leading-relaxed font-light">
+                  Direct Colis aide les structures qui gèrent des volumes réguliers à mieux organiser leurs flux, suivre leurs colis, accéder à leurs preuves de livraison et exploiter leurs données en toute sécurité.
+                </motion.p>
+                
+                <ul className="space-y-5">
+                  {[
+                    "Import en masse",
+                    "Étiquettes QR par lot",
+                    "Suivi par ID système ou référence client",
+                    "Données cloisonnées par client",
+                    "Statistiques et export Excel",
+                    "Reporting opérationnel"
+                  ].map((point, i) => (
+                    <motion.li key={i} variants={fadeInUp} className="flex items-start gap-3">
+                      <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-red-600 shrink-0"></div>
+                      <span className="text-slate-700 font-medium">{point}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: customEase }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-blue-950/5 rounded-2xl transform translate-x-4 translate-y-4"></div>
+                
+                <div className="bg-white border border-slate-100 rounded-2xl shadow-xl p-8 relative z-10">
+                  <div className="flex items-center justify-between mb-8">
+                    <h3 className="text-lg font-bold text-blue-950">Vue d'ensemble</h3>
+                    <select className="bg-slate-50 border border-slate-200 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-950/20">
+                      <option>Ce mois-ci</option>
+                    </select>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-8">
+                    <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+                      <p className="text-sm text-slate-500 font-medium mb-2">Total expéditions</p>
+                      <p className="text-3xl font-bold text-blue-950">1,248</p>
+                    </div>
+                    <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+                      <p className="text-sm text-slate-500 font-medium mb-2">Taux de succès</p>
+                      <p className="text-3xl font-bold text-green-600">98.4%</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-blue-50 rounded-lg">
+                          <FileSpreadsheet className="h-5 w-5 text-blue-950" />
+                        </div>
+                        <span className="text-sm font-medium text-slate-700">Import_Commandes_Oct.csv</span>
+                      </div>
+                      <span className="text-xs font-bold text-green-700 bg-green-50 px-2.5 py-1 rounded-md border border-green-100">Succès (450)</span>
+                    </div>
+                    <div className="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-blue-50 rounded-lg">
+                          <Printer className="h-5 w-5 text-blue-950" />
+                        </div>
+                        <span className="text-sm font-medium text-slate-700">Génération étiquettes</span>
+                      </div>
+                      <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">Terminé</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* 10. FAQ */}
+        <section id="faq" className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 tracking-tight">Questions fréquentes</h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-x-10 gap-y-0 items-start">
+              {/* Colonne 1 */}
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="space-y-3"
+              >
+                {[
+                  {
+                    q: "Comment suivre un colis ?",
+                    a: "Entrez simplement le numéro de suivi dans l'espace dédié pour consulter son statut et son historique."
+                  },
+                  {
+                    q: "Quelles informations puis-je voir ?",
+                    a: "Le suivi peut afficher le statut du colis, les étapes validées et certaines informations liées à la livraison."
+                  },
+                  {
+                    q: "Comment la livraison est-elle confirmée ?",
+                    a: "La confirmation peut inclure un OTP, une photo, une signature et une géolocalisation."
+                  },
+                  {
+                    q: "Que se passe-t-il en cas d'échec de livraison ?",
+                    a: "Le livreur enregistre un motif, ajoute une photo, puis le colis peut être reprogrammé ou retourné."
+                  },
+                  {
+                    q: "Direct Colis est-il adapté aux grands volumes ?",
+                    a: "Oui, la solution est pensée pour les entreprises ayant un besoin régulier et structuré."
+                  },
+                  {
+                    q: "Peut-on importer plusieurs colis à la fois ?",
+                    a: "Oui, l'import en masse via Excel ou CSV fait partie des usages prévus."
+                  }
+                ].map((faq, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp}
+                    className="border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-blue-950/20 transition-colors duration-300"
+                  >
+                    <button
+                      className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                      onClick={() => toggleFaq(i)}
+                    >
+                      <span className="text-base font-bold text-blue-950">{faq.q}</span>
+                      <motion.div
+                        animate={{ rotate: openFaqIndex === i ? 180 : 0 }}
+                        transition={{ duration: 0.3, ease: customEase }}
+                      >
+                        <ChevronDown className={`h-5 w-5 shrink-0 ml-4 ${openFaqIndex === i ? 'text-red-600' : 'text-slate-400'}`} />
+                      </motion.div>
+                    </button>
+                    <AnimatePresence>
+                      {openFaqIndex === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: customEase }}
+                        >
+                          <div className="px-6 pb-6">
+                            <p className="text-slate-600 leading-relaxed font-light">{faq.a}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Colonne 2 */}
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="space-y-3"
+              >
+                {[
+                  {
+                    q: "Quelles zones sont couvertes par Direct Colis ?",
+                    a: "Direct Colis couvre les principaux axes du Sénégal : Dakar, Thiès, Mbour, Saint-Louis et d'autres régions en expansion."
+                  },
+                  {
+                    q: "Comment contacter le support client ?",
+                    a: "Notre équipe est joignable par téléphone au +221 78 642 17 33 ou par email à contact@directcolis.sn."
+                  },
+                  {
+                    q: "Puis-je intégrer Direct Colis à mon système ?",
+                    a: "Oui, une API est disponible pour connecter Direct Colis à votre système de gestion ou e-commerce."
+                  },
+                  {
+                    q: "Quel type de colis puis-je expédier ?",
+                    a: "Direct Colis gère tous types de colis standards. Contactez-nous pour les envois hors gabarit ou les marchandises sensibles."
+                  },
+                  {
+                    q: "Comment générer des étiquettes QR ?",
+                    a: "Les étiquettes sont générées automatiquement lors de la création de colis, en unitaire ou en lot depuis un import Excel/CSV."
+                  },
+                  {
+                    q: "Les données de mes clients sont-elles sécurisées ?",
+                    a: "Oui, les données sont cloisonnées par compte client et stockées de façon sécurisée avec accès restreint."
+                  }
+                ].map((faq, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp}
+                    className="border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-blue-950/20 transition-colors duration-300"
+                  >
+                    <button
+                      className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                      onClick={() => toggleFaq2(i)}
+                    >
+                      <span className="text-base font-bold text-blue-950">{faq.q}</span>
+                      <motion.div
+                        animate={{ rotate: openFaqIndex2 === i ? 180 : 0 }}
+                        transition={{ duration: 0.3, ease: customEase }}
+                      >
+                        <ChevronDown className={`h-5 w-5 shrink-0 ml-4 ${openFaqIndex2 === i ? 'text-red-600' : 'text-slate-400'}`} />
+                      </motion.div>
+                    </button>
+                    <AnimatePresence>
+                      {openFaqIndex2 === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: customEase }}
+                        >
+                          <div className="px-6 pb-6">
+                            <p className="text-slate-600 leading-relaxed font-light">{faq.a}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* 10.5 Blog & News Section */}
+        <section className="py-24 bg-slate-50 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center max-w-3xl mx-auto mb-16"
+            >
+              <div className="flex items-center justify-center gap-3 text-red-600 font-bold text-sm uppercase tracking-wider mb-6">
+                <Box className="w-4 h-4" />
+                <div className="flex items-center gap-1">
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-4 h-px bg-red-600"></div>
+                </div>
+                <Bike className="w-5 h-5" />
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-px bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                </div>
+                BLOG & NEWS
+                <div className="flex items-center gap-1">
+                  <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-2 h-1 rounded-full bg-red-600"></div>
+                  <div className="w-4 h-px bg-red-600"></div>
+                </div>
+                <Car className="w-5 h-5" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-6 tracking-tight">
+                Dernières <span className="text-red-600">Actualités</span> de Direct Colis
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  image: "https://images.unsplash.com/photo-1586528116311-ad8ed7450900?q=80&w=800&auto=format&fit=crop",
+                  category: "Logistique",
+                  date: "10 Mai, 2025",
+                  comments: "Commentaire",
+                  title: "Comment optimiser vos expéditions avec le service Cargo",
+                  author: "Amadou Diallo",
+                  authorImg: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=150&auto=format&fit=crop"
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=800&auto=format&fit=crop",
+                  category: "Logistique",
+                  date: "10 Mai, 2025",
+                  comments: "Commentaire",
+                  title: "Suivre vos marchandises à travers la meilleure chaîne d'approvisionnement",
+                  author: "Fatou Sow",
+                  authorImg: "https://images.unsplash.com/photo-1531123897727-8f129e1b4dce?q=80&w=150&auto=format&fit=crop"
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=800&auto=format&fit=crop",
+                  category: "Logistique",
+                  date: "10 Mai, 2025",
+                  comments: "Commentaire",
+                  title: "Comment mesurer le succès de vos livraisons ?",
+                  author: "Cheikh Ndiaye",
+                  authorImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop"
+                }
+              ].map((post, i) => (
+                <motion.div 
+                  key={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={fadeInUp}
+                  className="group rounded-2xl bg-white border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-slate-200/80 transition-all duration-300 flex flex-col h-full"
+                >
+                  {/* Image Container */}
+                  <div className="relative h-64 rounded-t-2xl overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Category Badge - top left */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="inline-flex items-center gap-1.5 bg-red-600 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white/80 inline-block"></span>
+                        {post.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content Container */}
+                  <div className="p-8 pt-6 flex flex-col flex-grow">
+                    {/* Category label text */}
+                    <p className="text-red-600 text-xs font-bold uppercase tracking-widest mb-3">{post.category}</p>
+                    {/* Meta Info */}
+                    <div className="flex items-center gap-6 text-sm text-slate-500 mb-4 font-medium">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-red-600" />
+                        {post.date}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MessageSquare className="w-4 h-4 text-red-600" />
+                        {post.comments}
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-blue-950 mb-6 group-hover:text-red-600 transition-colors cursor-pointer leading-snug flex-grow">
+                      {post.title}
+                    </h3>
+
+                    {/* Footer / Author */}
+                    <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-red-100 p-0.5">
+                          <img src={post.authorImg} alt={post.author} className="w-full h-full object-cover rounded-full" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-blue-950 text-sm">{post.author}</p>
+                          <p className="text-slate-500 text-xs">{post.date}</p>
+                        </div>
+                      </div>
+                      <button className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center group-hover:bg-blue-950 transition-colors shadow-md">
+                        <ArrowRight className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 11. CTA final */}
+        <section className="py-24 bg-blue-950 relative overflow-hidden">
+          {/* Elegant subtle background */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/50 via-blue-950 to-blue-950"></div>
+          
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center"
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight tracking-tight">
+              Besoin d'une logistique plus claire et mieux suivie ?
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl text-blue-100/80 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+              Découvrez comment Direct Colis peut vous aider à mieux organiser vos livraisons, renforcer votre traçabilité et sécuriser vos preuves de remise.
+            </motion.p>
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-center gap-4">
+              <button className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5">
+                Demander une démo
+              </button>
+              <button className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-white/5 border border-white/20 hover:bg-white/10 hover:border-white/40 rounded-xl transition-all duration-300 hover:-translate-y-0.5">
+                Nous contacter
+              </button>
+            </motion.div>
+          </motion.div>
+        </section>
+      </main>
+
+      {/* 12. Footer */}
+      <footer id="contact" className="bg-blue-950 border-t border-white/10 pt-16 pb-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-2.5 mb-6">
+                <div className="bg-white p-1.5 rounded-lg">
+                  <Package className="h-5 w-5 text-blue-950" />
+                </div>
+                <span className="font-bold text-lg tracking-tight text-white">DIRECT COLIS</span>
+              </div>
+              <p className="text-blue-200/60 text-sm leading-relaxed font-light">
+                Solution logistique moderne pour le suivi, la gestion et la livraison sécurisée de vos expéditions.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-bold mb-5">Solution</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Suivi de colis</a></li>
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Preuve de livraison</a></li>
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Gestion grands comptes</a></li>
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">API & Intégrations</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-5">Entreprise</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">À propos</a></li>
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Contact</a></li>
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</a></li>
+                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Confidentialité</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold mb-5">Contact</h4>
+              <ul className="space-y-3">
+                <li className="text-blue-200/60 text-sm flex items-center gap-2">
+                  <PhoneCall className="w-4 h-4" /> +221 78 642 17 33
+                </li>
+                <li className="text-blue-200/60 text-sm flex items-center gap-2">
+                  <Globe className="w-4 h-4" /> contact@directcolis.sn
+                </li>
+                <li className="text-blue-200/60 text-sm mt-5">
+                  <button className="text-red-400 hover:text-red-300 font-medium transition-colors flex items-center gap-1 group">
+                    Support client <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-blue-200/40 text-sm font-light">
+              &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
+            </p>
+            <div className="flex gap-4">
+              <div className="h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"></div>
+              <div className="h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"></div>
+              <div className="h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
