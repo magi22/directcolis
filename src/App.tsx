@@ -588,7 +588,7 @@ export default function App() {
         </section>
 
         {/* 3. Barre de suivi pleine largeur */}
-        <section id="suivi" className="bg-blue-950 py-10">
+        <section id="suivi" className="bg-white py-10 border-b border-slate-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -596,29 +596,29 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: customEase }}
             >
-              <p className="text-blue-200/70 text-sm font-semibold uppercase tracking-widest text-center mb-3">
+              <p className="text-slate-500 text-sm font-semibold uppercase tracking-widest text-center mb-3">
                 {t.trackTitle}
               </p>
-              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.3)] border border-white/10">
+              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.08)] border border-slate-200">
                 <div className="relative flex-1 group">
                   <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-blue-300/60 group-focus-within:text-white transition-colors" />
+                    <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-950 transition-colors" />
                   </div>
                   <input
                     type="text"
-                    className="block w-full pl-14 pr-5 py-5 bg-white/5 text-white placeholder-blue-200/40 focus:outline-none focus:bg-white/10 transition-all text-base font-medium border-0"
+                    className="block w-full pl-14 pr-5 py-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-0 transition-all text-base font-medium border-0"
                     placeholder={t.trackPlaceholder}
                   />
                 </div>
                 <button
                   type="submit"
-                  className="flex items-center justify-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] whitespace-nowrap shrink-0"
+                  className="flex items-center justify-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.3)] whitespace-nowrap shrink-0"
                 >
                   <Search className="w-4 h-4" />
                   {t.trackBtn}
                 </button>
               </form>
-              <p className="text-blue-200/40 text-xs text-center mt-3">{t.trackHint}</p>
+              <p className="text-slate-400 text-xs text-center mt-3">{t.trackHint}</p>
             </motion.div>
           </div>
         </section>
