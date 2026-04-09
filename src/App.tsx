@@ -446,179 +446,218 @@ export default function App() {
           </div>
         </section>
 
-        {/* 2.5 About Us / Expertise */}
-        <section id="a-propos" className="py-24 bg-white overflow-hidden relative">
+        {/* 2.5 About Us / Expertise — redesigned */}
+        <section id="a-propos" className="py-28 bg-white overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left Side: Images & Floating Elements */}
-              <motion.div 
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={fadeInUp}
-                className="relative"
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+              {/* ── COLONNE GAUCHE ── */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.9, ease: customEase }}
+                className="relative min-h-[520px]"
               >
-                {/* Main Image */}
-                <div className="w-11/12 md:w-4/5 h-[450px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
-                  <img 
-                    src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Entrepôt logistique" 
+                {/* Image principale */}
+                <div className="w-[75%] h-[420px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
+                  <img
+                    src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=1000&auto=format&fit=crop"
+                    alt="Livraison Sénégal"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-blue-950/10"></div>
+                  <div className="absolute inset-0 bg-blue-950/10" />
                 </div>
 
-                {/* Secondary Image */}
-                <div className="absolute bottom-0 right-0 w-3/4 md:w-2/3 h-[280px] rounded-[2rem] overflow-hidden border-[8px] border-white shadow-2xl z-20 translate-y-1/4">
-                  <img 
-                    src="https://images.unsplash.com/photo-1615460549969-36fa19521a4f?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Livraison locale" 
+                {/* Image secondaire — train + containers */}
+                <div className="absolute bottom-0 right-0 w-[60%] h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20">
+                  <img
+                    src="https://images.unsplash.com/photo-1586528116311-ad8ed7450900?q=80&w=800&auto=format&fit=crop"
+                    alt="Containers logistiques"
                     className="w-full h-full object-cover"
                   />
                 </div>
 
-                {/* Floating Red Card */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3, duration: 0.6, ease: customEase }}
+                {/* Carte flottante rouge — stats */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute top-12 -right-4 md:-right-12 bg-red-600 rounded-[2rem] p-6 md:p-8 text-white shadow-2xl w-64 md:w-72 z-30"
+                  className="absolute top-8 -right-4 md:-right-10 bg-red-600 rounded-[1.75rem] p-6 text-white shadow-[0_20px_60px_rgba(220,38,38,0.35)] w-60 z-30"
                 >
-                  <div className="flex -space-x-4 mb-4">
-                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=33" alt="Client" />
-                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=47" alt="Client" />
-                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=12" alt="Client" />
-                    <img className="w-12 h-12 rounded-full border-2 border-red-600 object-cover" src="https://i.pravatar.cc/100?img=68" alt="Client" />
+                  {/* Avatars */}
+                  <div className="flex -space-x-3 mb-3">
+                    {[33,47,12,68].map(n => (
+                      <img key={n} className="w-10 h-10 rounded-full border-2 border-red-600 object-cover" src={`https://i.pravatar.cc/100?img=${n}`} alt="Client" />
+                    ))}
                   </div>
-                  <div className="flex text-yellow-400 mb-2">
-                    <Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" /><Star className="w-4 h-4 fill-current" />
+                  {/* Stars */}
+                  <div className="flex text-yellow-300 mb-1">
+                    {[...Array(5)].map((_,i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
                   </div>
-                  <p className="text-sm font-medium mb-6 opacity-90">Clients 4.8 (3,567 Avis)</p>
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-5xl font-black tracking-tight">1M+</span>
-                    <span className="text-sm leading-tight font-medium opacity-90">Colis<br/>Livrés</span>
+                  <p className="text-xs font-semibold mb-4 opacity-90">Clients 4.8 (3 567 avis)</p>
+                  {/* Big stat */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="text-5xl font-black tracking-tight leading-none">10+</span>
+                    <span className="text-xs leading-snug font-medium opacity-90">Ans<br/>d'Expérience</span>
                   </div>
+                  {/* Play */}
                   <button className="flex items-center gap-3 text-sm font-bold hover:opacity-80 transition-opacity group">
-                    <div className="w-12 h-12 bg-white text-red-600 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <Play className="w-5 h-5 ml-1 fill-current" />
+                    <div className="w-10 h-10 bg-white text-red-600 rounded-full flex items-center justify-center shadow group-hover:scale-110 transition-transform">
+                      <Play className="w-4 h-4 ml-0.5 fill-current" />
                     </div>
                     Voir la vidéo
                   </button>
                 </motion.div>
 
-                {/* Circular Badge */}
-                <motion.div 
-                  initial={{ opacity: 0, rotate: -90 }}
-                  whileInView={{ opacity: 1, rotate: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8, ease: customEase }}
+                {/* Badge circulaire rotatif */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute -bottom-12 -left-8 md:-left-12 w-40 h-40 z-30 hidden sm:block"
+                  className="absolute -bottom-8 -left-6 w-36 h-36 z-30 hidden sm:block"
                 >
-                  <div className="w-full h-full bg-white rounded-full shadow-2xl p-2 relative flex items-center justify-center">
+                  <div className="w-full h-full relative flex items-center justify-center">
+                    {/* Outer dashed ring */}
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/40 animate-[spin_20s_linear_infinite]" />
+                    {/* Rotating text */}
                     <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-red-600 animate-[spin_20s_linear_infinite]">
-                      <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
-                      <text className="text-[12.5px] font-bold uppercase tracking-[0.15em]" fill="currentColor">
-                        <textPath href="#circlePath">Direct Colis • Logistique • Livraison •</textPath>
+                      <path id="aboutCirclePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                      <text fontSize="8.5" fontWeight="bold" fill="currentColor" letterSpacing="1.5">
+                        <textPath href="#aboutCirclePath">DIRECT COLIS • LIVRAISON • SÉNÉGAL •</textPath>
                       </text>
                     </svg>
-                    <div className="w-16 h-16 bg-blue-950 rounded-full flex items-center justify-center text-white relative z-10">
+                    {/* Center */}
+                    <div className="w-16 h-16 bg-blue-950 rounded-full flex items-center justify-center text-white shadow-xl z-10">
                       <Truck className="h-7 w-7" />
                     </div>
                   </div>
                 </motion.div>
-                
-                {/* Decorative dashed line */}
-                <svg className="absolute -left-16 top-1/2 w-32 h-32 text-red-600/30 -z-10 hidden md:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4">
-                  <path d="M0 100 Q 50 50, 100 0" />
-                  <Bike className="w-6 h-6 text-red-600 absolute top-0 right-0" />
+
+                {/* Avion décoratif + trajectoire pointillée */}
+                <svg className="absolute -left-8 top-1/3 w-28 h-28 text-red-600/25 -z-10 hidden md:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 4">
+                  <path d="M10 90 Q30 50 90 10" />
+                </svg>
+                <motion.div
+                  animate={{ x: [0, 12, 0], y: [0, -8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute left-10 top-1/3 -z-10 hidden md:block text-red-600 opacity-40"
+                >
+                  <Plane className="w-5 h-5 -rotate-45" />
+                </motion.div>
+
+                {/* Ligne pointillée décorative droite */}
+                <svg className="absolute -right-6 top-0 bottom-0 h-full w-6 text-red-600/20 hidden lg:block" viewBox="0 0 20 400" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="6 5">
+                  <path d="M10 0 Q20 100 10 200 Q0 300 10 400" />
                 </svg>
               </motion.div>
 
-              {/* Right Side: Text Content */}
-              <motion.div 
+              {/* ── COLONNE DROITE ── */}
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 variants={staggerContainer}
-                className="lg:pl-12 mt-24 lg:mt-0"
+                className="lg:pl-6"
               >
-                <motion.div variants={fadeInUp} className="flex items-center gap-4 text-red-600 font-bold text-sm uppercase tracking-wider mb-6">
-                  <div className="flex items-center gap-1">
-                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
-                    <div className="w-2 h-1 rounded-full bg-red-600"></div>
-                    <div className="w-8 h-px bg-red-600"></div>
+                {/* Label "À PROPOS DE NOUS" avec flèches */}
+                <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-5">
+                  <div className="flex items-center gap-1 text-red-600">
+                    <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+                    <div className="w-10 h-px bg-red-600" />
+                    <div className="w-4 h-px bg-red-600/50" />
                   </div>
-                  À PROPOS DE NOUS
-                  <div className="flex items-center gap-1">
-                    <div className="w-8 h-px bg-red-600"></div>
-                    <div className="w-2 h-1 rounded-full bg-red-600"></div>
-                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
-                  </div>
-                </motion.div>
-                
-                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-blue-950 mb-6 leading-[1.15]">
-                  Notre expertise au service de vos <span className="text-red-600">livraisons au Sénégal</span>
-                </motion.h2>
-                
-                <motion.p variants={fadeInUp} className="text-slate-600 mb-10 leading-relaxed font-light text-lg">
-                  Direct Colis accompagne les entreprises, e-commerçants et équipes logistiques avec une approche adaptée aux réalités du terrain. Nous assurons une gestion fluide du mouvement des marchandises, de l'origine à la destination finale.
-                </motion.p>
-                
-                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-8 mb-10">
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                      <Globe className="w-7 h-7 text-red-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-blue-950 mb-1 text-lg">Couverture Nationale</h4>
-                      <p className="text-sm text-slate-500 font-light leading-relaxed">Une présence sur les axes majeurs (Dakar, Thiès, Mbour...).</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                      <Headset className="w-7 h-7 text-red-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-blue-950 mb-1 text-lg">Support Réactif</h4>
-                      <p className="text-sm text-slate-500 font-light leading-relaxed">Une équipe dédiée pour suivre et résoudre vos requêtes.</p>
-                    </div>
+                  <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">À PROPOS DE NOUS</span>
+                  <div className="flex items-center gap-1 text-red-600">
+                    <div className="w-4 h-px bg-red-600/50" />
+                    <div className="w-10 h-px bg-red-600" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-y-4 gap-x-6 mb-12">
+                {/* Titre */}
+                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-extrabold text-blue-950 mb-5 leading-[1.12]">
+                  Notre expertise au service de vos{' '}
+                  <span className="text-red-600">Livraisons au Sénégal</span>
+                </motion.h2>
+
+                {/* Description */}
+                <motion.p variants={fadeInUp} className="text-slate-500 mb-8 leading-relaxed text-base max-w-xl">
+                  Direct Colis joue un rôle central dans la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises, de l'origine à la destination finale. Nous offrons une solution complète adaptée aux réalités du terrain sénégalais.
+                </motion.p>
+
+                {/* Feature cards — 2 colonnes */}
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6 mb-8">
                   {[
-                    "Traçabilité 100% garantie",
-                    "Preuve de livraison sécurisée",
-                    "Flotte adaptée au terrain",
-                    "API & Intégration facile"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-6 h-6 text-red-600 shrink-0" />
-                      <span className="text-slate-700 font-medium">{item}</span>
+                    { icon: <Globe className="w-6 h-6 text-white" />, title: 'Couverture Nationale', desc: 'Présence sur tous les axes majeurs du Sénégal.' },
+                    { icon: <Headset className="w-6 h-6 text-white" />, title: 'Support 7j/7', desc: 'Une équipe dédiée disponible pour chaque requête.' },
+                  ].map((f, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shrink-0 shadow-lg shadow-red-600/25">
+                        {f.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-blue-950 text-base mb-1">{f.title}</h4>
+                        <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </motion.div>
 
+                {/* Checklist 2×2 */}
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-10">
+                  {[
+                    'Traçabilité 100% garantie',
+                    'Satisfaction client assurée',
+                    'Flotte adaptée au terrain',
+                    'Livraison dans les délais',
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                      </div>
+                      <span className="text-slate-700 text-sm font-medium">{item}</span>
+                    </div>
+                  ))}
+                </motion.div>
+
+                {/* Bas : CTA + fondateur */}
                 <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-6 border-t border-slate-100 flex-wrap">
-                  <button className="flex items-center gap-4 bg-red-600 text-white pl-8 pr-2 py-2.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5 group shrink-0">
+                  {/* Bouton pill */}
+                  <button className="flex items-center gap-0 bg-red-600 text-white pl-7 pr-1.5 py-1.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/25 hover:-translate-y-0.5 group shrink-0">
                     En savoir plus
-                    <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <ArrowRight className="w-5 h-5" />
+                    <div className="w-9 h-9 ml-4 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <ArrowRight className="w-4 h-4" />
                     </div>
                   </button>
 
-                  <div className="h-10 w-px bg-slate-200 hidden sm:block"></div>
+                  <div className="h-10 w-px bg-slate-200 hidden sm:block" />
 
+                  {/* Fondateur avec bordure pointillée animée */}
                   <div className="flex items-center gap-3">
-                    <img src="https://i.pravatar.cc/150?img=11" alt="CEO" className="w-12 h-12 rounded-full border-2 border-slate-100 shadow-sm" />
-                    <div>
-                      <p className="font-bold text-blue-950">Amadou Fall</p>
-                      <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-0.5">Fondateur & CEO</p>
+                    <div className="relative w-14 h-14 shrink-0">
+                      <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/50 animate-[spin_8s_linear_infinite]" />
+                      <img
+                        src="https://i.pravatar.cc/150?img=11"
+                        alt="Amadou Fall"
+                        className="w-full h-full rounded-full object-cover border-2 border-white shadow"
+                      />
                     </div>
+                    <div>
+                      <p className="font-bold text-blue-950 text-sm">Amadou Fall</p>
+                      <p className="text-xs text-slate-500 mt-0.5">Fondateur & CEO</p>
+                    </div>
+                    {/* Signature SVG cursive */}
+                    <svg className="h-8 w-24 text-blue-950/60 ml-2 hidden sm:block" viewBox="0 0 120 40" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 30 C15 10, 25 35, 35 20 S50 5, 60 22 S75 38, 88 18 S105 8, 115 25" />
+                      <path d="M20 34 L95 34" strokeWidth="0.8" opacity="0.4" />
+                    </svg>
                   </div>
                 </motion.div>
               </motion.div>
+
             </div>
           </div>
         </section>
