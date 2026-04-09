@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
+import logoPaysageBlanc from './assets/images/logo-paysage-blanc.png';
+import Chatbot from './components/Chatbot';
 import { 
   Package, MapPin, CheckCircle, ShieldCheck, Smartphone, 
   BarChart3, Users, QrCode, Camera, FileSignature, 
@@ -41,9 +43,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-red-100 selection:text-red-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden">
+      {/* Scan line futuriste (subtil) */}
+      <div className="scan-line" aria-hidden="true" />
+
+      {/* Chatbot flottant */}
+      <Chatbot />
+
       {/* 1. Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-slate-100/50 shadow-sm transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100/60 shadow-[0_1px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
@@ -87,7 +95,7 @@ export default function App() {
             >
               <div className="hidden lg:flex items-center gap-2 mr-2 text-blue-950 font-bold bg-slate-50 px-4 py-2 rounded-lg border border-slate-100">
                 <PhoneCall className="w-4 h-4 text-red-600" />
-                <span className="text-sm">+221 78 642 17 33</span>
+                <span className="text-sm">+221 78 542 17 33</span>
               </div>
               <button className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5">
                 Demander une démo
@@ -128,10 +136,13 @@ export default function App() {
 
       <main>
         {/* 2. Hero */}
-        <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white">
+        <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
           {/* Elegant Background Elements */}
-          <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/50 rounded-full blur-3xl -z-10"></div>
-          <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/30 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/40 rounded-full blur-3xl -z-10"></div>
+          {/* Futuristic corner accent */}
+          <div className="absolute top-0 left-0 w-48 h-48 border-l-2 border-t-2 border-red-600/10 rounded-tl-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 right-0 w-48 h-48 border-r-2 border-b-2 border-blue-950/10 rounded-br-3xl pointer-events-none"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -149,7 +160,7 @@ export default function App() {
                 </motion.p>
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
-                  <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5">
+                  <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-0.5 glow-red gradient-border">
                     Suivre un colis
                   </button>
                   <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-blue-950 bg-white border border-slate-200 hover:border-blue-950 hover:bg-slate-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
@@ -237,7 +248,7 @@ export default function App() {
                       <Truck className="h-5 w-5 text-blue-950" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-blue-950">Livreur : Thomas D.</p>
+                      <p className="text-sm font-bold text-blue-950">Livreur : Moussa D.</p>
                       <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
                         <Navigation className="h-3 w-3 text-red-500" /> Véhicule géolocalisé
                       </p>
@@ -712,9 +723,12 @@ export default function App() {
         </section>
 
         {/* 7. Section "Pourquoi choisir Direct Colis" */}
-        <section className="py-24 bg-blue-950 text-white relative overflow-hidden">
+        <section className="py-24 bg-blue-950 text-white relative overflow-hidden bg-grid-dark">
           {/* Elegant subtle gradient overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/40 via-blue-950 to-blue-950"></div>
+          {/* Neon corner accents */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
@@ -1017,7 +1031,7 @@ export default function App() {
                   },
                   {
                     q: "Comment contacter le support client ?",
-                    a: "Notre équipe est joignable par téléphone au +221 78 642 17 33 ou par email à contact@directcolis.sn."
+                    a: "Notre équipe est joignable par téléphone au +221 78 542 17 33 ou par email à contact@directcolis.sn."
                   },
                   {
                     q: "Puis-je intégrer Direct Colis à mon système ?",
@@ -1208,9 +1222,10 @@ export default function App() {
         </section>
 
         {/* 11. CTA final */}
-        <section className="py-24 bg-blue-950 relative overflow-hidden">
+        <section className="py-24 bg-blue-950 relative overflow-hidden bg-grid-dark">
           {/* Elegant subtle background */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/50 via-blue-950 to-blue-950"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
           
           <motion.div 
             initial="hidden"
@@ -1238,15 +1253,12 @@ export default function App() {
       </main>
 
       {/* 12. Footer */}
-      <footer id="contact" className="bg-blue-950 border-t border-white/10 pt-16 pb-8 relative z-10">
+      <footer id="contact" className="bg-blue-950 border-t border-white/10 pt-16 pb-8 relative z-10 bg-grid-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-1">
-              <div className="flex items-center gap-2.5 mb-6">
-                <div className="bg-white p-1.5 rounded-lg">
-                  <Package className="h-5 w-5 text-blue-950" />
-                </div>
-                <span className="font-bold text-lg tracking-tight text-white">DIRECT COLIS</span>
+              <div className="mb-6">
+                <img src={logoPaysageBlanc} alt="Direct Colis" className="h-12 w-auto object-contain" />
               </div>
               <p className="text-blue-200/60 text-sm leading-relaxed font-light">
                 Solution logistique moderne pour le suivi, la gestion et la livraison sécurisée de vos expéditions.
@@ -1277,7 +1289,7 @@ export default function App() {
               <h4 className="text-white font-bold mb-5">Contact</h4>
               <ul className="space-y-3">
                 <li className="text-blue-200/60 text-sm flex items-center gap-2">
-                  <PhoneCall className="w-4 h-4" /> +221 78 642 17 33
+                  <PhoneCall className="w-4 h-4" /> +221 78 542 17 33
                 </li>
                 <li className="text-blue-200/60 text-sm flex items-center gap-2">
                   <Globe className="w-4 h-4" /> contact@directcolis.sn
@@ -1291,7 +1303,8 @@ export default function App() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="neon-divider mb-8"></div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-blue-200/40 text-sm font-light">
               &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
             </p>
