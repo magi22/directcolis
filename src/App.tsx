@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
 import logoPaysageBlanc from './assets/images/logo-paysage-blanc.png';
 import Chatbot from './components/Chatbot';
@@ -28,6 +28,75 @@ const staggerContainer = {
     transition: { staggerChildren: 0.12 }
   }
 };
+
+// ─── Animated counter hook ───────────────────────────────────
+function useCounter(target: number, duration = 2000, start = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [start, target, duration]);
+  return count;
+}
+
+// ─── Stats counter card ───────────────────────────────────────
+function StatCard({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.3 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  const count = useCounter(value, 2000, visible);
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={visible ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="text-center px-6 py-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+    >
+      <p className="text-3xl font-black text-blue-950 tabular-nums">
+        {count.toLocaleString('fr-FR')}{suffix}
+      </p>
+      <p className="text-xs text-slate-500 font-medium mt-1 uppercase tracking-wider">{label}</p>
+    </motion.div>
+  );
+}
+
+// ─── Floating particles background ───────────────────────────
+function Particles() {
+  const particles = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    duration: Math.random() * 8 + 6,
+    delay: Math.random() * 4,
+  }));
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-red-600/20"
+          style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.8, 0.2] }}
+          transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -71,7 +140,7 @@ export default function App() {
 
             {/* Desktop Menu */}
             <nav className="hidden md:flex items-center gap-8">
-              {['Accueil', 'À propos', 'Services', 'Suivi', 'FAQ', 'Contact'].map((item, i) => (
+              {['À propos', 'Services', 'Suivi', 'FAQ', 'Contact'].map((item, i) => (
                 <motion.a
                   key={item}
                   initial={{ opacity: 0, y: -10 }}
@@ -120,7 +189,6 @@ export default function App() {
               transition={{ duration: 0.4, ease: customEase }}
               className="md:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-4 shadow-xl overflow-hidden"
             >
-              <a href="#accueil" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Accueil</a>
               <a href="#a-propos" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">À propos</a>
               <a href="#services" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Services</a>
               <a href="#suivi" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Suivi</a>
@@ -137,7 +205,8 @@ export default function App() {
       <main>
         {/* 2. Hero */}
         <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
-          {/* Elegant Background Elements */}
+          <Particles />
+          {/* Background orbs */}
           <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl -z-10"></div>
           <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/40 rounded-full blur-3xl -z-10"></div>
           {/* Futuristic corner accent */}
@@ -152,13 +221,22 @@ export default function App() {
                 animate="visible"
                 className="max-w-2xl"
               >
+                {/* Badge live */}
+                <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-2 rounded-full mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                  </span>
+                  <span className="text-xs font-bold text-red-600 uppercase tracking-widest">Suivi en temps réel · Sénégal</span>
+                </motion.div>
+
                 <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.15] tracking-tight mb-6">
-                  Suivez, gérez et livrez vos colis avec une <span className="text-red-600">traçabilité complète.</span>
+                  Suivez, gérez et livrez vos colis avec une <span className="text-red-600 text-glow-red">traçabilité complète.</span>
                 </motion.h1>
                 <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed font-light">
                   Direct Colis vous permet de piloter chaque étape de vos expéditions grâce à un suivi structuré, un système de scan QR code, une livraison sécurisée et une preuve fiable à l'arrivée.
                 </motion.p>
-                
+
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
                   <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-0.5 glow-red gradient-border">
                     Suivre un colis
@@ -168,12 +246,19 @@ export default function App() {
                   </button>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-500">
-                  {['QR Code', 'Tracking', 'OTP', 'Photo', 'Suivi GPS'].map((item, i) => (
+                <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-500 mb-10">
+                  {['QR Code', 'Tracking', 'OTP', 'Photo', 'Suivi GPS'].map((item) => (
                     <div key={item} className="flex items-center gap-1.5">
                       <CheckCircle className="h-4 w-4 text-red-600" /> {item}
                     </div>
                   ))}
+                </motion.div>
+
+                {/* Stat counters */}
+                <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-3">
+                  <StatCard value={1000000} suffix="+" label="Colis livrés" delay={0} />
+                  <StatCard value={98} suffix="%" label="Taux succès" delay={0.1} />
+                  <StatCard value={50} suffix="+" label="Villes couvertes" delay={0.2} />
                 </motion.div>
               </motion.div>
 
@@ -550,12 +635,15 @@ export default function App() {
                   desc: "Visibilité totale sur les missions en cours, l'activité des livreurs et les performances globales de livraison."
                 }
               ].map((service, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   variants={fadeInUp}
-                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)] transition-all duration-300 px-8 pb-10 pt-14 relative text-center flex flex-col items-center group"
+                  whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-shadow duration-300 px-8 pb-10 pt-14 relative text-center flex flex-col items-center group gradient-border"
+                  style={{ transformStyle: 'preserve-3d', perspective: 800 }}
                 >
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300">
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-bold text-blue-950 mb-4">{service.title}</h3>
@@ -1220,6 +1308,40 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* 10.8 Live ticker */}
+        <div className="bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
+          <motion.div
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+            className="flex items-center gap-12 whitespace-nowrap"
+          >
+            {[...Array(2)].map((_, rep) => (
+              <React.Fragment key={rep}>
+                {[
+                  { city: 'Dakar', name: 'Ibrahima S.', status: 'Livré ✓' },
+                  { city: 'Thiès', name: 'Fatou N.', status: 'En route →' },
+                  { city: 'Mbour', name: 'Cheikh D.', status: 'Livré ✓' },
+                  { city: 'Saint-Louis', name: 'Aïssatou B.', status: 'En route →' },
+                  { city: 'Kaolack', name: 'Oumar F.', status: 'Livré ✓' },
+                  { city: 'Ziguinchor', name: 'Mariama C.', status: 'En route →' },
+                  { city: 'Dakar', name: 'Abdou T.', status: 'Livré ✓' },
+                ].map((item, i) => (
+                  <span key={i} className="inline-flex items-center gap-3 text-sm text-blue-200/70">
+                    <span className={`font-bold ${item.status.includes('✓') ? 'text-green-400' : 'text-red-400'}`}>
+                      {item.status}
+                    </span>
+                    <span className="text-white/40">·</span>
+                    <span>{item.name}</span>
+                    <span className="text-white/40">·</span>
+                    <span className="text-blue-300/60">{item.city}</span>
+                    <span className="text-white/20 mx-2">|</span>
+                  </span>
+                ))}
+              </React.Fragment>
+            ))}
+          </motion.div>
+        </div>
 
         {/* 11. CTA final */}
         <section className="py-24 bg-blue-950 relative overflow-hidden bg-grid-dark">
