@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
 import logoPaysageBlanc from './assets/images/logo-paysage-blanc.png';
+import aboutImg from './assets/images/le3.jpg';
 import Chatbot from './components/Chatbot';
 import { 
   Package, MapPin, CheckCircle, ShieldCheck, Smartphone, 
@@ -477,7 +478,7 @@ export default function App() {
                   }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1586528116311-ad8ed7450900?q=80&w=1200&auto=format&fit=crop"
+                    src={aboutImg}
                     alt="Livraison Direct Colis"
                     style={{ width: '100%', height: '580px', objectFit: 'cover', display: 'block' }}
                   />
