@@ -13,6 +13,43 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+// ─── Translations ─────────────────────────────────────────────
+const translations = {
+  fr: {
+    nav: ['À propos', 'Services', 'Suivi', 'FAQ', 'Contact'],
+    navHrefs: ['a-propos', 'services', 'suivi', 'faq', 'contact'],
+    demo: 'Demander une démo',
+    trackTitle: 'Suivre ma commande',
+    trackPlaceholder: 'Entrez votre numéro de suivi (ex: DC-84729)',
+    trackBtn: 'Suivre',
+    trackHint: 'Recherche par numéro de colis ou référence client.',
+    heroBadge: 'Suivi en temps réel · Sénégal',
+    heroH1a: 'Suivez, gérez et livrez vos colis avec une',
+    heroH1b: 'traçabilité complète.',
+    heroP: "Direct Colis vous permet de piloter chaque étape de vos expéditions grâce à un suivi structuré, un système de scan QR code, une livraison sécurisée et une preuve fiable à l'arrivée.",
+    heroCta1: 'Suivre un colis',
+    heroCta2: 'Demander une démo',
+    statsLabels: ['Colis livrés', 'Taux succès', 'Villes couvertes'],
+  },
+  en: {
+    nav: ['About', 'Services', 'Tracking', 'FAQ', 'Contact'],
+    navHrefs: ['a-propos', 'services', 'suivi', 'faq', 'contact'],
+    demo: 'Request a demo',
+    trackTitle: 'Track my order',
+    trackPlaceholder: 'Enter your tracking number (e.g. DC-84729)',
+    trackBtn: 'Track',
+    trackHint: 'Search by parcel number or client reference.',
+    heroBadge: 'Real-time tracking · Senegal',
+    heroH1a: 'Track, manage and deliver your parcels with full',
+    heroH1b: 'traceability.',
+    heroP: 'Direct Colis lets you control every step of your shipments through structured tracking, QR code scanning, secured delivery and reliable proof of receipt.',
+    heroCta1: 'Track a parcel',
+    heroCta2: 'Request a demo',
+    statsLabels: ['Parcels delivered', 'Success rate', 'Cities covered'],
+  },
+} as const;
+type Lang = keyof typeof translations;
+
 // Elegant, smooth easing curve (similar to Apple's spring/ease-out)
 const customEase = [0.16, 1, 0.3, 1];
 
@@ -99,6 +136,8 @@ function Particles() {
 }
 
 export default function App() {
+  const [lang, setLang] = useState<Lang>('fr');
+  const t = translations[lang];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [openFaqIndex2, setOpenFaqIndex2] = useState<number | null>(null);
@@ -119,90 +158,116 @@ export default function App() {
       {/* Chatbot flottant */}
       <Chatbot />
 
-      {/* 1. Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100/60 shadow-[0_1px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+      {/* 1. Header — fixed */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100/60 shadow-[0_1px_24px_rgba(0,0,0,0.06)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <motion.a
-              href="#accueil"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: customEase }}
-              className="flex items-center"
-            >
-              <img
-                src={logoPaysageCouleur}
-                alt="Direct Colis"
-                className="h-12 w-auto object-contain"
-              />
-            </motion.a>
 
-            {/* Desktop Menu */}
-            <nav className="hidden md:flex items-center gap-8">
-              {['À propos', 'Services', 'Suivi', 'FAQ', 'Contact'].map((item, i) => (
-                <motion.a
+            {/* Logo */}
+            <a href="#accueil" className="flex items-center shrink-0">
+              <img src={logoPaysageCouleur} alt="Direct Colis" className="h-11 w-auto object-contain" />
+            </a>
+
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-7">
+              {t.nav.map((item, i) => (
+                <a
                   key={item}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.8, ease: customEase }}
-                  href={`#${item.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-')}`}
-                  className="text-sm font-medium text-slate-600 hover:text-blue-950 transition-colors relative group py-2"
+                  href={`#${t.navHrefs[i]}`}
+                  className="text-sm font-medium text-slate-600 hover:text-blue-950 transition-colors relative group py-2 whitespace-nowrap"
                 >
                   {item}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                </motion.a>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full" />
+                </a>
               ))}
             </nav>
 
-            {/* CTA & Mobile Toggle */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: customEase }}
-              className="flex items-center gap-4"
-            >
-              <div className="hidden lg:flex items-center gap-2 mr-2 text-blue-950 font-bold bg-slate-50 px-4 py-2 rounded-lg border border-slate-100">
-                <PhoneCall className="w-4 h-4 text-red-600" />
-                <span className="text-sm">+221 78 542 17 33</span>
+            {/* Right side */}
+            <div className="flex items-center gap-3">
+              {/* Phone — large screens only */}
+              <div className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100">
+                <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                <span className="text-xs">+221 78 542 17 33</span>
               </div>
-              <button className="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5">
-                Demander une démo
+
+              {/* Lang switcher */}
+              <div className="flex items-center bg-slate-100 rounded-lg p-0.5 gap-0.5">
+                {(['fr', 'en'] as Lang[]).map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLang(l)}
+                    className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 uppercase tracking-wide ${
+                      lang === l
+                        ? 'bg-blue-950 text-white shadow-sm'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+
+              {/* Demo CTA */}
+              <button className="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 whitespace-nowrap">
+                {t.demo}
               </button>
-              <button 
+
+              {/* Mobile burger */}
+              <button
                 className="md:hidden p-2 text-slate-600 hover:text-blue-950 transition-colors"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: customEase }}
-              className="md:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-4 shadow-xl overflow-hidden"
+              transition={{ duration: 0.35, ease: customEase }}
+              className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 px-4 py-4 space-y-1 shadow-xl overflow-hidden"
             >
-              <a href="#a-propos" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">À propos</a>
-              <a href="#services" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Services</a>
-              <a href="#suivi" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Suivi</a>
-              <a href="#faq" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">FAQ</a>
-              <a href="#contact" className="block text-base font-medium text-slate-800 p-2 hover:bg-slate-50 rounded-lg">Contact</a>
-              <button className="w-full mt-4 px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-md shadow-red-600/10">
-                Demander une démo
-              </button>
+              {t.nav.map((item, i) => (
+                <a
+                  key={item}
+                  href={`#${t.navHrefs[i]}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-base font-medium text-slate-800 px-3 py-2.5 hover:bg-slate-50 rounded-xl transition-colors"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 shrink-0" />
+                  {item}
+                </a>
+              ))}
+              <div className="pt-3 border-t border-slate-100 mt-2 flex gap-2">
+                <button className="flex-1 px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-colors">
+                  {t.demo}
+                </button>
+                <div className="flex items-center bg-slate-100 rounded-xl p-0.5 gap-0.5">
+                  {(['fr', 'en'] as Lang[]).map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => setLang(l)}
+                      className={`px-3 py-2 text-xs font-bold rounded-lg transition-all uppercase ${
+                        lang === l ? 'bg-blue-950 text-white' : 'text-slate-500'
+                      }`}
+                    >
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      <main>
+      <main className="pt-20">
         {/* 2. Hero */}
         <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
           <Particles />
@@ -227,27 +292,27 @@ export default function App() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                   </span>
-                  <span className="text-xs font-bold text-red-600 uppercase tracking-widest">Suivi en temps réel · Sénégal</span>
+                  <span className="text-xs font-bold text-red-600 uppercase tracking-widest">{t.heroBadge}</span>
                 </motion.div>
 
                 <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.15] tracking-tight mb-6">
-                  Suivez, gérez et livrez vos colis avec une <span className="text-red-600 text-glow-red">traçabilité complète.</span>
+                  {t.heroH1a} <span className="text-red-600 text-glow-red">{t.heroH1b}</span>
                 </motion.h1>
                 <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed font-light">
-                  Direct Colis vous permet de piloter chaque étape de vos expéditions grâce à un suivi structuré, un système de scan QR code, une livraison sécurisée et une preuve fiable à l'arrivée.
+                  {t.heroP}
                 </motion.p>
 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
                   <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-0.5 glow-red gradient-border">
-                    Suivre un colis
+                    {t.heroCta1}
                   </button>
                   <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-blue-950 bg-white border border-slate-200 hover:border-blue-950 hover:bg-slate-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                    Demander une démo
+                    {t.heroCta2}
                   </button>
                 </motion.div>
 
                 <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-500 mb-10">
-                  {['QR Code', 'Tracking', 'OTP', 'Photo', 'Suivi GPS'].map((item) => (
+                  {['QR Code', 'Tracking', 'OTP', 'Photo', 'GPS'].map((item) => (
                     <div key={item} className="flex items-center gap-1.5">
                       <CheckCircle className="h-4 w-4 text-red-600" /> {item}
                     </div>
@@ -256,9 +321,9 @@ export default function App() {
 
                 {/* Stat counters */}
                 <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-3">
-                  <StatCard value={1000000} suffix="+" label="Colis livrés" delay={0} />
-                  <StatCard value={98} suffix="%" label="Taux succès" delay={0.1} />
-                  <StatCard value={50} suffix="+" label="Villes couvertes" delay={0.2} />
+                  <StatCard value={1000000} suffix="+" label={t.statsLabels[0]} delay={0} />
+                  <StatCard value={98} suffix="%" label={t.statsLabels[1]} delay={0.1} />
+                  <StatCard value={50} suffix="+" label={t.statsLabels[2]} delay={0.2} />
                 </motion.div>
               </motion.div>
 
@@ -522,48 +587,41 @@ export default function App() {
           </div>
         </section>
 
-        {/* 3. Bloc tracking rapide */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          id="suivi" 
-          className="py-16 bg-white relative z-20 -mt-10"
-        >
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 p-8 md:p-12 text-center transition-shadow duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
-              <h2 className="text-2xl md:text-3xl font-bold text-blue-950 mb-4">Suivez votre colis en quelques secondes</h2>
-              <p className="text-slate-600 mb-8 max-w-2xl mx-auto font-light">
-                Entrez votre numéro de suivi pour consulter le statut du colis, son historique et les informations liées à la livraison.
+        {/* 3. Barre de suivi pleine largeur */}
+        <section id="suivi" className="bg-blue-950 py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: customEase }}
+            >
+              <p className="text-blue-200/70 text-sm font-semibold uppercase tracking-widest text-center mb-3">
+                {t.trackTitle}
               </p>
-              
-              <form className="max-w-xl mx-auto" onSubmit={(e) => e.preventDefault()}>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="relative flex-grow group">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-950 transition-colors" />
-                    </div>
-                    <input 
-                      type="text" 
-                      className="block w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-950/20 focus:border-blue-950 transition-all" 
-                      placeholder="Numéro de suivi"
-                    />
+              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.3)] border border-white/10">
+                <div className="relative flex-1 group">
+                  <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                    <Search className="h-5 w-5 text-blue-300/60 group-focus-within:text-white transition-colors" />
                   </div>
-                  <button 
-                    type="submit" 
-                    className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-xl transition-all duration-300 shadow-md shadow-red-600/10 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 whitespace-nowrap"
-                  >
-                    Rechercher
-                  </button>
+                  <input
+                    type="text"
+                    className="block w-full pl-14 pr-5 py-5 bg-white/5 text-white placeholder-blue-200/40 focus:outline-none focus:bg-white/10 transition-all text-base font-medium border-0"
+                    placeholder={t.trackPlaceholder}
+                  />
                 </div>
-                <p className="text-xs text-slate-500 mt-4">
-                  Recherche par identifiant de colis ou référence client.
-                </p>
+                <button
+                  type="submit"
+                  className="flex items-center justify-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] whitespace-nowrap shrink-0"
+                >
+                  <Search className="w-4 h-4" />
+                  {t.trackBtn}
+                </button>
               </form>
-            </div>
+              <p className="text-blue-200/40 text-xs text-center mt-3">{t.trackHint}</p>
+            </motion.div>
           </div>
-        </motion.section>
+        </section>
 
         {/* 5. Section services */}
         <section id="services" className="py-24 bg-slate-50/30">
