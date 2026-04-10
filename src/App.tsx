@@ -288,7 +288,7 @@ export default function App() {
           <div className="absolute bottom-0 right-0 w-48 h-48 border-r-2 border-b-2 border-blue-950/10 rounded-br-3xl pointer-events-none"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-8 items-center">
               <motion.div 
                 variants={staggerContainer}
                 initial="hidden"
@@ -304,10 +304,10 @@ export default function App() {
                   <span className="text-xs font-bold text-red-600 uppercase tracking-widest">{t.heroBadge}</span>
                 </motion.div>
 
-                <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.15] tracking-tight mb-6">
+                <motion.h1 variants={fadeInUp} className="text-3xl sm:text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.15] tracking-tight mb-6">
                   {t.heroH1a} <span className="text-red-600 text-glow-red">{t.heroH1b}</span>
                 </motion.h1>
-                <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed font-light">
+                <motion.p variants={fadeInUp} className="text-base sm:text-xl text-slate-600 mb-8 leading-relaxed font-light">
                   {t.heroP}
                 </motion.p>
 
@@ -349,7 +349,7 @@ export default function App() {
                 <motion.div 
                   animate={{ y: [-8, 8, -8] }}
                   transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                  className="bg-white border border-slate-100 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-8 relative overflow-hidden"
+                  className="bg-white border border-slate-100 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-8 relative overflow-hidden"
                 >
                   <div className="flex items-center justify-between mb-6 pb-5 border-b border-slate-100">
                     <div>
@@ -365,7 +365,7 @@ export default function App() {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-6 mb-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-2">
                     {/* Tracking Steps */}
                     <div className="flex flex-col justify-center">
                       <div className="relative pl-8 pb-8 border-l-2 border-red-600 ml-3">
@@ -458,7 +458,7 @@ export default function App() {
         {/* 2.5 About Us / Expertise — redesigned */}
         <section id="a-propos" className="py-28 bg-white overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
               {/* ── COLONNE GAUCHE ── */}
               <motion.div
@@ -466,10 +466,10 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.9, ease: customEase }}
-                className="relative min-h-[520px]"
+                className="relative min-h-[380px] lg:min-h-[520px]"
               >
                 {/* Image principale */}
-                <div className="w-[75%] h-[420px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
+                <div className="w-full lg:w-[75%] h-[260px] sm:h-[340px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
                   <img
                     src={aboutImg}
                     alt="Livraison Sénégal"
@@ -479,7 +479,7 @@ export default function App() {
                 </div>
 
                 {/* Image secondaire */}
-                <div className="absolute bottom-0 right-0 w-[60%] h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20">
+                <div className="hidden sm:block absolute bottom-0 right-0 w-[55%] h-[180px] lg:h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20">
                   <img
                     src={aboutImg}
                     alt="Livraison Direct Colis"
@@ -493,7 +493,7 @@ export default function App() {
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute top-8 -right-4 md:-right-10 bg-red-600 rounded-[1.75rem] p-6 text-white shadow-[0_20px_60px_rgba(220,38,38,0.35)] w-60 z-30"
+                  className="hidden sm:block absolute top-8 -right-4 md:-right-10 bg-red-600 rounded-[1.75rem] p-4 sm:p-6 text-white shadow-[0_20px_60px_rgba(220,38,38,0.35)] w-52 sm:w-60 z-30"
                 >
                   {/* Avatars */}
                   <div className="flex -space-x-3 mb-3">
@@ -587,7 +587,7 @@ export default function App() {
                 </motion.div>
 
                 {/* Titre */}
-                <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-extrabold text-blue-950 mb-5 leading-[1.12]">
+                <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 mb-5 leading-[1.12]">
                   Notre expertise au service de vos{' '}
                   <span className="text-red-600">Livraisons au Sénégal</span>
                 </motion.h2>
@@ -694,10 +694,10 @@ export default function App() {
                   <div className="w-1 h-1 rounded-full bg-red-600"></div>
                 </div>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
                 Des services logistiques efficaces
               </h2>
-              <h2 className="text-4xl md:text-5xl font-bold text-red-600 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 leading-tight">
                 pour votre entreprise
               </h2>
             </motion.div>
@@ -746,7 +746,7 @@ export default function App() {
                   variants={fadeInUp}
                   whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-shadow duration-300 px-8 pb-10 pt-14 relative text-center flex flex-col items-center group gradient-border"
+                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-shadow duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border"
                   style={{ transformStyle: 'preserve-3d', perspective: 800 }}
                 >
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300">
@@ -797,10 +797,10 @@ export default function App() {
                 </div>
                 <Car className="w-5 h-5" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
                 Un processus optimisé pour
               </h2>
-              <h2 className="text-4xl md:text-5xl font-bold text-red-600 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 leading-tight">
                 vos livraisons
               </h2>
             </motion.div>
@@ -811,7 +811,7 @@ export default function App() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 relative z-10"
               >
                 {[
                   { 
@@ -875,14 +875,14 @@ export default function App() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
-              className="mt-24 bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-center shadow-2xl"
+              className="mt-12 md:mt-24 bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-center shadow-2xl"
             >
               {/* Background Map Pattern */}
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/world-map.png")' }}></div>
               
               {/* Left Content */}
-              <div className="p-10 md:p-16 md:w-3/5 relative z-10">
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+              <div className="p-6 sm:p-10 md:p-16 md:w-3/5 relative z-10">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                   Reconnu comme l'un des leaders de la <span className="text-red-500">Logistique !</span>
                 </h3>
                 <p className="text-slate-300 mb-8 font-light leading-relaxed max-w-md">
@@ -897,7 +897,7 @@ export default function App() {
               </div>
 
               {/* Right Content */}
-              <div className="md:w-2/5 relative h-80 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
+              <div className="md:w-2/5 relative h-56 sm:h-72 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
                 <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden">
                   <img
                     src={numeroImg}
@@ -935,7 +935,7 @@ export default function App() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-x-10 md:gap-y-10 lg:gap-x-12 lg:gap-y-12"
             >
               {[
                 {
@@ -1036,7 +1036,7 @@ export default function App() {
         {/* 9. Section grands comptes / entreprises */}
         <section className="py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -1076,7 +1076,7 @@ export default function App() {
               >
                 <div className="absolute inset-0 bg-blue-950/5 rounded-2xl transform translate-x-4 translate-y-4"></div>
                 
-                <div className="bg-white border border-slate-100 rounded-2xl shadow-xl p-8 relative z-10">
+                <div className="bg-white border border-slate-100 rounded-2xl shadow-xl p-4 sm:p-8 relative z-10">
                   <div className="flex items-center justify-between mb-8">
                     <h3 className="text-lg font-bold text-blue-950">Vue d'ensemble</h3>
                     <select className="bg-slate-50 border border-slate-200 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-950/20">
@@ -1134,7 +1134,7 @@ export default function App() {
               <h2 className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 tracking-tight">Questions fréquentes</h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-x-10 gap-y-0 items-start">
+            <div className="grid md:grid-cols-2 gap-x-8 lg:gap-x-10 gap-y-0 items-start">
               {/* Colonne 1 */}
               <motion.div
                 variants={staggerContainer}
@@ -1307,7 +1307,7 @@ export default function App() {
                 </div>
                 <Car className="w-5 h-5" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-blue-950 mb-6 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-6 tracking-tight">
                 Dernières <span className="text-red-600">Actualités</span> de Direct Colis
               </h2>
             </motion.div>
@@ -1367,7 +1367,7 @@ export default function App() {
                   </div>
 
                   {/* Content Container */}
-                  <div className="p-8 pt-6 flex flex-col flex-grow">
+                  <div className="p-4 sm:p-6 lg:p-8 pt-4 sm:pt-6 flex flex-col flex-grow">
                     {/* Category label text */}
                     <p className="text-red-600 text-xs font-bold uppercase tracking-widest mb-3">{post.category}</p>
                     {/* Meta Info */}
