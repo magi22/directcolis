@@ -6,6 +6,10 @@ import testimonial1 from './assets/images/testimonial 1.jpg';
 import testimonial2 from './assets/images/testimonial 2.jpg';
 import testimonial3 from './assets/images/testimonial 3.jpg';
 import testimonial4 from './assets/images/testimonial 4.jpg';
+import blog1 from './assets/images/1.jpg';
+import blog2 from './assets/images/2.jpg';
+import blog3 from './assets/images/3.jpg';
+import numeroImg from './assets/images/numero.png';
 import Chatbot from './components/Chatbot';
 import { 
   Package, MapPin, CheckCircle, ShieldCheck, Smartphone, 
@@ -645,7 +649,7 @@ export default function App() {
                     <div className="relative w-14 h-14 shrink-0">
                       <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/50 animate-[spin_8s_linear_infinite]" />
                       <img
-                        src="https://i.pravatar.cc/150?img=11"
+                        src={testimonial1}
                         alt="Amadou Fall"
                         className="w-full h-full rounded-full object-cover border-2 border-white shadow"
                       />
@@ -849,8 +853,8 @@ export default function App() {
 
                     {/* Icon Circle */}
                     <div className="relative mb-8 z-10">
-                      <div className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform duration-300 border-4 border-white ring-8 ring-red-50">
-                        {step.icon}
+                      <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform duration-300 border-4 border-white ring-8 ring-red-50">
+                        <img src={numeroImg} alt={step.num} className="w-full h-full object-cover" />
                       </div>
                       {/* Number Badge */}
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow-sm">
@@ -1317,31 +1321,31 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  image: "https://images.unsplash.com/photo-1586528116311-ad8ed7450900?q=80&w=800&auto=format&fit=crop",
+                  image: blog1,
                   category: "Logistique",
                   date: "10 Mai, 2025",
                   comments: "Commentaire",
                   title: "Comment optimiser vos expéditions avec le service Cargo",
                   author: "Amadou Diallo",
-                  authorImg: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=150&auto=format&fit=crop"
+                  authorImg: testimonial2
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=800&auto=format&fit=crop",
+                  image: blog2,
                   category: "Logistique",
                   date: "10 Mai, 2025",
                   comments: "Commentaire",
                   title: "Suivre vos marchandises à travers la meilleure chaîne d'approvisionnement",
                   author: "Fatou Sow",
-                  authorImg: "https://images.unsplash.com/photo-1531123897727-8f129e1b4dce?q=80&w=150&auto=format&fit=crop"
+                  authorImg: testimonial3
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=800&auto=format&fit=crop",
+                  image: blog3,
                   category: "Logistique",
                   date: "10 Mai, 2025",
                   comments: "Commentaire",
                   title: "Comment mesurer le succès de vos livraisons ?",
                   author: "Cheikh Ndiaye",
-                  authorImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop"
+                  authorImg: testimonial4
                 }
               ].map((post, i) => (
                 <motion.div 
