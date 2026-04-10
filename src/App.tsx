@@ -458,29 +458,24 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.9, ease: customEase }}
-                className="relative min-h-[580px]"
+                className="relative min-h-[520px]"
               >
-                {/* Image avec masque SVG forme L inversé */}
-                <div
-                  className="relative z-10 shadow-2xl"
-                  style={{
-                    width: '570px',
-                    maxWidth: '100%',
-                    height: '580px',
-                    WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='570' height='580' viewBox='0 0 570 580'%3E%3Crect x='0' y='0' width='305' height='326' rx='45' ry='45' fill='black'/%3E%3Crect x='192' y='326' width='378' height='254' rx='45' ry='45' fill='black'/%3E%3Crect x='192' y='280' width='113' height='90' fill='black'/%3E%3C/svg%3E")`,
-                    maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='570' height='580' viewBox='0 0 570 580'%3E%3Crect x='0' y='0' width='305' height='326' rx='45' ry='45' fill='black'/%3E%3Crect x='192' y='326' width='378' height='254' rx='45' ry='45' fill='black'/%3E%3Crect x='192' y='280' width='113' height='90' fill='black'/%3E%3C/svg%3E")`,
-                    WebkitMaskRepeat: 'no-repeat',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskPosition: 'center center',
-                    maskPosition: 'center center',
-                    WebkitMaskSize: 'cover',
-                    maskSize: 'cover',
-                  }}
-                >
+                {/* Image principale */}
+                <div className="w-[75%] h-[420px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
                   <img
                     src={aboutImg}
-                    alt="Livraison Direct Colis"
-                    style={{ width: '100%', height: '580px', objectFit: 'cover', display: 'block' }}
+                    alt="Livraison Sénégal"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-blue-950/10" />
+                </div>
+
+                {/* Image secondaire — containers */}
+                <div className="absolute bottom-0 right-0 w-[60%] h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20">
+                  <img
+                    src="https://images.unsplash.com/photo-1586528116311-ad8ed7450900?q=80&w=800&auto=format&fit=crop"
+                    alt="Containers logistiques"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
