@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
 import logoPaysageBlanc from './assets/images/logo-paysage-blanc.png';
 import aboutImg from './assets/images/le3.jpg';
+import testimonial1 from './assets/images/testimonial 1.jpg';
+import testimonial2 from './assets/images/testimonial 2.jpg';
+import testimonial3 from './assets/images/testimonial 3.jpg';
+import testimonial4 from './assets/images/testimonial 4.jpg';
 import Chatbot from './components/Chatbot';
 import { 
   Package, MapPin, CheckCircle, ShieldCheck, Smartphone, 
@@ -489,8 +493,8 @@ export default function App() {
                 >
                   {/* Avatars */}
                   <div className="flex -space-x-3 mb-3">
-                    {[33,47,12,68].map(n => (
-                      <img key={n} className="w-10 h-10 rounded-full border-2 border-red-600 object-cover" src={`https://i.pravatar.cc/100?img=${n}`} alt="Client" />
+                    {[testimonial1, testimonial2, testimonial3, testimonial4].map((src, i) => (
+                      <img key={i} className="w-10 h-10 rounded-full border-2 border-red-600 object-cover" src={src} alt="Client" />
                     ))}
                   </div>
                   {/* Stars */}
