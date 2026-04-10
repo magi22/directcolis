@@ -470,11 +470,11 @@ export default function App() {
                   <div className="absolute inset-0 bg-blue-950/10" />
                 </div>
 
-                {/* Image secondaire — containers */}
+                {/* Image secondaire */}
                 <div className="absolute bottom-0 right-0 w-[60%] h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20">
                   <img
-                    src="https://images.unsplash.com/photo-1586528116311-ad8ed7450900?q=80&w=800&auto=format&fit=crop"
-                    alt="Containers logistiques"
+                    src={aboutImg}
+                    alt="Livraison Direct Colis"
                     className="w-full h-full object-cover"
                   />
                 </div>
