@@ -853,8 +853,8 @@ export default function App() {
 
                     {/* Icon Circle */}
                     <div className="relative mb-8 z-10">
-                      <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform duration-300 border-4 border-white ring-8 ring-red-50">
-                        <img src={numeroImg} alt={step.num} className="w-full h-full object-cover" />
+                      <div className="w-24 h-24 rounded-full bg-red-50 shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform duration-300 border-4 border-white ring-8 ring-red-50 flex items-center justify-center">
+                        <span className="text-3xl font-black text-red-600">{step.num}</span>
                       </div>
                       {/* Number Badge */}
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow-sm">
@@ -898,17 +898,11 @@ export default function App() {
 
               {/* Right Content */}
               <div className="md:w-2/5 relative h-80 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
-                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden flex items-end justify-center">
-                  <img 
-                    src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Livreur Direct Colis" 
-                    className="w-full h-full object-cover mix-blend-luminosity opacity-40 absolute inset-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-red-600/80 to-transparent"></div>
-                  <img 
-                    src="https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?q=80&w=1000&auto=format&fit=crop"
-                    alt="Logistique"
-                    className="relative z-10 w-full h-full object-cover"
+                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden flex items-center justify-center">
+                  <img
+                    src={numeroImg}
+                    alt="Numérotation Direct Colis"
+                    className="relative z-10 w-full h-full object-contain p-6"
                   />
                 </div>
               </div>
