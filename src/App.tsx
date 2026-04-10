@@ -898,11 +898,11 @@ export default function App() {
 
               {/* Right Content */}
               <div className="md:w-2/5 relative h-80 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
-                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden flex items-center justify-center">
+                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden">
                   <img
                     src={numeroImg}
                     alt="Numérotation Direct Colis"
-                    className="relative z-10 w-full h-full object-contain p-6"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
