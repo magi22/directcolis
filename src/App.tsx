@@ -11,22 +11,24 @@ import blog2 from './assets/images/2.jpg';
 import blog3 from './assets/images/3.jpg';
 import numeroImg from './assets/images/numero.png';
 import Chatbot from './components/Chatbot';
-import { 
-  Package, MapPin, CheckCircle, ShieldCheck, Smartphone, 
-  BarChart3, Users, QrCode, Camera, FileSignature, 
-  Clock, Truck, ArrowRight, Search, Menu, X, 
+import {
+  Package, MapPin, CheckCircle, ShieldCheck, Smartphone,
+  BarChart3, Users, QrCode, Camera, FileSignature,
+  Clock, Truck, ArrowRight, Search, Menu, X,
   ChevronDown, Box, FileSpreadsheet, Printer, Database,
   Check, Navigation, AlertTriangle, RefreshCcw, LayoutDashboard,
   ChevronUp, Play, Star, Globe, Headset, CheckCircle2, Plane,
-  PhoneCall, PackageOpen, Calendar, MessageSquare, Bike, Car
+  PhoneCall, PackageOpen, Calendar, MessageSquare, Bike, Car,
+  Instagram, Twitter
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
 // ─── Translations ─────────────────────────────────────────────
 const translations = {
   fr: {
-    nav: ['À propos', 'Services', 'Suivi', 'FAQ', 'Contact'],
-    navHrefs: ['a-propos', 'services', 'suivi', 'faq', 'contact'],
+    nav: ['À propos', 'Services', 'Suivi', 'FAQ', 'Blog', 'Contact'],
+    navHrefs: ['/a-propos', '/services', '/suivi', '/faq', '/blog', '/contact'],
     demo: 'Demander une démo',
     trackTitle: 'Suivre ma commande',
     trackPlaceholder: 'Entrez votre numéro de suivi (ex: DC-84729)',
@@ -41,8 +43,8 @@ const translations = {
     statsLabels: ['Colis livrés', 'Taux succès', 'Villes couvertes'],
   },
   en: {
-    nav: ['About', 'Services', 'Tracking', 'FAQ', 'Contact'],
-    navHrefs: ['a-propos', 'services', 'suivi', 'faq', 'contact'],
+    nav: ['About', 'Services', 'Tracking', 'FAQ', 'Blog', 'Contact'],
+    navHrefs: ['/a-propos', '/services', '/suivi', '/faq', '/blog', '/contact'],
     demo: 'Request a demo',
     trackTitle: 'Track my order',
     trackPlaceholder: 'Enter your tracking number (e.g. DC-84729)',
@@ -180,14 +182,14 @@ export default function App() {
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-7">
               {t.nav.map((item, i) => (
-                <a
+                <Link
                   key={item}
-                  href={`#${t.navHrefs[i]}`}
+                  to={t.navHrefs[i]}
                   className="text-sm font-medium text-slate-600 hover:text-blue-950 transition-colors relative group py-2 whitespace-nowrap"
                 >
                   {item}
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full" />
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -243,15 +245,15 @@ export default function App() {
               className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 px-4 py-4 space-y-1 shadow-xl overflow-hidden"
             >
               {t.nav.map((item, i) => (
-                <a
+                <Link
                   key={item}
-                  href={`#${t.navHrefs[i]}`}
+                  to={t.navHrefs[i]}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center gap-3 text-base font-medium text-slate-800 px-3 py-2.5 hover:bg-slate-50 rounded-xl transition-colors"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-red-600 shrink-0" />
                   {item}
-                </a>
+                </Link>
               ))}
               <div className="pt-3 border-t border-slate-100 mt-2 flex gap-2">
                 <button className="flex-1 px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-colors">
@@ -746,17 +748,19 @@ export default function App() {
                   variants={fadeInUp}
                   whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-shadow duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border"
+                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border overflow-hidden"
                   style={{ transformStyle: 'preserve-3d', perspective: 800 }}
                 >
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300">
+                  {/* Dark gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 opacity-0 group-hover:opacity-95 transition-opacity duration-300 rounded-2xl pointer-events-none z-0" />
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300 z-10">
                     {service.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-blue-950 mb-4">{service.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed font-light mb-8 flex-grow">{service.desc}</p>
-                  <a href="#" className="inline-flex items-center gap-2 text-blue-950 font-bold text-sm hover:text-red-600 transition-colors">
+                  <h3 className="text-xl font-bold text-blue-950 group-hover:text-white mb-4 relative z-10 transition-colors duration-300">{service.title}</h3>
+                  <p className="text-slate-500 group-hover:text-blue-100 text-sm leading-relaxed font-light mb-8 flex-grow relative z-10 transition-colors duration-300">{service.desc}</p>
+                  <Link to="/services" className="inline-flex items-center gap-2 text-blue-950 group-hover:text-white font-bold text-sm transition-colors duration-300 relative z-10">
                     En savoir plus <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>
@@ -1019,13 +1023,13 @@ export default function App() {
                   variants={fadeInUp}
                   className="group relative p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 opacity-0 group-hover:opacity-95 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                   <div className="relative z-10">
-                    <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-950 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-red-50 group-hover:text-red-600 transition-all duration-300">
+                    <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-950 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-white/15 group-hover:text-white transition-all duration-300">
                       <feature.icon className="h-6 w-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-blue-950 mb-2">{feature.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{feature.desc}</p>
+                    <h3 className="text-lg font-bold text-blue-950 group-hover:text-white mb-2 transition-colors duration-300">{feature.title}</h3>
+                    <p className="text-sm text-slate-600 group-hover:text-blue-100 leading-relaxed transition-colors duration-300">{feature.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -1526,14 +1530,30 @@ export default function App() {
           </div>
 
           <div className="neon-divider mb-8"></div>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-blue-200/40 text-sm font-light">
-              &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
-            </p>
-            <div className="flex gap-4">
-              <div className="h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"></div>
-              <div className="h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"></div>
-              <div className="h-8 w-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"></div>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-col items-center sm:items-start gap-1">
+              <p className="text-blue-200/40 text-sm font-light">
+                &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
+              </p>
+              <p className="text-blue-200/30 text-xs">
+                Développé par{' '}
+                <a href="https://wiicode.dev" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors">
+                  Wiicode
+                </a>
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <a href="#" aria-label="Instagram" className="h-9 w-9 rounded-full bg-white/5 hover:bg-red-600 flex items-center justify-center transition-all duration-300 group">
+                <Instagram className="h-4 w-4 text-blue-200/60 group-hover:text-white transition-colors" />
+              </a>
+              <a href="#" aria-label="Twitter" className="h-9 w-9 rounded-full bg-white/5 hover:bg-red-600 flex items-center justify-center transition-all duration-300 group">
+                <Twitter className="h-4 w-4 text-blue-200/60 group-hover:text-white transition-colors" />
+              </a>
+              <a href="#" aria-label="TikTok" className="h-9 w-9 rounded-full bg-white/5 hover:bg-red-600 flex items-center justify-center transition-all duration-300 group">
+                <svg className="h-4 w-4 fill-current text-blue-200/60 group-hover:text-white transition-colors" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
