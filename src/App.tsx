@@ -475,25 +475,40 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.9, ease: customEase }}
-                className="relative min-h-[440px] sm:min-h-[520px] lg:min-h-[620px]"
+                className="relative w-full aspect-[4/5] sm:aspect-[5/6] lg:aspect-[5/6] max-w-lg mx-auto lg:max-w-none"
               >
-                {/* Image principale — grande, prend ~80% du container */}
-                <div className="absolute top-0 left-0 w-[82%] h-[72%] sm:h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10">
-                  <img
-                    src={aboutImg}
-                    alt="Livraison Sénégal"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/30 via-transparent to-transparent" />
+                {/* FENÊTRE 1 — bloc principal top-left, 82% x 75% du parent */}
+                <div className="absolute top-0 left-0 w-[82%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10">
+                  {/* Wrapper virtuel représentant 100% x 100% du parent */}
+                  <div
+                    className="absolute top-0 left-0"
+                    style={{ width: 'calc(100% / 0.82)', height: 'calc(100% / 0.75)' }}
+                  >
+                    <img
+                      src={aboutImg}
+                      alt="Livraison Sénégal"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/25 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* Image secondaire — chevauche en bas à droite avec bordure blanche */}
-                <div className="absolute bottom-0 right-0 w-[58%] h-[46%] sm:h-[48%] rounded-[2rem] overflow-hidden border-[6px] sm:border-[8px] border-white shadow-2xl z-20">
-                  <img
-                    src={blog2}
-                    alt="Livraison Direct Colis"
-                    className="w-full h-full object-cover"
-                  />
+                {/* FENÊTRE 2 — bloc secondaire bottom-right, 58% x 48% du parent
+                     Ancré à son coin bas-droit = coin bas-droit du parent, donc affiche la suite exacte de l'image */}
+                <div
+                  className="absolute bottom-0 right-0 w-[58%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20"
+                  style={{ boxShadow: '0 0 0 6px #fff, 0 20px 60px rgba(0,0,0,0.25)' }}
+                >
+                  <div
+                    className="absolute bottom-0 right-0"
+                    style={{ width: 'calc(100% / 0.58)', height: 'calc(100% / 0.48)' }}
+                  >
+                    <img
+                      src={aboutImg}
+                      alt="Livraison Direct Colis"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
 
                 {/* Carte flottante rouge — stats */}

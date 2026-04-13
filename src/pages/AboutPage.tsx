@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import aboutImg from '../assets/images/le3.jpg';
-import blog1 from '../assets/images/1.jpg';
 import blog2 from '../assets/images/2.jpg';
 import blog3 from '../assets/images/3.jpg';
 import SiteHeader from '../components/SiteHeader';
@@ -27,8 +26,7 @@ type TabContent = {
   title: string;
   text: string;
   bullets: string[];
-  image1: string;
-  image2: string;
+  image: string;
   badge: string;
 };
 
@@ -42,8 +40,7 @@ const tabContent: Record<string, TabContent> = {
       'Présence dans plus de 50 villes',
       'Taux de satisfaction client à 98%',
     ],
-    image1: aboutImg,
-    image2: blog1,
+    image: aboutImg,
     badge: 'Certifié & sécurisé',
   },
   pourquoi: {
@@ -55,8 +52,7 @@ const tabContent: Record<string, TabContent> = {
       'Support client 7j/7',
       'Couverture nationale étendue',
     ],
-    image1: blog2,
-    image2: aboutImg,
+    image: blog2,
     badge: 'Technologie avancée',
   },
   comment: {
@@ -68,8 +64,7 @@ const tabContent: Record<string, TabContent> = {
       '3. Transit et passage en hub',
       '4. Livraison et preuve de remise',
     ],
-    image1: blog3,
-    image2: blog1,
+    image: blog3,
     badge: 'Processus éprouvé',
   },
 };
@@ -213,27 +208,38 @@ export default function AboutPage() {
                 transition={{ duration: 0.4 }}
                 className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
               >
-                {/* Images side — L-shape composition: main fills container, secondary overlaps bottom-right */}
-                <div className="relative min-h-[440px] sm:min-h-[540px] lg:min-h-[620px]">
-                  {/* Main image — large, fills top-left ~80% of container */}
+                {/* Images side — deux fenêtres sur UNE MÊME image (effet de découpe continue) */}
+                <div className="relative w-full aspect-[4/5] sm:aspect-[5/6] lg:aspect-[5/6] max-w-lg mx-auto lg:max-w-none">
+                  {/* FENÊTRE 1 — bloc principal top-left, 82% x 75% */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7 }}
-                    className="absolute top-0 left-0 w-[82%] h-[72%] sm:h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10"
+                    className="absolute top-0 left-0 w-[82%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10"
                   >
-                    <img src={content.image1} alt={content.title} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/30 via-transparent to-transparent" />
+                    <div
+                      className="absolute top-0 left-0"
+                      style={{ width: 'calc(100% / 0.82)', height: 'calc(100% / 0.75)' }}
+                    >
+                      <img src={content.image} alt={content.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/25 via-transparent to-transparent pointer-events-none" />
                   </motion.div>
 
-                  {/* Secondary image — overlaps bottom-right with white border (L-shape effect) */}
+                  {/* FENÊTRE 2 — bloc secondaire bottom-right, 58% x 48% (suite continue de l'image) */}
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.15 }}
-                    className="absolute bottom-0 right-0 w-[58%] h-[46%] sm:h-[48%] rounded-[2rem] overflow-hidden border-[6px] sm:border-[8px] border-white shadow-2xl z-20"
+                    className="absolute bottom-0 right-0 w-[58%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20"
+                    style={{ boxShadow: '0 0 0 6px #fff, 0 20px 60px rgba(0,0,0,0.25)' }}
                   >
-                    <img src={content.image2} alt="" className="w-full h-full object-cover" />
+                    <div
+                      className="absolute bottom-0 right-0"
+                      style={{ width: 'calc(100% / 0.58)', height: 'calc(100% / 0.48)' }}
+                    >
+                      <img src={content.image} alt="" className="w-full h-full object-cover" />
+                    </div>
                   </motion.div>
 
                   {/* Floating red badge */}
