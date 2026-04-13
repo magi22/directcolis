@@ -544,14 +544,13 @@ export default function App() {
                   </button>
                 </motion.div>
 
-                {/* Badge circulaire rotatif — rapproché du creux (jonction des deux blocs) */}
+                {/* Badge circulaire rotatif — à côté en bas-gauche, collé au bord du bloc principal */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute w-32 h-32 sm:w-36 sm:h-36 z-30 hidden sm:block"
-                  style={{ left: '42%', top: '75%', transform: 'translate(-50%, -50%)' }}
+                  className="absolute -bottom-4 -left-2 w-32 h-32 sm:w-36 sm:h-36 z-30 hidden sm:block"
                 >
                   <div className="w-full h-full relative flex items-center justify-center">
                     {/* Outer dashed ring */}
