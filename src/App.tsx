@@ -465,9 +465,9 @@ export default function App() {
         </section>
 
         {/* 2.5 About Us / Expertise — redesigned */}
-        <section id="a-propos" className="py-24 bg-white overflow-hidden relative">
+        <section id="a-propos" className="py-28 bg-white overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
               {/* ── COLONNE GAUCHE ── */}
               <motion.div
@@ -475,14 +475,14 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.9, ease: customEase }}
-                className="relative w-full aspect-[4/5] sm:aspect-[5/6] max-w-lg mx-auto lg:max-w-none"
+                className="relative w-full aspect-[4/5] sm:aspect-[5/6] lg:aspect-[5/6] max-w-lg mx-auto lg:max-w-none"
               >
-                {/* FENÊTRE 1 — bloc principal top-left, 80% x 72% du parent */}
-                <div className="absolute top-0 left-0 w-[80%] h-[72%] rounded-[2rem] overflow-hidden shadow-2xl z-10">
-                  {/* Wrapper virtuel représentant 100% x 100% du parent — image de référence */}
+                {/* FENÊTRE 1 — bloc principal top-left, 82% x 75% du parent */}
+                <div className="absolute top-0 left-0 w-[82%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10">
+                  {/* Wrapper virtuel représentant 100% x 100% du parent */}
                   <div
                     className="absolute top-0 left-0"
-                    style={{ width: 'calc(100% / 0.80)', height: 'calc(100% / 0.72)' }}
+                    style={{ width: 'calc(100% / 0.82)', height: 'calc(100% / 0.75)' }}
                   >
                     <img
                       src={aboutImg}
@@ -490,15 +490,18 @@ export default function App() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/15 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/25 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* FENÊTRE 2 — bloc secondaire bottom-right, 66% x 48% du parent
-                     Ancré bas-droit pour afficher la suite exacte de l'image (effet de découpe continue) */}
-                <div className="absolute bottom-0 right-0 w-[66%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20">
+                {/* FENÊTRE 2 — bloc secondaire bottom-right, 58% x 48% du parent
+                     Ancré à son coin bas-droit = coin bas-droit du parent, donc affiche la suite exacte de l'image */}
+                <div
+                  className="absolute bottom-0 right-0 w-[58%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20"
+                  style={{ boxShadow: '0 0 0 6px #fff, 0 20px 60px rgba(0,0,0,0.25)' }}
+                >
                   <div
                     className="absolute bottom-0 right-0"
-                    style={{ width: 'calc(100% / 0.66)', height: 'calc(100% / 0.48)' }}
+                    style={{ width: 'calc(100% / 0.58)', height: 'calc(100% / 0.48)' }}
                   >
                     <img
                       src={aboutImg}
@@ -508,73 +511,80 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Carte flottante rouge — stats, en haut à droite (protruding) */}
+                {/* Carte flottante rouge — stats */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.85, y: 20 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="hidden sm:block absolute top-10 -right-4 md:-right-10 bg-red-600 rounded-[2rem] p-6 md:p-7 text-white shadow-[0_20px_60px_rgba(220,38,38,0.35)] w-60 md:w-64 z-30"
+                  className="hidden sm:block absolute top-8 -right-4 md:-right-10 bg-red-600 rounded-[1.75rem] p-4 sm:p-6 text-white shadow-[0_20px_60px_rgba(220,38,38,0.35)] w-52 sm:w-60 z-30"
                 >
                   {/* Avatars */}
-                  <div className="flex -space-x-3 mb-4">
+                  <div className="flex -space-x-3 mb-3">
                     {[testimonial1, testimonial2, testimonial3, testimonial4].map((src, i) => (
-                      <img key={i} className="w-11 h-11 rounded-full border-2 border-red-600 object-cover" src={src} alt="Client" />
+                      <img key={i} className="w-10 h-10 rounded-full border-2 border-red-600 object-cover" src={src} alt="Client" />
                     ))}
                   </div>
                   {/* Stars */}
-                  <div className="flex text-yellow-300 mb-1.5">
-                    {[...Array(5)].map((_,i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                  <div className="flex text-yellow-300 mb-1">
+                    {[...Array(5)].map((_,i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
                   </div>
-                  <p className="text-xs font-semibold mb-5 opacity-90">Clients 4.8 (3 567 avis)</p>
+                  <p className="text-xs font-semibold mb-4 opacity-90">Clients 4.8 (3 567 avis)</p>
                   {/* Big stat */}
                   <div className="flex items-center gap-3 mb-5">
-                    <span className="text-5xl font-black tracking-tight leading-none">1M+</span>
-                    <span className="text-xs leading-snug font-medium opacity-90">Colis<br/>Livrés</span>
+                    <span className="text-5xl font-black tracking-tight leading-none">10+</span>
+                    <span className="text-xs leading-snug font-medium opacity-90">Ans<br/>d'Expérience</span>
                   </div>
                   {/* Play */}
                   <button className="flex items-center gap-3 text-sm font-bold hover:opacity-80 transition-opacity group">
-                    <div className="w-11 h-11 bg-white text-red-600 rounded-full flex items-center justify-center shadow group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 bg-white text-red-600 rounded-full flex items-center justify-center shadow group-hover:scale-110 transition-transform">
                       <Play className="w-4 h-4 ml-0.5 fill-current" />
                     </div>
                     Voir la vidéo
                   </button>
                 </motion.div>
 
-                {/* Badge circulaire rotatif — en bas à gauche (protruding) */}
+                {/* Badge circulaire rotatif */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.8, ease: customEase }}
+                  transition={{ delay: 0.5, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute -bottom-10 -left-4 md:-left-10 w-36 h-36 md:w-40 md:h-40 z-30 hidden sm:block"
+                  className="absolute -bottom-8 -left-6 w-36 h-36 z-30 hidden sm:block"
                 >
-                  <div className="w-full h-full bg-white rounded-full shadow-2xl p-2 relative flex items-center justify-center">
-                    {/* Rotating text along circle */}
+                  <div className="w-full h-full relative flex items-center justify-center">
+                    {/* Outer dashed ring */}
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/40 animate-[spin_20s_linear_infinite]" />
+                    {/* Rotating text */}
                     <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-red-600 animate-[spin_20s_linear_infinite]">
                       <path id="aboutCirclePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
-                      <text fontSize="9" fontWeight="bold" fill="currentColor" letterSpacing="1.2">
-                        <textPath href="#aboutCirclePath">DIRECT COLIS • LOGISTIQUE • LIVRAISON •</textPath>
+                      <text fontSize="8.5" fontWeight="bold" fill="currentColor" letterSpacing="1.5">
+                        <textPath href="#aboutCirclePath">DIRECT COLIS • LIVRAISON • SÉNÉGAL •</textPath>
                       </text>
                     </svg>
-                    {/* Center logo */}
-                    <div className="w-[58%] h-[58%] bg-blue-950 rounded-full flex items-center justify-center text-white relative z-10 shadow-lg">
-                      <Truck className="h-7 w-7 md:h-8 md:w-8" />
+                    {/* Center */}
+                    <div className="w-16 h-16 bg-blue-950 rounded-full flex items-center justify-center text-white shadow-xl z-10">
+                      <Truck className="h-7 w-7" />
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Ligne pointillée décorative gauche */}
-                <svg className="absolute -left-16 top-1/2 w-32 h-32 text-red-600/25 -z-10 hidden md:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4">
-                  <path d="M0 100 Q 50 50, 100 0" />
+                {/* Avion décoratif + trajectoire pointillée */}
+                <svg className="absolute -left-8 top-1/3 w-28 h-28 text-red-600/25 -z-10 hidden md:block" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 4">
+                  <path d="M10 90 Q30 50 90 10" />
                 </svg>
                 <motion.div
                   animate={{ x: [0, 12, 0], y: [0, -8, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute -left-8 top-1/3 -z-10 hidden md:block text-red-600 opacity-40"
+                  className="absolute left-10 top-1/3 -z-10 hidden md:block text-red-600 opacity-40"
                 >
-                  <Bike className="w-6 h-6" />
+                  <Plane className="w-5 h-5 -rotate-45" />
                 </motion.div>
+
+                {/* Ligne pointillée décorative droite */}
+                <svg className="absolute -right-6 top-0 bottom-0 h-full w-6 text-red-600/20 hidden lg:block" viewBox="0 0 20 400" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="6 5">
+                  <path d="M10 0 Q20 100 10 200 Q0 300 10 400" />
+                </svg>
               </motion.div>
 
               {/* ── COLONNE DROITE ── */}
@@ -585,93 +595,97 @@ export default function App() {
                 variants={staggerContainer}
                 className="lg:pl-6"
               >
-                {/* Label "À PROPOS DE NOUS" */}
-                <motion.div variants={fadeInUp} className="flex items-center gap-4 text-red-600 font-bold text-sm uppercase tracking-wider mb-6">
-                  <div className="flex items-center gap-1">
-                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
-                    <div className="w-2 h-1 rounded-full bg-red-600"></div>
-                    <div className="w-8 h-px bg-red-600"></div>
+                {/* Label "À PROPOS DE NOUS" avec flèches */}
+                <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-5">
+                  <div className="flex items-center gap-1 text-red-600">
+                    <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+                    <div className="w-10 h-px bg-red-600" />
+                    <div className="w-4 h-px bg-red-600/50" />
                   </div>
-                  À PROPOS DE NOUS
-                  <div className="flex items-center gap-1">
-                    <div className="w-8 h-px bg-red-600"></div>
-                    <div className="w-2 h-1 rounded-full bg-red-600"></div>
-                    <div className="w-1 h-1 rounded-full bg-red-600"></div>
+                  <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">À PROPOS DE NOUS</span>
+                  <div className="flex items-center gap-1 text-red-600">
+                    <div className="w-4 h-px bg-red-600/50" />
+                    <div className="w-10 h-px bg-red-600" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </motion.div>
 
                 {/* Titre */}
-                <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-6 leading-[1.15]">
-                  Notre expertise au service de vos <span className="text-red-600">livraisons au Sénégal</span>
+                <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 mb-5 leading-[1.12]">
+                  Notre expertise au service de vos{' '}
+                  <span className="text-red-600">Livraisons au Sénégal</span>
                 </motion.h2>
 
                 {/* Description */}
-                <motion.p variants={fadeInUp} className="text-slate-600 mb-10 leading-relaxed font-light text-base sm:text-lg">
-                  Direct Colis accompagne les entreprises, e-commerçants et équipes logistiques avec une approche adaptée aux réalités du terrain. Nous assurons une gestion fluide du mouvement des marchandises, de l'origine à la destination finale.
+                <motion.p variants={fadeInUp} className="text-slate-500 mb-8 leading-relaxed text-base max-w-xl">
+                  Direct Colis joue un rôle central dans la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises, de l'origine à la destination finale. Nous offrons une solution complète adaptée aux réalités du terrain sénégalais.
                 </motion.p>
 
                 {/* Feature cards — 2 colonnes */}
-                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6 sm:gap-8 mb-10">
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                      <Globe className="w-7 h-7 text-red-600" />
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6 mb-8">
+                  {[
+                    { icon: <Globe className="w-6 h-6 text-white" />, title: 'Couverture Nationale', desc: 'Présence sur tous les axes majeurs du Sénégal.' },
+                    { icon: <Headset className="w-6 h-6 text-white" />, title: 'Support 7j/7', desc: 'Une équipe dédiée disponible pour chaque requête.' },
+                  ].map((f, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shrink-0 shadow-lg shadow-red-600/25">
+                        {f.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-blue-950 text-base mb-1">{f.title}</h4>
+                        <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-blue-950 mb-1 text-lg">Couverture Nationale</h4>
-                      <p className="text-sm text-slate-500 font-light leading-relaxed">Une présence sur les axes majeurs (Dakar, Thiès, Mbour...).</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                      <Headset className="w-7 h-7 text-red-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-blue-950 mb-1 text-lg">Support Réactif</h4>
-                      <p className="text-sm text-slate-500 font-light leading-relaxed">Une équipe dédiée pour suivre et résoudre vos requêtes.</p>
-                    </div>
-                  </div>
+                  ))}
                 </motion.div>
 
                 {/* Checklist 2×2 */}
-                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-y-4 gap-x-6 mb-12">
+                <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-10">
                   {[
                     'Traçabilité 100% garantie',
-                    'Preuve de livraison sécurisée',
+                    'Satisfaction client assurée',
                     'Flotte adaptée au terrain',
-                    'API & Intégration facile',
+                    'Livraison dans les délais',
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-6 h-6 text-red-600 shrink-0" />
-                      <span className="text-slate-700 font-medium">{item}</span>
+                      <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                      </div>
+                      <span className="text-slate-700 text-sm font-medium">{item}</span>
                     </div>
                   ))}
                 </motion.div>
 
                 {/* Bas : CTA + fondateur */}
-                <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-6 sm:gap-8 pt-6 border-t border-slate-100">
+                <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-6 border-t border-slate-100 flex-wrap">
                   {/* Bouton pill */}
-                  <button className="flex items-center gap-4 bg-red-600 text-white pl-8 pr-2 py-2.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5 group">
+                  <button className="flex items-center gap-0 bg-red-600 text-white pl-7 pr-1.5 py-1.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/25 hover:-translate-y-0.5 group shrink-0">
                     En savoir plus
-                    <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <ArrowRight className="w-5 h-5" />
+                    <div className="w-9 h-9 ml-4 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <ArrowRight className="w-4 h-4" />
                     </div>
                   </button>
 
-                  {/* Fondateur avec signature */}
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonial1}
-                      alt="Amadou Fall"
-                      className="w-14 h-14 rounded-full border-2 border-slate-100 shadow-sm object-cover"
-                    />
-                    <div>
-                      <p className="font-bold text-blue-950">Amadou Fall</p>
-                      <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-0.5">Fondateur & CEO</p>
+                  <div className="h-10 w-px bg-slate-200 hidden sm:block" />
+
+                  {/* Fondateur avec bordure pointillée animée */}
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-14 h-14 shrink-0">
+                      <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/50 animate-[spin_8s_linear_infinite]" />
+                      <img
+                        src={testimonial1}
+                        alt="Amadou Fall"
+                        className="w-full h-full rounded-full object-cover border-2 border-white shadow"
+                      />
                     </div>
-                    {/* Signature cursive SVG */}
-                    <svg className="h-10 w-28 text-blue-950 ml-2 opacity-80 hidden sm:block" viewBox="0 0 200 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 40 Q 40 10, 60 30 T 90 20 T 120 40 T 150 10 T 180 30" />
-                      <path d="M40 45 L 160 45" strokeWidth="1" opacity="0.5" />
+                    <div>
+                      <p className="font-bold text-blue-950 text-sm">Amadou Fall</p>
+                      <p className="text-xs text-slate-500 mt-0.5">Fondateur & CEO</p>
+                    </div>
+                    {/* Signature SVG cursive */}
+                    <svg className="h-8 w-24 text-blue-950/60 ml-2 hidden sm:block" viewBox="0 0 120 40" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 30 C15 10, 25 35, 35 20 S50 5, 60 22 S75 38, 88 18 S105 8, 115 25" />
+                      <path d="M20 34 L95 34" strokeWidth="0.8" opacity="0.4" />
                     </svg>
                   </div>
                 </motion.div>
