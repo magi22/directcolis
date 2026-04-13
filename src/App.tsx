@@ -147,7 +147,14 @@ function Particles() {
 }
 
 export default function App() {
-  const [lang, setLang] = useState<Lang>('fr');
+  const [lang, setLangState] = useState<Lang>(() => {
+    if (typeof window === 'undefined') return 'fr';
+    return (localStorage.getItem('lang') as Lang) || 'fr';
+  });
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    localStorage.setItem('lang', l);
+  };
   const t = translations[lang];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -281,13 +288,13 @@ export default function App() {
       <main className="pt-20">
         {/* 2. Hero */}
         <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
-          <Particles />
-          {/* Background orbs */}
-          <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl -z-10"></div>
-          <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/40 rounded-full blur-3xl -z-10"></div>
-          {/* Futuristic corner accent */}
-          <div className="absolute top-0 left-0 w-48 h-48 border-l-2 border-t-2 border-red-600/10 rounded-tl-3xl pointer-events-none"></div>
-          <div className="absolute bottom-0 right-0 w-48 h-48 border-r-2 border-b-2 border-blue-950/10 rounded-br-3xl pointer-events-none"></div>
+          <div className="hidden md:block"><Particles /></div>
+          {/* Background orbs - hidden on small mobile for perf */}
+          <div className="hidden sm:block absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl -z-10"></div>
+          <div className="hidden sm:block absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/40 rounded-full blur-3xl -z-10"></div>
+          {/* Futuristic corner accents - hide on mobile */}
+          <div className="hidden md:block absolute top-0 left-0 w-48 h-48 border-l-2 border-t-2 border-red-600/10 rounded-tl-3xl pointer-events-none"></div>
+          <div className="hidden md:block absolute bottom-0 right-0 w-48 h-48 border-r-2 border-b-2 border-blue-950/10 rounded-br-3xl pointer-events-none"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-8 items-center">

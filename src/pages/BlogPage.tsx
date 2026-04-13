@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Calendar, MessageSquare, ArrowRight, Tag } from 'lucide-react';
+import { Calendar, MessageSquare, ArrowRight, Tag, Sparkles, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import blog1 from '../assets/images/1.jpg';
 import blog2 from '../assets/images/2.jpg';
@@ -54,20 +54,35 @@ const posts = [
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <SiteHeader />
 
       <main className="pt-20">
         {/* Hero */}
-        <section className="py-20 bg-gradient-to-br from-slate-50 to-white border-b border-slate-100">
-          <div className="max-w-3xl mx-auto px-4 text-center">
+        <section className="py-20 sm:py-24 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 border-b border-slate-100 relative overflow-hidden">
+          <motion.div
+            animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-10 left-10 w-72 h-72 bg-red-600/20 rounded-full blur-3xl pointer-events-none"
+          />
+          <motion.div
+            animate={{ x: [0, -40, 0], y: [0, 40, 0] }}
+            transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute bottom-0 right-10 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"
+          />
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
+          <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
             <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-              <p className="text-red-600 font-bold text-sm uppercase tracking-widest mb-3">Blog</p>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 mb-4">
-                Actualités & <span className="text-red-600">Conseils</span>
+              <div className="inline-flex items-center gap-2 bg-red-500/15 border border-red-500/30 px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
+                <BookOpen className="w-4 h-4 text-red-400" />
+                <span className="text-xs font-bold text-red-300 uppercase tracking-widest">Blog & News</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 leading-[1.1]">
+                Actualités & <span className="text-red-400 text-glow-red">Conseils</span>
               </h1>
-              <p className="text-slate-500 text-lg">
-                Découvrez nos articles sur la logistique, la livraison et les bonnes pratiques pour vos expéditions.
+              <p className="text-blue-100/80 text-base sm:text-lg">
+                Découvrez nos articles sur la logistique, la livraison et les bonnes pratiques.
               </p>
             </motion.div>
           </div>

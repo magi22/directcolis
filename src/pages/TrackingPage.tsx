@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Search, Package, Truck, CheckCircle, MapPin, QrCode, PhoneCall, Clock } from 'lucide-react';
+import { Search, Package, Truck, CheckCircle, MapPin, QrCode, PhoneCall, Clock, Sparkles, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
@@ -27,20 +27,34 @@ export default function TrackingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <SiteHeader />
 
       <main className="pt-20">
         {/* Hero + Search */}
-        <section className="py-20 bg-gradient-to-br from-blue-950 to-blue-900 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+        <section className="py-20 sm:py-24 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 relative overflow-hidden">
+          <motion.div
+            animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-10 right-10 w-80 h-80 bg-red-600/25 rounded-full blur-3xl pointer-events-none"
+          />
+          <motion.div
+            animate={{ x: [0, -50, 0], y: [0, 30, 0] }}
+            transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute bottom-0 left-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"
+          />
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
             <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-              <p className="text-red-400 font-bold text-sm uppercase tracking-widest mb-3">Suivi de colis</p>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4">
-                Où est mon <span className="text-red-400">colis</span> ?
+              <div className="inline-flex items-center gap-2 bg-red-500/15 border border-red-500/30 px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
+                <Navigation className="w-4 h-4 text-red-400" />
+                <span className="text-xs font-bold text-red-300 uppercase tracking-widest">Suivi en temps réel</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 leading-[1.1]">
+                Où est mon <span className="text-red-400 text-glow-red">colis</span> ?
               </h1>
-              <p className="text-blue-100/70 text-lg mb-10">
+              <p className="text-blue-100/80 text-base sm:text-lg mb-10">
                 Entrez votre numéro de suivi pour localiser votre colis en temps réel.
               </p>
 
