@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import aboutImg from '../assets/images/le3.jpg';
 import blog2 from '../assets/images/2.jpg';
 import blog3 from '../assets/images/3.jpg';
+import logoComprimerCouleur from '../assets/images/logo-comprimer-couleur.png';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 
@@ -232,7 +233,6 @@ export default function AboutPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.15 }}
                     className="absolute bottom-0 right-0 w-[58%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20"
-                    style={{ boxShadow: '0 0 0 6px #fff, 0 20px 60px rgba(0,0,0,0.25)' }}
                   >
                     <div
                       className="absolute bottom-0 right-0"
@@ -253,16 +253,31 @@ export default function AboutPage() {
                     <span className="text-sm font-bold whitespace-nowrap">{content.badge}</span>
                   </motion.div>
 
-                  {/* Rotating badge */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                    className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full border-2 border-dashed border-red-600/40 z-30 hidden md:flex items-center justify-center bg-white shadow-xl"
+                  {/* Badge rotatif placé dans le creux (coin inversé) de la composition L */}
+                  <div
+                    className="absolute w-28 h-28 sm:w-32 sm:h-32 z-30 hidden sm:block"
+                    style={{ left: '42%', top: '75%', transform: 'translate(-50%, -50%)' }}
                   >
-                    <div className="w-14 h-14 rounded-full bg-blue-950 flex items-center justify-center">
-                      <Truck className="w-6 h-6 text-white" />
+                    <div className="w-full h-full relative flex items-center justify-center">
+                      {/* Outer dashed ring */}
+                      <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/50 animate-[spin_20s_linear_infinite]" />
+                      {/* Rotating text */}
+                      <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-red-600 animate-[spin_20s_linear_infinite]">
+                        <path id="aboutTabCirclePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none" />
+                        <text fontSize="8.5" fontWeight="bold" fill="currentColor" letterSpacing="1.5">
+                          <textPath href="#aboutTabCirclePath">DIRECT COLIS • LIVRAISON • SÉNÉGAL •</textPath>
+                        </text>
+                      </svg>
+                      {/* Logo carré centré dans le badge */}
+                      <div className="w-[62%] h-[62%] bg-white rounded-full flex items-center justify-center shadow-2xl z-10 p-3 ring-1 ring-slate-100">
+                        <img
+                          src={logoComprimerCouleur}
+                          alt="Direct Colis"
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Text side */}

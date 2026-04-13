@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
 import logoPaysageBlanc from './assets/images/logo-paysage-blanc.png';
+import logoComprimerCouleur from './assets/images/logo-comprimer-couleur.png';
 import aboutImg from './assets/images/le3.jpg';
 import testimonial1 from './assets/images/testimonial 1.jpg';
 import testimonial2 from './assets/images/testimonial 2.jpg';
@@ -495,10 +496,7 @@ export default function App() {
 
                 {/* FENÊTRE 2 — bloc secondaire bottom-right, 58% x 48% du parent
                      Ancré à son coin bas-droit = coin bas-droit du parent, donc affiche la suite exacte de l'image */}
-                <div
-                  className="absolute bottom-0 right-0 w-[58%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20"
-                  style={{ boxShadow: '0 0 0 6px #fff, 0 20px 60px rgba(0,0,0,0.25)' }}
-                >
+                <div className="absolute bottom-0 right-0 w-[58%] h-[48%] rounded-[2rem] overflow-hidden shadow-2xl z-20">
                   <div
                     className="absolute bottom-0 right-0"
                     style={{ width: 'calc(100% / 0.58)', height: 'calc(100% / 0.48)' }}
@@ -544,27 +542,32 @@ export default function App() {
                   </button>
                 </motion.div>
 
-                {/* Badge circulaire rotatif */}
+                {/* Badge circulaire rotatif — placé dans le creux (coin inversé) de la composition L */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute -bottom-8 -left-6 w-36 h-36 z-30 hidden sm:block"
+                  className="absolute w-28 h-28 sm:w-32 sm:h-32 z-30 hidden sm:block"
+                  style={{ left: '42%', top: '75%', transform: 'translate(-50%, -50%)' }}
                 >
                   <div className="w-full h-full relative flex items-center justify-center">
                     {/* Outer dashed ring */}
-                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/40 animate-[spin_20s_linear_infinite]" />
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/50 animate-[spin_20s_linear_infinite]" />
                     {/* Rotating text */}
                     <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-red-600 animate-[spin_20s_linear_infinite]">
-                      <path id="aboutCirclePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                      <path id="aboutCirclePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none" />
                       <text fontSize="8.5" fontWeight="bold" fill="currentColor" letterSpacing="1.5">
                         <textPath href="#aboutCirclePath">DIRECT COLIS • LIVRAISON • SÉNÉGAL •</textPath>
                       </text>
                     </svg>
-                    {/* Center */}
-                    <div className="w-16 h-16 bg-blue-950 rounded-full flex items-center justify-center text-white shadow-xl z-10">
-                      <Truck className="h-7 w-7" />
+                    {/* Logo carré centré dans le badge */}
+                    <div className="w-[62%] h-[62%] bg-white rounded-full flex items-center justify-center shadow-2xl z-10 p-3 ring-1 ring-slate-100">
+                      <img
+                        src={logoComprimerCouleur}
+                        alt="Direct Colis"
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                   </div>
                 </motion.div>
