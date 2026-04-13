@@ -101,7 +101,7 @@ export default function SiteFooter() {
                   &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
                 </p>
                 <p className="text-blue-200/30 text-xs">
-                  Développé par{' '}
+                  Dev par{' '}
                   <a href="https://wiicode.dev" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors">
                     Wiicode
                   </a>

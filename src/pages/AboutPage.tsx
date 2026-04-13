@@ -213,25 +213,25 @@ export default function AboutPage() {
                 transition={{ duration: 0.4 }}
                 className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
               >
-                {/* Images side — main + secondary overlap */}
-                <div className="relative min-h-[340px] sm:min-h-[440px] lg:min-h-[520px]">
-                  {/* Main image */}
+                {/* Images side — L-shape composition: main fills container, secondary overlaps bottom-right */}
+                <div className="relative min-h-[440px] sm:min-h-[540px] lg:min-h-[620px]">
+                  {/* Main image — large, fills top-left ~80% of container */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7 }}
-                    className="w-full lg:w-[78%] h-[260px] sm:h-[340px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10"
+                    className="absolute top-0 left-0 w-[82%] h-[72%] sm:h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10"
                   >
                     <img src={content.image1} alt={content.title} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/30 via-transparent to-transparent" />
                   </motion.div>
 
-                  {/* Secondary image - overlapping bottom-right */}
+                  {/* Secondary image — overlaps bottom-right with white border (L-shape effect) */}
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.15 }}
-                    className="hidden sm:block absolute bottom-0 right-0 w-[58%] h-[200px] lg:h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20"
+                    className="absolute bottom-0 right-0 w-[58%] h-[46%] sm:h-[48%] rounded-[2rem] overflow-hidden border-[6px] sm:border-[8px] border-white shadow-2xl z-20"
                   >
                     <img src={content.image2} alt="" className="w-full h-full object-cover" />
                   </motion.div>

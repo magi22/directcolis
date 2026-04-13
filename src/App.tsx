@@ -475,22 +475,22 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.9, ease: customEase }}
-                className="relative min-h-[380px] lg:min-h-[520px]"
+                className="relative min-h-[440px] sm:min-h-[520px] lg:min-h-[620px]"
               >
-                {/* Image principale */}
-                <div className="w-full lg:w-[75%] h-[260px] sm:h-[340px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
+                {/* Image principale — grande, prend ~80% du container */}
+                <div className="absolute top-0 left-0 w-[82%] h-[72%] sm:h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10">
                   <img
                     src={aboutImg}
                     alt="Livraison Sénégal"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-blue-950/10" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/30 via-transparent to-transparent" />
                 </div>
 
-                {/* Image secondaire */}
-                <div className="hidden sm:block absolute bottom-0 right-0 w-[55%] h-[180px] lg:h-[260px] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-20">
+                {/* Image secondaire — chevauche en bas à droite avec bordure blanche */}
+                <div className="absolute bottom-0 right-0 w-[58%] h-[46%] sm:h-[48%] rounded-[2rem] overflow-hidden border-[6px] sm:border-[8px] border-white shadow-2xl z-20">
                   <img
-                    src={aboutImg}
+                    src={blog2}
                     alt="Livraison Direct Colis"
                     className="w-full h-full object-cover"
                   />
@@ -755,7 +755,7 @@ export default function App() {
                   variants={fadeInUp}
                   whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border overflow-hidden"
+                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border"
                   style={{ transformStyle: 'preserve-3d', perspective: 800 }}
                 >
                   {/* Dark gradient overlay on hover */}
@@ -1543,7 +1543,7 @@ export default function App() {
                 &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
               </p>
               <p className="text-blue-200/30 text-xs">
-                Développé par{' '}
+                Dev par{' '}
                 <a href="https://wiicode.dev" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors">
                   Wiicode
                 </a>
