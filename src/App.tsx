@@ -544,13 +544,14 @@ export default function App() {
                   </button>
                 </motion.div>
 
-                {/* Badge circulaire rotatif */}
+                {/* Badge circulaire rotatif — rapproché du creux (jonction des deux blocs) */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5, duration: 0.7, ease: customEase }}
                   viewport={{ once: true }}
-                  className="absolute -bottom-8 -left-6 w-36 h-36 z-30 hidden sm:block"
+                  className="absolute w-32 h-32 sm:w-36 sm:h-36 z-30 hidden sm:block"
+                  style={{ left: '42%', top: '75%', transform: 'translate(-50%, -50%)' }}
                 >
                   <div className="w-full h-full relative flex items-center justify-center">
                     {/* Outer dashed ring */}
@@ -774,7 +775,7 @@ export default function App() {
                   style={{ transformStyle: 'preserve-3d', perspective: 800 }}
                 >
                   {/* Dark gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 opacity-0 group-hover:opacity-95 transition-opacity duration-300 rounded-2xl pointer-events-none z-0" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0a1530] via-[#1a0a1a] to-[#4a0a0f] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none z-0" />
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300 z-10">
                     {service.icon}
                   </div>
@@ -1045,7 +1046,7 @@ export default function App() {
                   variants={fadeInUp}
                   className="group relative p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 opacity-0 group-hover:opacity-95 transition-opacity duration-300 rounded-2xl pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0a1530] via-[#1a0a1a] to-[#4a0a0f] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                   <div className="relative z-10">
                     <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-950 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-white/15 group-hover:text-white transition-all duration-300">
                       <feature.icon className="h-6 w-6" />
