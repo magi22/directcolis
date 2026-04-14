@@ -5,6 +5,7 @@ import { Calendar, Clock, Tag, ArrowLeft, ArrowRight, ChevronRight } from 'lucid
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { blogPosts } from '../data/blogPosts';
+import { useLang } from '../i18n/LanguageContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -12,6 +13,7 @@ const fadeInUp = {
 };
 
 export default function BlogPostPage() {
+  const { t } = useLang();
   const { slug } = useParams();
   const post = blogPosts.find(p => p.slug === slug);
 
@@ -33,9 +35,9 @@ export default function BlogPostPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Breadcrumb */}
             <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 text-xs sm:text-sm text-blue-200/60 mb-6 flex-wrap">
-              <Link to="/" className="hover:text-white transition-colors">Accueil</Link>
+              <Link to="/" className="hover:text-white transition-colors">{t.common.home}</Link>
               <ChevronRight className="w-3 h-3" />
-              <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
+              <Link to="/blog" className="hover:text-white transition-colors">{t.common.blog}</Link>
               <ChevronRight className="w-3 h-3" />
               <span className="text-red-300 truncate">{post.category}</span>
             </motion.nav>
@@ -56,7 +58,7 @@ export default function BlogPostPage() {
                   <span className="font-semibold text-white">{post.author}</span>
                 </span>
                 <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-red-400" />{post.date}</span>
-                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{post.readTime} de lecture</span>
+                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{post.readTime} {t.common.readTime}</span>
               </div>
             </motion.div>
           </div>
@@ -124,7 +126,7 @@ export default function BlogPostPage() {
                         to="/contact"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm rounded-xl transition-all duration-300"
                       >
-                        Nous contacter
+                        {t.common.contactUs}
                       </Link>
                     </div>
                   </div>
@@ -133,7 +135,7 @@ export default function BlogPostPage() {
                 {/* Back */}
                 <div className="mt-10">
                   <Link to="/blog" className="inline-flex items-center gap-2 text-red-600 font-bold text-sm hover:gap-3 transition-all">
-                    <ArrowLeft className="w-4 h-4" /> Retour au blog
+                    <ArrowLeft className="w-4 h-4" /> {t.blogPage.backToBlog}
                   </Link>
                 </div>
               </article>
@@ -141,7 +143,7 @@ export default function BlogPostPage() {
               {/* Sidebar */}
               <aside className="space-y-6">
                 <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 sticky top-28">
-                  <h3 className="text-sm font-extrabold text-blue-950 uppercase tracking-widest mb-4">Autres articles</h3>
+                  <h3 className="text-sm font-extrabold text-blue-950 uppercase tracking-widest mb-4">{t.blogPage.otherArticles}</h3>
                   <div className="space-y-4">
                     {otherPosts.map(other => (
                       <Link key={other.slug} to={`/blog/${other.slug}`} className="block group">

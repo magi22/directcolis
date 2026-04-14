@@ -5,6 +5,7 @@ import { CheckCircle, ArrowRight, ChevronRight, PhoneCall, Mail, FileText } from
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { services } from '../data/services';
+import { useLang } from '../i18n/LanguageContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -12,6 +13,7 @@ const fadeInUp = {
 };
 
 export default function ServiceDetailPage() {
+  const { t } = useLang();
   const { slug } = useParams();
   const service = services.find(s => s.slug === slug);
   if (!service) return <Navigate to="/services" replace />;
@@ -33,9 +35,9 @@ export default function ServiceDetailPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Breadcrumb */}
             <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 text-xs sm:text-sm text-blue-200/60 mb-6 flex-wrap">
-              <Link to="/" className="hover:text-white transition-colors">Accueil</Link>
+              <Link to="/" className="hover:text-white transition-colors">{t.common.home}</Link>
               <ChevronRight className="w-3 h-3" />
-              <Link to="/services" className="hover:text-white transition-colors">Services</Link>
+              <Link to="/services" className="hover:text-white transition-colors">{t.common.services}</Link>
               <ChevronRight className="w-3 h-3" />
               <span className="text-red-300">{service.shortTitle}</span>
             </motion.nav>
@@ -69,7 +71,7 @@ export default function ServiceDetailPage() {
 
                 {/* Detail paragraphs */}
                 <div className="mb-10">
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-blue-950 mb-5">Comment ça fonctionne</h2>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-blue-950 mb-5">{t.servicesSection.howItWorks}</h2>
                   {service.detail.paragraphs.map((p, i) => (
                     <p key={i} className="text-slate-600 leading-relaxed mb-4 text-base sm:text-lg">{p}</p>
                   ))}
@@ -77,7 +79,7 @@ export default function ServiceDetailPage() {
 
                 {/* Benefits */}
                 <div className="mb-10 bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-blue-950 mb-5">Ce que ce service vous apporte</h2>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-blue-950 mb-5">{t.servicesSection.benefitsTitle}</h2>
                   <ul className="space-y-3">
                     {service.benefits.map((b, i) => (
                       <li key={i} className="flex items-start gap-3">
@@ -92,7 +94,7 @@ export default function ServiceDetailPage() {
 
                 {/* Features */}
                 <div className="mb-10">
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-blue-950 mb-5">Fonctionnalités incluses</h2>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-blue-950 mb-5">{t.servicesSection.featuresTitle}</h2>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {service.features.map((f, i) => (
                       <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 hover:border-red-200 hover:shadow-md transition-all">
@@ -107,7 +109,7 @@ export default function ServiceDetailPage() {
 
                 {/* Why choose */}
                 <div className="mb-10">
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-blue-950 mb-4">Pourquoi choisir Direct Colis</h2>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-blue-950 mb-4">{t.servicesSection.whyTitle}</h2>
                   <p className="text-slate-600 leading-relaxed text-base sm:text-lg">{service.why}</p>
                 </div>
 
@@ -141,7 +143,7 @@ export default function ServiceDetailPage() {
                   {/* Autres services */}
                   <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <div className="p-5 bg-slate-50 border-b border-slate-100">
-                      <h3 className="text-sm font-extrabold text-blue-950 uppercase tracking-widest">Autres services</h3>
+                      <h3 className="text-sm font-extrabold text-blue-950 uppercase tracking-widest">{t.servicesSection.sidebarOtherTitle}</h3>
                     </div>
                     <nav className="p-3">
                       {others.map(other => {
@@ -169,16 +171,16 @@ export default function ServiceDetailPage() {
                   <div className="bg-gradient-to-br from-blue-950 to-blue-900 text-white rounded-2xl p-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/20 rounded-full blur-2xl" />
                     <div className="relative">
-                      <h3 className="font-extrabold text-lg mb-2">Besoin d'un accompagnement ?</h3>
+                      <h3 className="font-extrabold text-lg mb-2">{t.servicesSection.sidebarContactTitle}</h3>
                       <p className="text-blue-100/70 text-sm mb-5 leading-relaxed">
-                        Notre équipe vous aide à choisir la solution la plus adaptée à votre activité.
+                        {t.servicesSection.sidebarContactDesc}
                       </p>
                       <div className="space-y-2">
                         <Link
                           to="/contact"
                           className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold text-sm rounded-lg transition-colors"
                         >
-                          <Mail className="w-4 h-4" /> Nous contacter
+                          <Mail className="w-4 h-4" /> {t.common.contactUs}
                         </Link>
                         <a
                           href="tel:+221785421733"
@@ -193,15 +195,15 @@ export default function ServiceDetailPage() {
                   {/* Quote block */}
                   <div className="bg-red-50 border border-red-100 rounded-2xl p-6">
                     <FileText className="w-6 h-6 text-red-600 mb-3" />
-                    <h3 className="font-extrabold text-blue-950 mb-1">Demander un devis</h3>
+                    <h3 className="font-extrabold text-blue-950 mb-1">{t.servicesSection.sidebarQuoteTitle}</h3>
                     <p className="text-slate-600 text-sm mb-4">
-                      Obtenez une proposition adaptée à vos volumes et vos contraintes.
+                      {t.servicesSection.sidebarQuoteDesc}
                     </p>
                     <Link
                       to="/contact"
                       className="inline-flex items-center gap-2 text-red-600 font-bold text-sm hover:gap-3 transition-all"
                     >
-                      Obtenir un devis <ArrowRight className="w-4 h-4" />
+                      {t.servicesSection.sidebarQuoteCta} <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>

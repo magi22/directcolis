@@ -3,25 +3,27 @@ import { FileText } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
+import { useLang } from '../i18n/LanguageContext';
 
 export default function MentionsLegalesPage() {
+  const { t } = useLang();
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <SiteHeader />
 
       <main className="pt-20">
         <PageHero
-          badge="Informations légales"
+          badge={t.legal.badge}
           badgeIcon={FileText}
-          title={<>Mentions <HeroHighlight>légales</HeroHighlight></>}
-          subtitle="Informations relatives à l'éditeur du site, aux conditions d'utilisation et aux obligations légales applicables."
+          title={<>{t.legal.titleA} <HeroHighlight>{t.legal.titleB}</HeroHighlight></>}
+          subtitle={t.legal.subtitle}
         />
 
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="prose prose-slate max-w-none">
 
-              <p className="text-sm text-slate-400 mb-8">Dernière mise à jour : 14 avril 2026</p>
+              <p className="text-sm text-slate-400 mb-8">{t.legal.lastUpdate}</p>
 
               <h2 className="text-2xl font-extrabold text-blue-950 mt-10 mb-4">1. Éditeur du site</h2>
               <p className="text-slate-600 leading-relaxed mb-4">

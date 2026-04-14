@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
+import { useLang } from '../i18n/LanguageContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -81,6 +82,7 @@ function AccordionItem({ q, a, open, onToggle }: { q: string; a: string; open: b
 }
 
 export default function FAQPage() {
+  const { t } = useLang();
   const [activeCategory, setActiveCategory] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [query, setQuery] = useState('');
@@ -100,8 +102,8 @@ export default function FAQPage() {
         <PageHero
           badge="FAQ"
           badgeIcon={HelpCircle}
-          title={<>Questions <HeroHighlight>fréquentes</HeroHighlight></>}
-          subtitle="Trouvez rapidement une réponse à vos questions sur Direct Colis."
+          title={<>{t.faqSection.pageTitleA} <HeroHighlight>{t.faqSection.pageTitleB}</HeroHighlight></>}
+          subtitle={t.faqSection.pageSubtitle}
         >
           {/* Search bar */}
           <div className="relative max-w-xl mx-auto">
@@ -110,7 +112,7 @@ export default function FAQPage() {
               type="text"
               value={query}
               onChange={e => { setQuery(e.target.value); setOpenIndex(null); }}
-              placeholder="Rechercher une question..."
+              placeholder={t.faqSection.searchPlaceholder}
               className="w-full pl-12 pr-4 py-4 bg-white/95 backdrop-blur border border-white/20 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 shadow-2xl"
             />
           </div>
@@ -159,7 +161,7 @@ export default function FAQPage() {
                   </motion.div>
                 ))
               ) : (
-                <p className="text-center text-slate-400 py-12">Aucun résultat pour « {query} »</p>
+                <p className="text-center text-slate-400 py-12">{t.faqSection.noResults} « {query} »</p>
               )}
             </motion.div>
           </div>
@@ -169,10 +171,10 @@ export default function FAQPage() {
         <section className="py-16 bg-slate-50 border-t border-slate-100">
           <div className="max-w-2xl mx-auto px-4 text-center">
             <MessageSquare className="w-10 h-10 text-red-600 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-blue-950 mb-3">Vous n'avez pas trouvé votre réponse ?</h2>
-            <p className="text-slate-500 mb-6">Notre équipe est disponible pour vous répondre rapidement.</p>
+            <h2 className="text-xl font-bold text-blue-950 mb-3">{t.faqSection.needHelp}</h2>
+            <p className="text-slate-500 mb-6">{t.faqSection.needHelpDesc}</p>
             <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-red-600/25">
-              Contacter le support
+              {t.faqSection.contactSupport}
             </Link>
           </div>
         </section>

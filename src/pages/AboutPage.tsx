@@ -11,17 +11,15 @@ import blog3 from '../assets/images/3.jpg';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
+import { useLang } from '../i18n/LanguageContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-const tabs = [
-  { id: 'qui', label: 'Qui sommes-nous', icon: Users },
-  { id: 'pourquoi', label: 'Pourquoi nous choisir', icon: Award },
-  { id: 'comment', label: 'Comment ça marche', icon: Target },
-];
+const tabIds = ['qui', 'pourquoi', 'comment'] as const;
+const tabIcons = { qui: Users, pourquoi: Award, comment: Target };
 
 type TabContent = {
   title: string;
@@ -98,14 +96,11 @@ const testimonials = [
   },
 ];
 
-const stats = [
-  { value: '1M+', label: 'Colis livrés', icon: Truck },
-  { value: '98%', label: 'Taux de succès', icon: Target },
-  { value: '50+', label: 'Villes couvertes', icon: Award },
-  { value: '10+', label: "Ans d'expérience", icon: Sparkles },
-];
+const statIcons = [Truck, Target, Award, Sparkles];
+const statValues = ['1M+', '98%', '50+', '10+'];
 
 export default function AboutPage() {
+  const { t } = useLang();
   const [activeTab, setActiveTab] = useState('qui');
   const [testimonialIdx, setTestimonialIdx] = useState(0);
 
@@ -122,16 +117,19 @@ export default function AboutPage() {
 
       <main className="pt-20">
         <PageHero
-          badge="À Propos"
-          title={<>Découvrez <HeroHighlight>Direct Colis</HeroHighlight></>}
-          subtitle="La solution logistique de référence pour le suivi et la livraison de colis au Sénégal."
+          badge={t.aboutPage.badge}
+          title={<>{t.aboutPage.titleA} <HeroHighlight>{t.aboutPage.titleB}</HeroHighlight></>}
+          subtitle={t.aboutPage.subtitle}
         />
 
         {/* Stats bar */}
         <section className="bg-white border-b border-slate-100 -mt-12 relative z-20">
           <div className="max-w-5xl mx-auto px-4">
             <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-100 overflow-hidden">
-              {stats.map(({ value, label, icon: Icon }, i) => (
+              {statValues.map((value, i) => {
+                const Icon = statIcons[i];
+                const label = [t.aboutPage.stats.delivered, t.aboutPage.stats.success, t.aboutPage.stats.cities, t.aboutPage.stats.years][i];
+                return (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -144,7 +142,8 @@ export default function AboutPage() {
                   <div className="text-2xl sm:text-3xl font-extrabold text-red-600 mb-1">{value}</div>
                   <div className="text-xs sm:text-sm text-slate-500 font-medium">{label}</div>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -155,13 +154,14 @@ export default function AboutPage() {
 
             {/* Tab buttons */}
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-12 justify-center">
-              {tabs.map(tab => {
-                const Icon = tab.icon;
-                const active = activeTab === tab.id;
+              {tabIds.map(id => {
+                const Icon = tabIcons[id];
+                const active = activeTab === id;
+                const label = id === 'qui' ? t.aboutPage.tabs.who : id === 'pourquoi' ? t.aboutPage.tabs.why : t.aboutPage.tabs.how;
                 return (
                   <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
+                    key={id}
+                    onClick={() => setActiveTab(id)}
                     className={`flex items-center gap-2 px-5 sm:px-7 py-3 rounded-full text-sm sm:text-base font-bold transition-all duration-300 ${
                       active
                         ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-xl shadow-red-600/30 scale-105'
@@ -169,7 +169,7 @@ export default function AboutPage() {
                     }`}
                   >
                     <Icon className="w-4 h-4" />
-                    {tab.label}
+                    {label}
                   </button>
                 );
               })}
@@ -246,7 +246,7 @@ export default function AboutPage() {
                 <div>
                   <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 text-red-600 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
                     <Zap className="w-3 h-3" />
-                    {tabs.find(t => t.id === activeTab)?.label}
+                    {activeTab === 'qui' ? t.aboutPage.tabs.who : activeTab === 'pourquoi' ? t.aboutPage.tabs.why : t.aboutPage.tabs.how}
                   </div>
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-950 mb-5 leading-tight">{content.title}</h2>
                   <p className="text-slate-500 leading-relaxed mb-8 text-base sm:text-lg">{content.text}</p>
@@ -288,9 +288,9 @@ export default function AboutPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-2 rounded-full mb-4">
                 <Star className="w-4 h-4 text-red-600 fill-red-600" />
-                <span className="text-xs font-bold text-red-600 uppercase tracking-widest">Témoignages</span>
+                <span className="text-xs font-bold text-red-600 uppercase tracking-widest">{t.aboutPage.testimonialsBadge}</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950">Ce que disent nos clients</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950">{t.aboutPage.testimonialsTitle}</h2>
             </motion.div>
 
             <div className="relative">
@@ -367,11 +367,11 @@ export default function AboutPage() {
           />
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4">
-              Rejoignez des centaines d'entreprises qui nous <span className="text-red-400">font confiance</span>
+              {t.aboutPage.ctaTitleA} <span className="text-red-400">{t.aboutPage.ctaTitleB}</span>
             </h2>
-            <p className="text-blue-100/70 mb-8 text-lg">Découvrez comment Direct Colis peut transformer votre logistique.</p>
+            <p className="text-blue-100/70 mb-8 text-lg">{t.aboutPage.ctaSubtitle}</p>
             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-2xl shadow-red-600/40">
-              Demander une démo <ArrowRight className="w-5 h-5" />
+              {t.common.requestDemo} <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </section>

@@ -6,6 +6,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { blogPosts } from '../data/blogPosts';
+import { useLang } from '../i18n/LanguageContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -13,6 +14,7 @@ const fadeInUp = {
 };
 
 export default function BlogPage() {
+  const { t } = useLang();
   const [featured, ...rest] = blogPosts;
 
   return (
@@ -21,10 +23,10 @@ export default function BlogPage() {
 
       <main className="pt-20">
         <PageHero
-          badge="Blog & News"
+          badge={t.blogPage.badge}
           badgeIcon={BookOpen}
-          title={<>Actualités & <HeroHighlight>Conseils</HeroHighlight></>}
-          subtitle="Découvrez nos articles sur la logistique, la livraison et les bonnes pratiques."
+          title={<>{t.blogPage.titleA} <HeroHighlight>{t.blogPage.titleB}</HeroHighlight></>}
+          subtitle={t.blogPage.subtitle}
         />
 
         {/* Blog posts */}
@@ -55,7 +57,7 @@ export default function BlogPage() {
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm text-slate-400 mb-4">
                   <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-red-500" />{featured.date}</span>
                   <span>·</span>
-                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{featured.readTime} de lecture</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{featured.readTime} {t.common.readTime}</span>
                 </div>
                 <Link to={`/blog/${featured.slug}`}>
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-950 mb-4 leading-tight hover:text-red-600 transition-colors cursor-pointer">
@@ -77,11 +79,11 @@ export default function BlogPage() {
                     </div>
                     <div>
                       <p className="font-bold text-blue-950 text-sm">{featured.author}</p>
-                      <p className="text-slate-400 text-xs">Auteur</p>
+                      <p className="text-slate-400 text-xs">{t.common.author}</p>
                     </div>
                   </div>
                   <Link to={`/blog/${featured.slug}`} className="flex items-center gap-2 text-red-600 font-bold text-sm hover:gap-3 transition-all duration-200">
-                    Lire <ArrowRight className="w-4 h-4" />
+                    {t.blogPage.read} <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -147,16 +149,16 @@ export default function BlogPage() {
         <section className="py-16 sm:py-20 bg-blue-950">
           <div className="max-w-2xl mx-auto px-4 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">Restez informé</h2>
-              <p className="text-blue-100/70 mb-8">Abonnez-vous pour recevoir nos derniers articles et conseils logistiques directement dans votre boîte mail.</p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">{t.blogPage.newsletter}</h2>
+              <p className="text-blue-100/70 mb-8">{t.blogPage.newsletterDesc}</p>
               <div className="flex flex-col sm:flex-row gap-0 rounded-xl overflow-hidden shadow-2xl max-w-md mx-auto">
                 <input
                   type="email"
-                  placeholder="Votre adresse email"
+                  placeholder={t.blogPage.newsletterPlaceholder}
                   className="flex-1 px-5 py-4 bg-white text-slate-800 placeholder-slate-400 focus:outline-none text-sm"
                 />
                 <button className="px-6 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-sm transition-colors whitespace-nowrap">
-                  S'abonner
+                  {t.blogPage.newsletterButton}
                 </button>
               </div>
             </motion.div>

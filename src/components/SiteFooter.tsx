@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { PhoneCall, Globe, ArrowRight, Instagram, Twitter } from 'lucide-react';
 import logoPaysageBlanc from '../assets/images/logo-paysage-blanc.png';
+import { useLang } from '../i18n/LanguageContext';
 
 const ticker = [
   { city: 'Dakar', name: 'Ibrahima S.', status: 'Livré ✓' },
@@ -15,10 +16,12 @@ const ticker = [
 ];
 
 export default function SiteFooter() {
+  const { t } = useLang();
+
   return (
     <>
       {/* Live ticker */}
-      <div className="bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
+      <div className="hidden md:block bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
         <motion.div
           animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
@@ -52,32 +55,32 @@ export default function SiteFooter() {
                 <img src={logoPaysageBlanc} alt="Direct Colis" className="h-12 w-auto object-contain" />
               </div>
               <p className="text-blue-200/60 text-sm leading-relaxed font-light">
-                Solution logistique moderne pour le suivi, la gestion et la livraison sécurisée de vos expéditions.
+                {t.footer.tagline}
               </p>
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-5">Solution</h4>
+              <h4 className="text-white font-bold mb-5">{t.footer.solution}</h4>
               <ul className="space-y-3">
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">Suivi de colis</Link></li>
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">Preuve de livraison</Link></li>
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">Gestion grands comptes</Link></li>
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">API & Intégrations</Link></li>
+                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.tracking}</Link></li>
+                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.proof}</Link></li>
+                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.enterprise}</Link></li>
+                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.api}</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-5">Entreprise</h4>
+              <h4 className="text-white font-bold mb-5">{t.footer.enterprise}</h4>
               <ul className="space-y-3">
-                <li><Link to="/a-propos" className="text-blue-200/60 hover:text-white text-sm transition-colors">À propos</Link></li>
-                <li><Link to="/blog" className="text-blue-200/60 hover:text-white text-sm transition-colors">Blog</Link></li>
-                <li><Link to="/contact" className="text-blue-200/60 hover:text-white text-sm transition-colors">Contact</Link></li>
-                <li><Link to="/mentions-legales" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</Link></li>
+                <li><Link to="/a-propos" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.about}</Link></li>
+                <li><Link to="/blog" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.blog}</Link></li>
+                <li><Link to="/contact" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.contact}</Link></li>
+                <li><Link to="/mentions-legales" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.legal}</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-5">Contact</h4>
+              <h4 className="text-white font-bold mb-5">{t.footer.contactCol}</h4>
               <ul className="space-y-3">
                 <li className="text-blue-200/60 text-sm flex items-center gap-2">
                   <PhoneCall className="w-4 h-4 shrink-0" /> +221 78 542 17 33
@@ -87,7 +90,7 @@ export default function SiteFooter() {
                 </li>
                 <li className="text-blue-200/60 text-sm mt-5">
                   <Link to="/contact" className="text-red-400 hover:text-red-300 font-medium transition-colors flex items-center gap-1 group">
-                    Support client <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    {t.footer.supportClient} <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </li>
               </ul>
@@ -98,10 +101,10 @@ export default function SiteFooter() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex flex-col items-center sm:items-start gap-1">
                 <p className="text-blue-200/40 text-sm font-light">
-                  &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
+                  &copy; {new Date().getFullYear()} Direct Colis. {t.footer.rights}
                 </p>
                 <p className="text-blue-200/30 text-xs">
-                  Dev par{' '}
+                  {t.footer.devBy}{' '}
                   <a href="https://wiicode.dev" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors">
                     Wiicode
                   </a>

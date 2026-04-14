@@ -24,42 +24,8 @@ import {
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
-// ─── Translations ─────────────────────────────────────────────
-const translations = {
-  fr: {
-    nav: ['À propos', 'Services', 'Suivi', 'FAQ', 'Blog', 'Contact'],
-    navHrefs: ['/a-propos', '/services', '/suivi', '/faq', '/blog', '/contact'],
-    demo: 'Demander une démo',
-    trackTitle: 'Suivre ma commande',
-    trackPlaceholder: 'Entrez votre numéro de suivi (ex: DC-84729)',
-    trackBtn: 'Suivre',
-    trackHint: 'Recherche par numéro de colis ou référence client.',
-    heroBadge: 'Suivi en temps réel · Sénégal',
-    heroH1a: 'Suivez, gérez et livrez vos colis avec une',
-    heroH1b: 'traçabilité complète.',
-    heroP: "Direct Colis vous permet de piloter chaque étape de vos expéditions grâce à un suivi structuré, un système de scan QR code, une livraison sécurisée et une preuve fiable à l'arrivée.",
-    heroCta1: 'Suivre un colis',
-    heroCta2: 'Demander une démo',
-    statsLabels: ['Colis livrés', 'Taux succès', 'Villes couvertes'],
-  },
-  en: {
-    nav: ['About', 'Services', 'Tracking', 'FAQ', 'Blog', 'Contact'],
-    navHrefs: ['/a-propos', '/services', '/suivi', '/faq', '/blog', '/contact'],
-    demo: 'Request a demo',
-    trackTitle: 'Track my order',
-    trackPlaceholder: 'Enter your tracking number (e.g. DC-84729)',
-    trackBtn: 'Track',
-    trackHint: 'Search by parcel number or client reference.',
-    heroBadge: 'Real-time tracking · Senegal',
-    heroH1a: 'Track, manage and deliver your parcels with full',
-    heroH1b: 'traceability.',
-    heroP: 'Direct Colis lets you control every step of your shipments through structured tracking, QR code scanning, secured delivery and reliable proof of receipt.',
-    heroCta1: 'Track a parcel',
-    heroCta2: 'Request a demo',
-    statsLabels: ['Parcels delivered', 'Success rate', 'Cities covered'],
-  },
-} as const;
-type Lang = keyof typeof translations;
+import { useLang } from './i18n/LanguageContext';
+import type { Lang } from './i18n/translations';
 
 // Elegant, smooth easing curve (similar to Apple's spring/ease-out)
 const customEase = [0.16, 1, 0.3, 1];
@@ -165,15 +131,7 @@ function Particles() {
 }
 
 export default function App() {
-  const [lang, setLangState] = useState<Lang>(() => {
-    if (typeof window === 'undefined') return 'fr';
-    return (localStorage.getItem('lang') as Lang) || 'fr';
-  });
-  const setLang = (l: Lang) => {
-    setLangState(l);
-    localStorage.setItem('lang', l);
-  };
-  const t = translations[lang];
+  const { lang, setLang, t } = useLang();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [openFaqIndex2, setOpenFaqIndex2] = useState<number | null>(null);
@@ -206,13 +164,20 @@ export default function App() {
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-7">
-              {t.nav.map((item, i) => (
+              {[
+                { label: t.nav.about, path: '/a-propos' },
+                { label: t.nav.services, path: '/services' },
+                { label: t.nav.tracking, path: '/suivi' },
+                { label: t.nav.faq, path: '/faq' },
+                { label: t.nav.blog, path: '/blog' },
+                { label: t.nav.contact, path: '/contact' },
+              ].map((item) => (
                 <Link
-                  key={item}
-                  to={t.navHrefs[i]}
+                  key={item.path}
+                  to={item.path}
                   className="text-sm font-medium text-slate-600 hover:text-blue-950 transition-colors relative group py-2 whitespace-nowrap"
                 >
-                  {item}
+                  {item.label}
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full" />
                 </Link>
               ))}
@@ -244,9 +209,9 @@ export default function App() {
               </div>
 
               {/* Demo CTA */}
-              <button className="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 whitespace-nowrap">
-                {t.demo}
-              </button>
+              <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 whitespace-nowrap">
+                {t.nav.demo}
+              </Link>
 
               {/* Mobile burger */}
               <button
@@ -269,21 +234,28 @@ export default function App() {
               transition={{ duration: 0.35, ease: customEase }}
               className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 px-4 py-4 space-y-1 shadow-xl overflow-hidden"
             >
-              {t.nav.map((item, i) => (
+              {[
+                { label: t.nav.about, path: '/a-propos' },
+                { label: t.nav.services, path: '/services' },
+                { label: t.nav.tracking, path: '/suivi' },
+                { label: t.nav.faq, path: '/faq' },
+                { label: t.nav.blog, path: '/blog' },
+                { label: t.nav.contact, path: '/contact' },
+              ].map((item) => (
                 <Link
-                  key={item}
-                  to={t.navHrefs[i]}
+                  key={item.path}
+                  to={item.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center gap-3 text-base font-medium text-slate-800 px-3 py-2.5 hover:bg-slate-50 rounded-xl transition-colors"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-red-600 shrink-0" />
-                  {item}
+                  {item.label}
                 </Link>
               ))}
               <div className="pt-3 border-t border-slate-100 mt-2 flex gap-2">
-                <button className="flex-1 px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-colors">
-                  {t.demo}
-                </button>
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="flex-1 text-center px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-colors">
+                  {t.nav.demo}
+                </Link>
                 <div className="flex items-center bg-slate-100 rounded-xl p-0.5 gap-0.5">
                   {(['fr', 'en'] as Lang[]).map((l) => (
                     <button
@@ -328,23 +300,23 @@ export default function App() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                   </span>
-                  <span className="text-xs font-bold text-red-600 uppercase tracking-widest">{t.heroBadge}</span>
+                  <span className="text-xs font-bold text-red-600 uppercase tracking-widest">{t.heroHome.badge}</span>
                 </motion.div>
 
                 <motion.h1 variants={fadeInUp} className="text-3xl sm:text-5xl lg:text-6xl font-bold text-blue-950 leading-[1.15] tracking-tight mb-6">
-                  {t.heroH1a} <span className="text-red-600 text-glow-red">{t.heroH1b}</span>
+                  {t.heroHome.titleA} <span className="text-red-600 text-glow-red">{t.heroHome.titleB}</span>
                 </motion.h1>
                 <motion.p variants={fadeInUp} className="text-base sm:text-xl text-slate-600 mb-8 leading-relaxed font-light">
-                  {t.heroP}
+                  {t.heroHome.subtitle}
                 </motion.p>
 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
-                  <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-0.5 glow-red gradient-border">
-                    {t.heroCta1}
-                  </button>
-                  <button className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-blue-950 bg-white border border-slate-200 hover:border-blue-950 hover:bg-slate-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                    {t.heroCta2}
-                  </button>
+                  <Link to="/suivi" className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-0.5 glow-red gradient-border">
+                    {t.heroHome.cta1}
+                  </Link>
+                  <Link to="/contact" className="inline-flex items-center justify-center px-7 py-3.5 text-base font-medium text-blue-950 bg-white border border-slate-200 hover:border-blue-950 hover:bg-slate-50 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                    {t.heroHome.cta2}
+                  </Link>
                 </motion.div>
 
                 <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-500 mb-10">
@@ -357,9 +329,9 @@ export default function App() {
 
                 {/* Stat counters */}
                 <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-3">
-                  <StatCard value={1000000} suffix="+" label={t.statsLabels[0]} delay={0} />
-                  <StatCard value={98} suffix="%" label={t.statsLabels[1]} delay={0.1} />
-                  <StatCard value={50} suffix="+" label={t.statsLabels[2]} delay={0.2} />
+                  <StatCard value={1000000} suffix="+" label={t.heroHome.stats.delivered} delay={0} />
+                  <StatCard value={98} suffix="%" label={t.heroHome.stats.success} delay={0.1} />
+                  <StatCard value={50} suffix="+" label={t.heroHome.stats.cities} delay={0.2} />
                 </motion.div>
               </motion.div>
 
@@ -456,7 +428,7 @@ export default function App() {
               transition={{ duration: 0.7, ease: customEase }}
             >
               <p className="text-slate-500 text-sm font-semibold uppercase tracking-widest text-center mb-3">
-                {t.trackTitle}
+                {t.trackBar.title}
               </p>
               <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.08)] border border-slate-200">
                 <div className="relative flex-1 group">
@@ -466,7 +438,7 @@ export default function App() {
                   <input
                     type="text"
                     className="block w-full pl-14 pr-5 py-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-0 transition-all text-base font-medium border-0"
-                    placeholder={t.trackPlaceholder}
+                    placeholder={t.trackBar.placeholder}
                   />
                 </div>
                 <button
@@ -474,10 +446,10 @@ export default function App() {
                   className="flex items-center justify-center gap-2 px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.3)] whitespace-nowrap shrink-0"
                 >
                   <Search className="w-4 h-4" />
-                  {t.trackBtn}
+                  {t.trackBar.button}
                 </button>
               </form>
-              <p className="text-slate-400 text-xs text-center mt-3">{t.trackHint}</p>
+              <p className="text-slate-400 text-xs text-center mt-3">{t.trackBar.hint}</p>
             </motion.div>
           </div>
         </section>

@@ -9,6 +9,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { services } from '../data/services';
+import { useLang } from '../i18n/LanguageContext';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -35,15 +36,16 @@ const fonctionnalites = [
 ];
 
 export default function ServicesPage() {
+  const { t } = useLang();
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <SiteHeader />
 
       <main className="pt-20">
         <PageHero
-          badge="Nos Services"
-          title={<>Nos services <HeroHighlight>logistiques</HeroHighlight></>}
-          subtitle="Des solutions conçues pour suivre, sécuriser et piloter vos livraisons à chaque étape."
+          badge={t.nav.services}
+          title={<>{t.servicesSection.pageTitle.split(' ').slice(0, -1).join(' ')} <HeroHighlight>{t.servicesSection.pageTitle.split(' ').slice(-1)[0]}</HeroHighlight></>}
+          subtitle={t.servicesSection.pageSubtitle}
         >
           {/* Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
@@ -73,13 +75,13 @@ export default function ServicesPage() {
               to="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold text-sm rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-red-600/40 hover:shadow-red-600/60"
             >
-              Demander une démo <ArrowRight className="w-4 h-4" />
+              {t.common.requestDemo} <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#services-grid"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 text-white font-bold text-sm rounded-xl transition-all duration-300 backdrop-blur-md"
             >
-              Voir les services
+              {t.common.viewAll}
             </a>
           </div>
         </PageHero>
@@ -88,7 +90,7 @@ export default function ServicesPage() {
         <section className="py-12 sm:py-16 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-              Avec <strong className="text-blue-950">Direct Colis</strong>, vous disposez d'une plateforme logistique complète pensée pour structurer vos opérations de livraison, améliorer la traçabilité des colis et offrir une meilleure visibilité à vos équipes comme à vos clients. De la création d'un envoi jusqu'à la livraison finale, chaque étape est suivie, horodatée et intégrée dans un workflow clair.
+              {t.servicesSection.pageIntro}
             </p>
           </div>
         </section>
@@ -104,10 +106,10 @@ export default function ServicesPage() {
               className="text-center mb-12 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 mb-3">
-                Découvrez nos <span className="text-red-600">6 services</span>
+                {t.servicesSection.gridTitle} <span className="text-red-600">{t.servicesSection.gridTitleHighlight}</span>
               </h2>
               <p className="text-slate-500 max-w-2xl mx-auto">
-                Cliquez sur « En savoir plus » pour découvrir le fonctionnement détaillé de chaque service, ses avantages et son utilité dans votre organisation.
+                {t.servicesSection.gridSubtitle}
               </p>
             </motion.div>
 
@@ -185,7 +187,7 @@ export default function ServicesPage() {
                         to={`/services/${service.slug}`}
                         className="inline-flex items-center gap-2 text-red-600 font-bold text-sm hover:gap-3 transition-all duration-200 group/cta mt-auto"
                       >
-                        En savoir plus
+                        {t.common.learnMore}
                         <ArrowRight className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform" />
                       </Link>
                     </div>
@@ -205,10 +207,10 @@ export default function ServicesPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-10 sm:mb-14">
               <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-2 rounded-full mb-4">
                 <Sparkles className="w-4 h-4 text-red-600" />
-                <span className="text-xs font-bold text-red-600 uppercase tracking-widest">Tout inclus</span>
+                <span className="text-xs font-bold text-red-600 uppercase tracking-widest">{t.servicesSection.allFeaturesBadge}</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 mb-3">Toutes les fonctionnalités incluses</h2>
-              <p className="text-slate-500">Un accès complet à l'ensemble de nos outils, sans supplément.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 mb-3">{t.servicesSection.allFeaturesTitle}</h2>
+              <p className="text-slate-500">{t.servicesSection.allFeaturesSubtitle}</p>
             </motion.div>
             <motion.div
               initial="hidden"
@@ -242,11 +244,11 @@ export default function ServicesPage() {
           />
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4">
-              Prêt à <span className="text-red-400">booster</span> vos livraisons ?
+              {t.servicesSection.ctaTitle} <span className="text-red-400">{t.servicesSection.ctaTitleHighlight}</span> {t.servicesSection.ctaTitleEnd}
             </motion.h2>
-            <p className="text-blue-100/70 mb-8 text-base sm:text-lg">Contactez-nous pour une démonstration personnalisée de notre solution.</p>
+            <p className="text-blue-100/70 mb-8 text-base sm:text-lg">{t.servicesSection.ctaSubtitle}</p>
             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-2xl shadow-red-600/40">
-              Demander une démo <ArrowRight className="w-5 h-5" />
+              {t.common.requestDemo} <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </section>
