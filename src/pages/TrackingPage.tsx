@@ -4,6 +4,7 @@ import { Search, Package, Truck, CheckCircle, MapPin, QrCode, PhoneCall, Clock, 
 import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
+import PageHero, { HeroHighlight } from '../components/PageHero';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -31,56 +32,32 @@ export default function TrackingPage() {
       <SiteHeader />
 
       <main className="pt-20">
-        {/* Hero + Search */}
-        <section className="py-20 sm:py-24 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 relative overflow-hidden">
-          <motion.div
-            animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-10 right-10 w-80 h-80 bg-red-600/25 rounded-full blur-3xl pointer-events-none"
-          />
-          <motion.div
-            animate={{ x: [0, -50, 0], y: [0, 30, 0] }}
-            transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute bottom-0 left-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"
-          />
-          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-
-          <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-            <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2 bg-red-500/15 border border-red-500/30 px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
-                <Navigation className="w-4 h-4 text-red-400" />
-                <span className="text-xs font-bold text-red-300 uppercase tracking-widest">Suivi en temps réel</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 leading-[1.1]">
-                Où est mon <span className="text-red-400 text-glow-red">colis</span> ?
-              </h1>
-              <p className="text-blue-100/80 text-base sm:text-lg mb-10">
-                Entrez votre numéro de suivi pour localiser votre colis en temps réel.
-              </p>
-
-              {/* Search bar */}
-              <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border border-white/10">
-                <div className="relative flex-1">
-                  <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input
-                    type="text"
-                    value={trackingId}
-                    onChange={e => { setTrackingId(e.target.value); setSearched(false); }}
-                    placeholder="Entrez votre numéro de suivi (ex: DC-84729)"
-                    className="w-full pl-14 pr-4 py-5 bg-white text-slate-900 placeholder-slate-400 focus:outline-none text-base font-medium"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="flex items-center justify-center gap-2 px-8 py-5 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 whitespace-nowrap"
-                >
-                  <Search className="w-5 h-5" /> Suivre
-                </button>
-              </form>
-              <p className="text-blue-200/50 text-sm mt-3">Recherche par numéro de colis ou référence client.</p>
-            </motion.div>
-          </div>
-        </section>
+        <PageHero
+          badge="Suivi en temps réel"
+          badgeIcon={Navigation}
+          title={<>Où est mon <HeroHighlight>colis</HeroHighlight> ?</>}
+          subtitle="Entrez votre numéro de suivi pour localiser votre colis en temps réel."
+        >
+          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-0 w-full max-w-xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border border-white/10">
+            <div className="relative flex-1">
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input
+                type="text"
+                value={trackingId}
+                onChange={e => { setTrackingId(e.target.value); setSearched(false); }}
+                placeholder="Entrez votre numéro de suivi (ex: DC-84729)"
+                className="w-full pl-14 pr-4 py-5 bg-white text-slate-900 placeholder-slate-400 focus:outline-none text-base font-medium"
+              />
+            </div>
+            <button
+              type="submit"
+              className="flex items-center justify-center gap-2 px-8 py-5 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 whitespace-nowrap"
+            >
+              <Search className="w-5 h-5" /> Suivre
+            </button>
+          </form>
+          <p className="text-blue-200/50 text-sm mt-3">Recherche par numéro de colis ou référence client.</p>
+        </PageHero>
 
         {/* Result zone */}
         {searched && (

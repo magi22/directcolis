@@ -4,6 +4,7 @@ import { ChevronDown, Search, MessageSquare, Sparkles, HelpCircle } from 'lucide
 import { Link } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
+import PageHero, { HeroHighlight } from '../components/PageHero';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -96,43 +97,24 @@ export default function FAQPage() {
       <SiteHeader />
 
       <main className="pt-20">
-        {/* Hero */}
-        <section className="py-20 sm:py-24 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 border-b border-slate-100 relative overflow-hidden">
-          <motion.div
-            animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-10 left-10 w-72 h-72 bg-red-600/20 rounded-full blur-3xl pointer-events-none"
-          />
-          <motion.div
-            animate={{ x: [0, -40, 0], y: [0, 40, 0] }}
-            transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute bottom-0 right-10 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"
-          />
-          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-
-          <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-            <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2 bg-red-500/15 border border-red-500/30 px-4 py-2 rounded-full mb-6 backdrop-blur-sm">
-                <HelpCircle className="w-4 h-4 text-red-400" />
-                <span className="text-xs font-bold text-red-300 uppercase tracking-widest">FAQ</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 leading-[1.1]">Questions <span className="text-red-400 text-glow-red">fréquentes</span></h1>
-              <p className="text-blue-100/80 text-base sm:text-lg mb-8">Trouvez rapidement une réponse à vos questions sur Direct Colis.</p>
-
-              {/* Search bar */}
-              <div className="relative max-w-xl mx-auto">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                <input
-                  type="text"
-                  value={query}
-                  onChange={e => { setQuery(e.target.value); setOpenIndex(null); }}
-                  placeholder="Rechercher une question..."
-                  className="w-full pl-12 pr-4 py-4 bg-white/95 backdrop-blur border border-white/20 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 shadow-2xl"
-                />
-              </div>
-            </motion.div>
+        <PageHero
+          badge="FAQ"
+          badgeIcon={HelpCircle}
+          title={<>Questions <HeroHighlight>fréquentes</HeroHighlight></>}
+          subtitle="Trouvez rapidement une réponse à vos questions sur Direct Colis."
+        >
+          {/* Search bar */}
+          <div className="relative max-w-xl mx-auto">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input
+              type="text"
+              value={query}
+              onChange={e => { setQuery(e.target.value); setOpenIndex(null); }}
+              placeholder="Rechercher une question..."
+              className="w-full pl-12 pr-4 py-4 bg-white/95 backdrop-blur border border-white/20 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 shadow-2xl"
+            />
           </div>
-        </section>
+        </PageHero>
 
         {/* Content */}
         <section className="py-16 bg-white">
