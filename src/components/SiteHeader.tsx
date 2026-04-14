@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { PhoneCall, Menu, X } from 'lucide-react';
+import { PhoneCall, Menu, X, User } from 'lucide-react';
 import logoPaysageCouleur from '../assets/images/logo-paysage-couleur.png';
 import { useLang } from '../i18n/LanguageContext';
-import type { Lang } from '../i18n/translations';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const { lang, setLang, t } = useLang();
+  const { t } = useLang();
   const { pathname } = useLocation();
 
   const navLinks = [
@@ -59,20 +58,15 @@ export default function SiteHeader() {
               <span className="text-xs">+221 78 542 17 33</span>
             </div>
 
-            {/* Lang switcher */}
-            <div className="flex items-center bg-slate-100 rounded-lg p-0.5 gap-0.5">
-              {(['fr', 'en'] as Lang[]).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 uppercase tracking-wide ${
-                    lang === l ? 'bg-blue-950 text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
+            {/* Se connecter */}
+            <a
+              href="#"
+              aria-label="Se connecter"
+              title="Se connecter"
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-50 border border-slate-100 text-blue-950 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-200"
+            >
+              <User className="w-4 h-4" />
+            </a>
 
             {/* Demo CTA */}
             <Link

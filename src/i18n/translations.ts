@@ -117,6 +117,12 @@ export const translations = {
       bannerTitleB: 'Logistique !',
       bannerDesc:
         "Direct Colis joue un rôle central dans l'écosystème de la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises.",
+      steps: [
+        { title: 'Création & Assignation', desc: "Ce processus est dédié à l'enregistrement et l'attribution efficace des colis." },
+        { title: 'Collecte & Scan', desc: 'Ce processus garantit la prise en charge et la traçabilité dès le premier kilomètre.' },
+        { title: 'Transit & Hub', desc: 'Ce processus assure le suivi et le contrôle lors des passages en entrepôt.' },
+        { title: 'Livraison & Preuve', desc: 'Ce processus sécurise la remise finale avec une validation fiable et géolocalisée.' },
+      ],
     },
     // ─── FAQ ─────────────────────────────────────────────
     faqSection: {
@@ -397,6 +403,12 @@ export const translations = {
       bannerTitleB: 'Logistics!',
       bannerDesc:
         'Direct Colis plays a central role in the supply chain ecosystem by efficiently managing the movement of goods.',
+      steps: [
+        { title: 'Creation & Assignment', desc: 'This step handles parcel registration and efficient dispatching.' },
+        { title: 'Collection & Scan', desc: 'Ensures pickup and traceability from the very first kilometer.' },
+        { title: 'Transit & Hub', desc: 'Tracks and controls parcels as they pass through warehouses.' },
+        { title: 'Delivery & Proof', desc: 'Secures the final handover with reliable and geolocated validation.' },
+      ],
     },
     // ─── FAQ ─────────────────────────────────────────────
     faqSection: {

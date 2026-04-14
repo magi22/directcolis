@@ -11,6 +11,7 @@ import blog2 from './assets/images/2.jpg';
 import blog3 from './assets/images/3.jpg';
 import numeroImg from './assets/images/numero.png';
 import Chatbot from './components/Chatbot';
+import SiteFooter from './components/SiteFooter';
 import {
   Package, MapPin, CheckCircle, ShieldCheck, Smartphone,
   BarChart3, Users, QrCode, Camera, FileSignature,
@@ -19,13 +20,15 @@ import {
   Check, Navigation, AlertTriangle, RefreshCcw, LayoutDashboard,
   ChevronUp, Play, Star, Globe, Headset, CheckCircle2, Plane,
   PhoneCall, PackageOpen, Calendar, MessageSquare, Bike, Car,
-  Instagram, Twitter
+  Instagram, Twitter, User
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
 import { useLang } from './i18n/LanguageContext';
 import type { Lang } from './i18n/translations';
+import { services } from './data/services';
+import { blogPosts } from './data/blogPosts';
 
 // Elegant, smooth easing curve (similar to Apple's spring/ease-out)
 const customEase = [0.16, 1, 0.3, 1];
@@ -191,22 +194,15 @@ export default function App() {
                 <span className="text-xs">+221 78 542 17 33</span>
               </div>
 
-              {/* Lang switcher */}
-              <div className="flex items-center bg-slate-100 rounded-lg p-0.5 gap-0.5">
-                {(['fr', 'en'] as Lang[]).map((l) => (
-                  <button
-                    key={l}
-                    onClick={() => setLang(l)}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all duration-200 uppercase tracking-wide ${
-                      lang === l
-                        ? 'bg-blue-950 text-white shadow-sm'
-                        : 'text-slate-500 hover:text-slate-800'
-                    }`}
-                  >
-                    {l}
-                  </button>
-                ))}
-              </div>
+              {/* Se connecter */}
+              <a
+                href="#"
+                aria-label="Se connecter"
+                title="Se connecter"
+                className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-50 border border-slate-100 text-blue-950 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-200"
+              >
+                <User className="w-4 h-4" />
+              </a>
 
               {/* Demo CTA */}
               <Link to="/contact" className="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-600/20 hover:-translate-y-0.5 whitespace-nowrap">
@@ -256,19 +252,9 @@ export default function App() {
                 <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="flex-1 text-center px-5 py-3 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-xl transition-colors">
                   {t.nav.demo}
                 </Link>
-                <div className="flex items-center bg-slate-100 rounded-xl p-0.5 gap-0.5">
-                  {(['fr', 'en'] as Lang[]).map((l) => (
-                    <button
-                      key={l}
-                      onClick={() => setLang(l)}
-                      className={`px-3 py-2 text-xs font-bold rounded-lg transition-all uppercase ${
-                        lang === l ? 'bg-blue-950 text-white' : 'text-slate-500'
-                      }`}
-                    >
-                      {l}
-                    </button>
-                  ))}
-                </div>
+                <a href="#" aria-label="Se connecter" className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-100 text-blue-950 hover:bg-red-600 hover:text-white transition-colors">
+                  <User className="w-4 h-4" />
+                </a>
               </div>
             </motion.div>
           )}
@@ -277,14 +263,16 @@ export default function App() {
 
       <main className="pt-20">
         {/* 2. Hero */}
-        <section id="accueil" className="relative pt-10 pb-16 sm:pt-20 sm:pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
+        <section id="accueil" className="relative pt-10 pb-16 sm:pt-20 sm:pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white">
+          {/* Full-width grid background — covers entire section */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            backgroundImage: 'linear-gradient(rgba(220,38,38,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(220,38,38,0.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }} />
           <div className="hidden md:block"><Particles /></div>
           {/* Background orbs - hidden on small mobile for perf */}
-          <div className="hidden sm:block absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl -z-10"></div>
-          <div className="hidden sm:block absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/40 rounded-full blur-3xl -z-10"></div>
-          {/* Futuristic corner accents - hide on mobile */}
-          <div className="hidden md:block absolute top-0 left-0 w-48 h-48 border-l-2 border-t-2 border-red-600/10 rounded-tl-3xl pointer-events-none"></div>
-          <div className="hidden md:block absolute bottom-0 right-0 w-48 h-48 border-r-2 border-b-2 border-blue-950/10 rounded-br-3xl pointer-events-none"></div>
+          <div className="hidden sm:block absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="hidden sm:block absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-red-50/40 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-8 items-center">
@@ -592,7 +580,7 @@ export default function App() {
                     <div className="w-10 h-px bg-red-600" />
                     <div className="w-4 h-px bg-red-600/50" />
                   </div>
-                  <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">À PROPOS DE NOUS</span>
+                  <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">{t.about.badge}</span>
                   <div className="flex items-center gap-1 text-red-600">
                     <div className="w-4 h-px bg-red-600/50" />
                     <div className="w-10 h-px bg-red-600" />
@@ -602,20 +590,20 @@ export default function App() {
 
                 {/* Titre */}
                 <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 mb-5 leading-[1.12]">
-                  Notre expertise au service de vos{' '}
-                  <span className="text-red-600">Livraisons au Sénégal</span>
+                  {t.about.titleA}{' '}
+                  <span className="text-red-600">{t.about.titleB}</span>
                 </motion.h2>
 
                 {/* Description */}
                 <motion.p variants={fadeInUp} className="text-slate-500 mb-8 leading-relaxed text-base max-w-xl">
-                  Direct Colis joue un rôle central dans la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises, de l'origine à la destination finale. Nous offrons une solution complète adaptée aux réalités du terrain sénégalais.
+                  {t.about.desc}
                 </motion.p>
 
                 {/* Feature cards — 2 colonnes */}
                 <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6 mb-8">
                   {[
-                    { icon: <Globe className="w-6 h-6 text-white" />, title: 'Couverture Nationale', desc: 'Présence sur tous les axes majeurs du Sénégal.' },
-                    { icon: <Headset className="w-6 h-6 text-white" />, title: 'Support 7j/7', desc: 'Une équipe dédiée disponible pour chaque requête.' },
+                    { icon: <Globe className="w-6 h-6 text-white" />, title: t.about.feature1Title, desc: t.about.feature1Desc },
+                    { icon: <Headset className="w-6 h-6 text-white" />, title: t.about.feature2Title, desc: t.about.feature2Desc },
                   ].map((f, i) => (
                     <div key={i} className="flex items-start gap-4">
                       <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shrink-0 shadow-lg shadow-red-600/25">
@@ -631,12 +619,7 @@ export default function App() {
 
                 {/* Checklist 2×2 */}
                 <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-10">
-                  {[
-                    'Traçabilité 100% garantie',
-                    'Satisfaction client assurée',
-                    'Flotte adaptée au terrain',
-                    'Livraison dans les délais',
-                  ].map((item, i) => (
+                  {[t.about.check1, t.about.check2, t.about.check3, t.about.check4].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center shrink-0">
                         <Check className="w-3 h-3 text-white" strokeWidth={3} />
@@ -649,12 +632,12 @@ export default function App() {
                 {/* Bas : CTA + fondateur */}
                 <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-6 border-t border-slate-100 flex-wrap">
                   {/* Bouton pill */}
-                  <button className="flex items-center gap-0 bg-red-600 text-white pl-7 pr-1.5 py-1.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/25 hover:-translate-y-0.5 group shrink-0">
-                    En savoir plus
+                  <Link to="/a-propos" className="flex items-center gap-0 bg-red-600 text-white pl-7 pr-1.5 py-1.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 shadow-lg shadow-red-600/25 hover:-translate-y-0.5 group shrink-0">
+                    {t.common.learnMore}
                     <div className="w-9 h-9 ml-4 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                       <ArrowRight className="w-4 h-4" />
                     </div>
-                  </button>
+                  </Link>
 
                   <div className="h-10 w-px bg-slate-200 hidden sm:block" />
 
@@ -670,7 +653,7 @@ export default function App() {
                     </div>
                     <div>
                       <p className="font-bold text-blue-950 text-sm">Amadou Fall</p>
-                      <p className="text-xs text-slate-500 mt-0.5">Fondateur & CEO</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{t.about.founderRole}</p>
                     </div>
                     {/* Signature SVG cursive */}
                     <svg className="h-8 w-24 text-blue-950/60 ml-2 hidden sm:block" viewBox="0 0 120 40" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -701,7 +684,7 @@ export default function App() {
                   <div className="w-2 h-1 rounded-full bg-red-600"></div>
                   <div className="w-8 h-px bg-red-600"></div>
                 </div>
-                NOS SERVICES
+                {t.servicesSection.badge}
                 <div className="flex items-center gap-1">
                   <div className="w-8 h-px bg-red-600"></div>
                   <div className="w-2 h-1 rounded-full bg-red-600"></div>
@@ -709,10 +692,10 @@ export default function App() {
                 </div>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
-                Des services logistiques efficaces
+                {t.servicesSection.titleA}
               </h2>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 leading-tight">
-                pour votre entreprise
+                {t.servicesSection.titleB}
               </h2>
             </motion.div>
 
@@ -723,64 +706,31 @@ export default function App() {
               viewport={{ once: true, margin: "-100px" }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
             >
-              {[
-                {
-                  icon: <Search className="h-8 w-8 text-white" />,
-                  title: "Suivi de colis",
-                  desc: "Un accès simple au statut, à l'historique et aux informations de livraison en temps réel pour vous et vos clients.",
-                  mobile: true,
-                },
-                {
-                  icon: <Truck className="h-8 w-8 text-white" />,
-                  title: "Collecte & Acheminement",
-                  desc: "Une gestion claire du colis, de la prise en charge jusqu'au dernier kilomètre avec une flotte adaptée au terrain.",
-                  mobile: true,
-                },
-                {
-                  icon: <FileSignature className="h-8 w-8 text-white" />,
-                  title: "Preuve de livraison",
-                  desc: "Validation par OTP, photo, signature et géolocalisation pour sécuriser chaque remise au destinataire.",
-                  mobile: true,
-                },
-                {
-                  icon: <AlertTriangle className="h-8 w-8 text-white" />,
-                  title: "Gestion des échecs",
-                  desc: "Motif détaillé, photo justificative, retour entrepôt sécurisé et reprogrammation fluide des tentatives.",
-                  mobile: false,
-                },
-                {
-                  icon: <Users className="h-8 w-8 text-white" />,
-                  title: "Gestion grands comptes",
-                  desc: "Import Excel/CSV, double identifiant, génération d'étiquettes QR et reporting complet pour les volumes importants.",
-                  mobile: false,
-                },
-                {
-                  icon: <LayoutDashboard className="h-8 w-8 text-white" />,
-                  title: "Pilotage des opérations",
-                  desc: "Visibilité totale sur les missions en cours, l'activité des livreurs et les performances globales de livraison.",
-                  mobile: false,
-                }
-              ].map((service, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className={`${service.mobile ? '' : 'hidden md:flex'} bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border`}
-                  style={{ transformStyle: 'preserve-3d', perspective: 800 }}
-                >
-                  {/* Dark gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0a1530] via-[#1a0a1a] to-[#4a0a0f] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none z-0" />
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300 z-10">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-blue-950 group-hover:text-white mb-4 relative z-10 transition-colors duration-300">{service.title}</h3>
-                  <p className="text-slate-500 group-hover:text-blue-100 text-sm leading-relaxed font-light mb-8 flex-grow relative z-10 transition-colors duration-300">{service.desc}</p>
-                  <Link to="/services" className="inline-flex items-center gap-2 text-blue-950 group-hover:text-white font-bold text-sm transition-colors duration-300 relative z-10">
-                    En savoir plus <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </motion.div>
-              ))}
+              {services.map((service, i) => {
+                const Icon = service.icon;
+                const isMobile = i < 3;
+                return (
+                  <motion.div
+                    key={service.slug}
+                    variants={fadeInUp}
+                    whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    className={`${isMobile ? '' : 'hidden md:flex'} bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border`}
+                    style={{ transformStyle: 'preserve-3d', perspective: 800 }}
+                  >
+                    {/* Dark gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0a1530] via-[#1a0a1a] to-[#4a0a0f] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none z-0" />
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-[6px] border-white shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-300 z-10">
+                      <Icon className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-blue-950 group-hover:text-white mb-4 relative z-10 transition-colors duration-300">{service.shortTitle}</h3>
+                    <p className="text-slate-500 group-hover:text-blue-100 text-sm leading-relaxed font-light mb-8 flex-grow relative z-10 transition-colors duration-300">{service.cardDesc}</p>
+                    <Link to={`/services/${service.slug}`} className="inline-flex items-center gap-2 text-blue-950 group-hover:text-white font-bold text-sm transition-colors duration-300 relative z-10">
+                      {t.common.learnMore} <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </div>
         </section>
@@ -811,7 +761,7 @@ export default function App() {
                   <div className="w-2 h-1 rounded-full bg-red-600"></div>
                   <div className="w-1 h-1 rounded-full bg-red-600"></div>
                 </div>
-                PROCESSUS DE TRAVAIL
+                {t.process.badge}
                 <div className="flex items-center gap-1">
                   <div className="w-1 h-1 rounded-full bg-red-600"></div>
                   <div className="w-2 h-1 rounded-full bg-red-600"></div>
@@ -820,10 +770,10 @@ export default function App() {
                 <Car className="w-5 h-5" />
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
-                Un processus optimisé pour
+                {t.process.titleA}
               </h2>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 leading-tight">
-                vos livraisons
+                {t.process.titleB}
               </h2>
             </motion.div>
 
@@ -835,32 +785,9 @@ export default function App() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 relative z-10"
               >
-                {[
-                  { 
-                    num: "01", 
-                    title: "Création & Assignation", 
-                    desc: "Ce processus est dédié à l'enregistrement et l'attribution efficace des colis.",
-                    icon: <PhoneCall className="w-8 h-8" />
-                  },
-                  { 
-                    num: "02", 
-                    title: "Collecte & Scan", 
-                    desc: "Ce processus garantit la prise en charge et la traçabilité dès le premier kilomètre.",
-                    icon: <Box className="w-8 h-8" />
-                  },
-                  { 
-                    num: "03", 
-                    title: "Transit & Hub", 
-                    desc: "Ce processus assure le suivi et le contrôle lors des passages en entrepôt.",
-                    icon: <PackageOpen className="w-8 h-8" />
-                  },
-                  { 
-                    num: "04", 
-                    title: "Livraison & Preuve", 
-                    desc: "Ce processus sécurise la remise finale avec une validation fiable et géolocalisée.",
-                    icon: <Truck className="w-8 h-8" />
-                  }
-                ].map((step, i) => (
+                {t.process.steps.map((step, i) => {
+                  const num = String(i + 1).padStart(2, '0');
+                  return (
                   <motion.div 
                     key={i} 
                     variants={fadeInUp}
@@ -876,18 +803,19 @@ export default function App() {
                     {/* Icon Circle */}
                     <div className="relative mb-8 z-10">
                       <div className="w-24 h-24 rounded-full bg-red-50 shadow-lg shadow-red-600/30 group-hover:scale-110 transition-transform duration-300 border-4 border-white ring-8 ring-red-50 flex items-center justify-center">
-                        <span className="text-3xl font-black text-red-600">{step.num}</span>
+                        <span className="text-3xl font-black text-red-600">{num}</span>
                       </div>
                       {/* Number Badge */}
                       <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow-sm">
-                        {step.num}
+                        {num}
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold text-blue-950 mb-4">{step.title}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed font-light px-2">{step.desc}</p>
                   </motion.div>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
 
@@ -905,17 +833,17 @@ export default function App() {
               {/* Left Content */}
               <div className="p-6 sm:p-10 md:p-16 md:w-3/5 relative z-10">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                  Reconnu comme l'un des leaders de la <span className="text-red-500">Logistique !</span>
+                  {t.process.bannerTitleA} <span className="text-red-500">{t.process.bannerTitleB}</span>
                 </h3>
                 <p className="text-slate-300 mb-8 font-light leading-relaxed max-w-md">
-                  Direct Colis joue un rôle central dans l'écosystème de la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises.
+                  {t.process.bannerDesc}
                 </p>
-                <button className="flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group">
-                  En savoir plus
+                <Link to="/a-propos" className="flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group">
+                  {t.common.learnMore}
                   <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
                     <ArrowRight className="w-5 h-5 text-white" />
                   </div>
-                </button>
+                </Link>
               </div>
 
               {/* Right Content */}
@@ -1335,37 +1263,9 @@ export default function App() {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  image: blog1,
-                  category: "Logistique",
-                  date: "10 Mai, 2025",
-                  comments: "Commentaire",
-                  title: "Comment optimiser vos expéditions avec le service Cargo",
-                  author: "Amadou Diallo",
-                  authorImg: testimonial2
-                },
-                {
-                  image: blog2,
-                  category: "Logistique",
-                  date: "10 Mai, 2025",
-                  comments: "Commentaire",
-                  title: "Suivre vos marchandises à travers la meilleure chaîne d'approvisionnement",
-                  author: "Fatou Sow",
-                  authorImg: testimonial3
-                },
-                {
-                  image: blog3,
-                  category: "Logistique",
-                  date: "10 Mai, 2025",
-                  comments: "Commentaire",
-                  title: "Comment mesurer le succès de vos livraisons ?",
-                  author: "Cheikh Ndiaye",
-                  authorImg: testimonial4
-                }
-              ].map((post, i) => (
-                <motion.div 
-                  key={i}
+              {blogPosts.map((post, i) => (
+                <motion.div
+                  key={post.slug}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: "-50px" }}
@@ -1373,7 +1273,7 @@ export default function App() {
                   className="group rounded-2xl bg-white border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-slate-200/80 transition-all duration-300 flex flex-col h-full"
                 >
                   {/* Image Container */}
-                  <div className="relative h-64 rounded-t-2xl overflow-hidden">
+                  <Link to={`/blog/${post.slug}`} className="block relative h-64 rounded-t-2xl overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
@@ -1386,7 +1286,7 @@ export default function App() {
                         {post.category}
                       </span>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content Container */}
                   <div className="p-4 sm:p-6 lg:p-8 pt-4 sm:pt-6 flex flex-col flex-grow">
@@ -1400,29 +1300,31 @@ export default function App() {
                       </div>
                       <div className="flex items-center gap-2">
                         <MessageSquare className="w-4 h-4 text-red-600" />
-                        {post.comments}
+                        {post.readTime}
                       </div>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-blue-950 mb-6 group-hover:text-red-600 transition-colors cursor-pointer leading-snug flex-grow">
-                      {post.title}
-                    </h3>
+                    <Link to={`/blog/${post.slug}`}>
+                      <h3 className="text-xl font-bold text-blue-950 mb-6 group-hover:text-red-600 transition-colors cursor-pointer leading-snug flex-grow">
+                        {post.title}
+                      </h3>
+                    </Link>
 
                     {/* Footer / Author */}
                     <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-red-100 p-0.5">
-                          <img src={post.authorImg} alt={post.author} className="w-full h-full object-cover rounded-full" />
+                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-red-100 bg-white p-0.5 shrink-0">
+                          <img src={post.authorImg} alt={post.author} className="w-full h-full object-contain rounded-full" />
                         </div>
                         <div>
                           <p className="font-bold text-blue-950 text-sm">{post.author}</p>
                           <p className="text-slate-500 text-xs">{post.date}</p>
                         </div>
                       </div>
-                      <button className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center group-hover:bg-blue-950 transition-colors shadow-md">
+                      <Link to={`/blog/${post.slug}`} className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center group-hover:bg-blue-950 transition-colors shadow-md">
                         <ArrowRight className="w-5 h-5" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
@@ -1479,103 +1381,24 @@ export default function App() {
             className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center"
           >
             <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight tracking-tight">
-              Besoin d'une logistique plus claire et mieux suivie ?
+              {t.ctaFinal.title}
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-xl text-blue-100/80 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-              Découvrez comment Direct Colis peut vous aider à mieux organiser vos livraisons, renforcer votre traçabilité et sécuriser vos preuves de remise.
+              {t.ctaFinal.subtitle}
             </motion.p>
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5">
-                Demander une démo
-              </button>
-              <button className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-white/5 border border-white/20 hover:bg-white/10 hover:border-white/40 rounded-xl transition-all duration-300 hover:-translate-y-0.5">
-                Nous contacter
-              </button>
+              <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5">
+                {t.ctaFinal.cta1}
+              </Link>
+              <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-white/5 border border-white/20 hover:bg-white/10 hover:border-white/40 rounded-xl transition-all duration-300 hover:-translate-y-0.5">
+                {t.ctaFinal.cta2}
+              </Link>
             </motion.div>
           </motion.div>
         </section>
       </main>
 
-      {/* 12. Footer */}
-      <footer id="contact" className="bg-blue-950 border-t border-white/10 pt-16 pb-8 relative z-10 bg-grid-dark">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div className="md:col-span-1">
-              <div className="mb-6">
-                <img src={logoPaysageBlanc} alt="Direct Colis" className="h-12 w-auto object-contain" />
-              </div>
-              <p className="text-blue-200/60 text-sm leading-relaxed font-light">
-                Solution logistique moderne pour le suivi, la gestion et la livraison sécurisée de vos expéditions.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-bold mb-5">Solution</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Suivi de colis</a></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Preuve de livraison</a></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Gestion grands comptes</a></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">API & Intégrations</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-bold mb-5">Entreprise</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">À propos</a></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Contact</a></li>
-                <li><Link to="/mentions-legales" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</Link></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Confidentialité</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-bold mb-5">Contact</h4>
-              <ul className="space-y-3">
-                <li className="text-blue-200/60 text-sm flex items-center gap-2">
-                  <PhoneCall className="w-4 h-4" /> +221 78 542 17 33
-                </li>
-                <li className="text-blue-200/60 text-sm flex items-center gap-2">
-                  <Globe className="w-4 h-4" /> contact@directcolis.sn
-                </li>
-                <li className="text-blue-200/60 text-sm mt-5">
-                  <button className="text-red-400 hover:text-red-300 font-medium transition-colors flex items-center gap-1 group">
-                    Support client <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="neon-divider mb-8"></div>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex flex-col items-center sm:items-start gap-1">
-              <p className="text-blue-200/40 text-sm font-light">
-                &copy; {new Date().getFullYear()} Direct Colis. Tous droits réservés.
-              </p>
-              <p className="text-blue-200/30 text-xs">
-                Dev par{' '}
-                <a href="https://wiicode.dev" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors">
-                  Wiicode
-                </a>
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <a href="#" aria-label="Instagram" className="h-9 w-9 rounded-full bg-white/5 hover:bg-red-600 flex items-center justify-center transition-all duration-300 group">
-                <Instagram className="h-4 w-4 text-blue-200/60 group-hover:text-white transition-colors" />
-              </a>
-              <a href="#" aria-label="Twitter" className="h-9 w-9 rounded-full bg-white/5 hover:bg-red-600 flex items-center justify-center transition-all duration-300 group">
-                <Twitter className="h-4 w-4 text-blue-200/60 group-hover:text-white transition-colors" />
-              </a>
-              <a href="#" aria-label="TikTok" className="h-9 w-9 rounded-full bg-white/5 hover:bg-red-600 flex items-center justify-center transition-all duration-300 group">
-                <svg className="h-4 w-4 fill-current text-blue-200/60 group-hover:text-white transition-colors" viewBox="0 0 24 24">
-                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
