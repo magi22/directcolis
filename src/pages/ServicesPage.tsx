@@ -2,20 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
-  Search, Truck, FileSignature, AlertTriangle, Users, LayoutDashboard,
   QrCode, ShieldCheck, Navigation, Camera, CheckCircle, ArrowRight,
-  Package, Clock, RefreshCcw, FileSpreadsheet, Printer, BarChart3, Sparkles, Zap,
-  MapPin, Boxes
+  Package, Clock, RefreshCcw, FileSpreadsheet, Printer, BarChart3, Sparkles, Zap, Users
 } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
-import service1 from '../assets/images/service 1.png';
-import service2 from '../assets/images/service 2.png';
-import service3 from '../assets/images/service 3.png';
-import service4 from '../assets/images/service 4.png';
-import service5 from '../assets/images/service 5.png';
-import service6 from '../assets/images/service 6.jpg';
+import { services } from '../data/services';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -25,57 +18,6 @@ const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } }
 };
-
-const services = [
-  {
-    icon: Search,
-    title: 'Suivi de colis en temps réel',
-    desc: "Donnez à vos clients une visibilité totale sur leur livraison. Notre système de tracking permet de consulter le statut, l'historique de chaque étape et l'heure estimée de livraison.",
-    features: ['Statut en temps réel', 'Historique complet', 'Lien de suivi public', 'Notifications auto'],
-    image: service1,
-    tag: 'TRACKING',
-  },
-  {
-    icon: Truck,
-    title: 'Collecte & Acheminement',
-    desc: "De la prise en charge au dernier kilomètre, notre flotte adaptée au terrain sénégalais garantit une collecte rapide et un acheminement maîtrisé jusqu'à destination.",
-    features: ['Collecte à domicile', 'Flotte terrain', 'Couverture nationale', 'Suivi GPS en direct'],
-    image: service2,
-    tag: 'LOGISTIQUE',
-  },
-  {
-    icon: FileSignature,
-    title: 'Preuve de livraison',
-    desc: "Chaque remise est sécurisée et documentée. OTP, photo, signature électronique et géolocalisation réduisent les litiges et renforcent la confiance de vos clients.",
-    features: ['Validation par OTP', 'Photo de livraison', 'Signature électronique', 'Géolocalisation GPS'],
-    image: service3,
-    tag: 'SÉCURITÉ',
-  },
-  {
-    icon: AlertTriangle,
-    title: 'Gestion des échecs',
-    desc: "Chaque tentative infructueuse est traitée avec rigueur : motif détaillé, photo justificative, retour entrepôt sécurisé et reprogrammation fluide de la livraison.",
-    features: ['Motif documenté', 'Photo justificative', 'Retour entrepôt suivi', 'Reprogrammation facile'],
-    image: service4,
-    tag: 'GESTION',
-  },
-  {
-    icon: Users,
-    title: 'Gestion grands comptes',
-    desc: "Pour les structures qui gèrent des volumes importants : import Excel/CSV, double identifiant, génération d'étiquettes QR par lot et reporting complet de vos expéditions.",
-    features: ['Import Excel / CSV', 'Étiquettes QR par lot', 'Double identifiant', 'Reporting détaillé'],
-    image: service5,
-    tag: 'B2B',
-  },
-  {
-    icon: LayoutDashboard,
-    title: 'Pilotage des opérations',
-    desc: "Un tableau de bord centralisé pour piloter vos équipes, suivre les missions en cours, analyser les performances et optimiser la productivité de vos livreurs.",
-    features: ["Vue d'ensemble directe", 'Activité livreurs', 'Statistiques détaillées', 'Alertes temps réel'],
-    image: service6,
-    tag: 'DASHBOARD',
-  },
-];
 
 const fonctionnalites = [
   { icon: QrCode, label: 'QR Code unique' },
@@ -100,8 +42,8 @@ export default function ServicesPage() {
       <main className="pt-20">
         <PageHero
           badge="Nos Services"
-          title={<>Des solutions <HeroHighlight>complètes</HeroHighlight><br className="hidden sm:block" /> pour votre <span className="text-red-500">logistique</span></>}
-          subtitle="De la collecte à la preuve de livraison, Direct Colis vous offre une plateforme tout-en-un pour piloter chaque étape de vos expéditions."
+          title={<>Nos services <HeroHighlight>logistiques</HeroHighlight></>}
+          subtitle="Des solutions conçues pour suivre, sécuriser et piloter vos livraisons à chaque étape."
         >
           {/* Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
@@ -125,7 +67,7 @@ export default function ServicesPage() {
             })}
           </div>
 
-          {/* CTA rapides */}
+          {/* CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/contact"
@@ -142,8 +84,17 @@ export default function ServicesPage() {
           </div>
         </PageHero>
 
-        {/* Services grid — modern card with real image */}
-        <section id="services-grid" className="py-16 sm:py-24 bg-white relative scroll-mt-24">
+        {/* Intro text before grid */}
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Avec <strong className="text-blue-950">Direct Colis</strong>, vous disposez d'une plateforme logistique complète pensée pour structurer vos opérations de livraison, améliorer la traçabilité des colis et offrir une meilleure visibilité à vos équipes comme à vos clients. De la création d'un envoi jusqu'à la livraison finale, chaque étape est suivie, horodatée et intégrée dans un workflow clair.
+            </p>
+          </div>
+        </section>
+
+        {/* Services grid */}
+        <section id="services-grid" className="pb-16 sm:pb-24 bg-white relative scroll-mt-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial="hidden"
@@ -155,7 +106,9 @@ export default function ServicesPage() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 mb-3">
                 Découvrez nos <span className="text-red-600">6 services</span>
               </h2>
-              <p className="text-slate-500">Une offre complète et adaptée à chaque étape de votre chaîne logistique.</p>
+              <p className="text-slate-500 max-w-2xl mx-auto">
+                Cliquez sur « En savoir plus » pour découvrir le fonctionnement détaillé de chaque service, ses avantages et son utilité dans votre organisation.
+              </p>
             </motion.div>
 
             <motion.div
@@ -169,19 +122,18 @@ export default function ServicesPage() {
                 const Icon = service.icon;
                 return (
                   <motion.div
-                    key={i}
+                    key={service.slug}
                     variants={fadeInUp}
                     className="group relative bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(220,38,38,0.15)] transition-all duration-500 flex flex-col"
                   >
                     {/* Image cover */}
-                    <div className="relative h-48 overflow-hidden">
+                    <Link to={`/services/${service.slug}`} className="block relative h-48 overflow-hidden">
                       <img
                         src={service.image}
                         alt={service.title}
                         loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                       />
-                      {/* Gradient overlay always visible */}
                       <div className="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-blue-950/20 to-transparent" />
 
                       {/* Red tag */}
@@ -202,21 +154,22 @@ export default function ServicesPage() {
                       {/* Service number */}
                       <div className="absolute bottom-4 left-4 text-white">
                         <span className="text-5xl font-black leading-none opacity-30 group-hover:opacity-60 transition-opacity">
-                          {String(i + 1).padStart(2, '0')}
+                          {service.num}
                         </span>
                       </div>
-                    </div>
+                    </Link>
 
                     {/* Content */}
                     <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-extrabold text-blue-950 mb-3 group-hover:text-red-600 transition-colors duration-300 leading-tight">
-                        {service.title}
-                      </h3>
+                      <Link to={`/services/${service.slug}`}>
+                        <h3 className="text-xl font-extrabold text-blue-950 mb-3 group-hover:text-red-600 transition-colors duration-300 leading-tight">
+                          {service.title}
+                        </h3>
+                      </Link>
                       <p className="text-slate-500 text-sm leading-relaxed mb-5 flex-grow">
-                        {service.desc}
+                        {service.cardDesc}
                       </p>
 
-                      {/* Features */}
                       <ul className="space-y-2 mb-6">
                         {service.features.map((f, j) => (
                           <li key={j} className="flex items-center gap-2 text-xs text-slate-600 font-medium">
@@ -228,9 +181,8 @@ export default function ServicesPage() {
                         ))}
                       </ul>
 
-                      {/* CTA */}
                       <Link
-                        to="/contact"
+                        to={`/services/${service.slug}`}
                         className="inline-flex items-center gap-2 text-red-600 font-bold text-sm hover:gap-3 transition-all duration-200 group/cta mt-auto"
                       >
                         En savoir plus
@@ -238,7 +190,6 @@ export default function ServicesPage() {
                       </Link>
                     </div>
 
-                    {/* Red accent bar bottom */}
                     <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-red-600 to-red-500 group-hover:w-full transition-all duration-500" />
                   </motion.div>
                 );

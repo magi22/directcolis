@@ -96,6 +96,17 @@ function useCounter(target: number, duration = 2000, start = false) {
 }
 
 // ─── Stats counter card ───────────────────────────────────────
+function formatCompact(n: number): string {
+  if (n >= 1_000_000) {
+    const v = n / 1_000_000;
+    return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + 'M';
+  }
+  if (n >= 1_000) {
+    const v = n / 1_000;
+    return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + 'k';
+  }
+  return String(n);
+}
 function StatCard({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -105,18 +116,25 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
     return () => obs.disconnect();
   }, []);
   const count = useCounter(value, 2000, visible);
+  // On mobile, we display the target value compactly (e.g. "1M+") to fit the narrow card.
+  // The animated count still runs full on desktop.
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={visible ? { opacity: 1, y: 0 } : {}}
       transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="text-center px-2 sm:px-4 py-4 sm:py-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow min-w-0"
+      className="text-center px-2 sm:px-4 py-4 sm:py-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow min-w-0 overflow-hidden"
     >
-      <p className="text-lg sm:text-2xl lg:text-3xl font-black text-blue-950 tabular-nums whitespace-nowrap overflow-hidden">
+      {/* Mobile: compact format (e.g. 1M+) */}
+      <p className="sm:hidden text-2xl font-black text-blue-950 tabular-nums whitespace-nowrap leading-none">
+        {formatCompact(value)}{suffix}
+      </p>
+      {/* Desktop: animated full number with thousand separators */}
+      <p className="hidden sm:block text-2xl lg:text-3xl font-black text-blue-950 tabular-nums whitespace-nowrap">
         {count.toLocaleString('fr-FR')}{suffix}
       </p>
-      <p className="text-[10px] sm:text-xs text-slate-500 font-medium mt-1 uppercase tracking-wider leading-tight">{label}</p>
+      <p className="text-[10px] sm:text-xs text-slate-500 font-medium mt-1.5 uppercase tracking-wider leading-tight">{label}</p>
     </motion.div>
   );
 }
@@ -1534,7 +1552,7 @@ export default function App() {
               <ul className="space-y-3">
                 <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">À propos</a></li>
                 <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Contact</a></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</a></li>
+                <li><Link to="/mentions-legales" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</Link></li>
                 <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Confidentialité</a></li>
               </ul>
             </div>

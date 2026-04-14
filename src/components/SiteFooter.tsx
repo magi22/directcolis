@@ -72,7 +72,7 @@ export default function SiteFooter() {
                 <li><Link to="/a-propos" className="text-blue-200/60 hover:text-white text-sm transition-colors">À propos</Link></li>
                 <li><Link to="/blog" className="text-blue-200/60 hover:text-white text-sm transition-colors">Blog</Link></li>
                 <li><Link to="/contact" className="text-blue-200/60 hover:text-white text-sm transition-colors">Contact</Link></li>
-                <li><a href="#" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</a></li>
+                <li><Link to="/mentions-legales" className="text-blue-200/60 hover:text-white text-sm transition-colors">Mentions légales</Link></li>
               </ul>
             </div>
 
