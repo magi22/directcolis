@@ -8,6 +8,12 @@ import {
 } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
+import service1 from '../assets/images/service 1.png';
+import service2 from '../assets/images/service 2.png';
+import service3 from '../assets/images/service 3.png';
+import service4 from '../assets/images/service 4.png';
+import service5 from '../assets/images/service 5.png';
+import service6 from '../assets/images/service 6.jpg';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -24,7 +30,7 @@ const services = [
     title: 'Suivi de colis en temps réel',
     desc: "Donnez à vos clients une visibilité totale sur leur livraison. Notre système de tracking permet de consulter le statut, l'historique de chaque étape et l'heure estimée de livraison.",
     features: ['Statut en temps réel', 'Historique complet', 'Lien de suivi public', 'Notifications auto'],
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop',
+    image: service1,
     tag: 'TRACKING',
   },
   {
@@ -32,7 +38,7 @@ const services = [
     title: 'Collecte & Acheminement',
     desc: "De la prise en charge au dernier kilomètre, notre flotte adaptée au terrain sénégalais garantit une collecte rapide et un acheminement maîtrisé jusqu'à destination.",
     features: ['Collecte à domicile', 'Flotte terrain', 'Couverture nationale', 'Suivi GPS en direct'],
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
+    image: service2,
     tag: 'LOGISTIQUE',
   },
   {
@@ -40,7 +46,7 @@ const services = [
     title: 'Preuve de livraison',
     desc: "Chaque remise est sécurisée et documentée. OTP, photo, signature électronique et géolocalisation réduisent les litiges et renforcent la confiance de vos clients.",
     features: ['Validation par OTP', 'Photo de livraison', 'Signature électronique', 'Géolocalisation GPS'],
-    image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1200&auto=format&fit=crop',
+    image: service3,
     tag: 'SÉCURITÉ',
   },
   {
@@ -48,7 +54,7 @@ const services = [
     title: 'Gestion des échecs',
     desc: "Chaque tentative infructueuse est traitée avec rigueur : motif détaillé, photo justificative, retour entrepôt sécurisé et reprogrammation fluide de la livraison.",
     features: ['Motif documenté', 'Photo justificative', 'Retour entrepôt suivi', 'Reprogrammation facile'],
-    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?q=80&w=1200&auto=format&fit=crop',
+    image: service4,
     tag: 'GESTION',
   },
   {
@@ -56,7 +62,7 @@ const services = [
     title: 'Gestion grands comptes',
     desc: "Pour les structures qui gèrent des volumes importants : import Excel/CSV, double identifiant, génération d'étiquettes QR par lot et reporting complet de vos expéditions.",
     features: ['Import Excel / CSV', 'Étiquettes QR par lot', 'Double identifiant', 'Reporting détaillé'],
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop',
+    image: service5,
     tag: 'B2B',
   },
   {
@@ -64,7 +70,7 @@ const services = [
     title: 'Pilotage des opérations',
     desc: "Un tableau de bord centralisé pour piloter vos équipes, suivre les missions en cours, analyser les performances et optimiser la productivité de vos livreurs.",
     features: ["Vue d'ensemble directe", 'Activité livreurs', 'Statistiques détaillées', 'Alertes temps réel'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
+    image: service6,
     tag: 'DASHBOARD',
   },
 ];
