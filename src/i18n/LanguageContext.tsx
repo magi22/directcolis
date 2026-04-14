@@ -11,10 +11,16 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 const STORAGE_KEY = 'lang';
 
+// The FR/EN switcher is currently disabled in the UI. The site is French-only
+// by default. We clear any previously-stored 'en' preference so users who
+// tested the switcher fall back to French automatically.
 function getInitialLang(): Lang {
   if (typeof window === 'undefined') return 'fr';
-  const stored = localStorage.getItem(STORAGE_KEY) as Lang | null;
-  if (stored === 'fr' || stored === 'en') return stored;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
   return 'fr';
 }
 
