@@ -53,7 +53,7 @@ export default function BlogPostPage() {
               <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-sm text-blue-200/70">
                 <span className="flex items-center gap-2">
                   <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-red-500/30 bg-white p-0.5">
-                    <img src={post.authorImg} alt={post.author} className="w-full h-full object-contain" />
+                    <img src={post.authorImg} alt={post.author} loading="lazy" className="w-full h-full object-contain" />
                   </div>
                   <span className="font-semibold text-white">{post.author}</span>
                 </span>
@@ -67,7 +67,7 @@ export default function BlogPostPage() {
         {/* Cover image */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 sm:-mt-8 relative z-10">
           <div className="rounded-3xl overflow-hidden shadow-2xl aspect-[16/9] bg-slate-100">
-            <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+            <img src={post.image} alt={post.title} loading="lazy" className="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -148,7 +148,7 @@ export default function BlogPostPage() {
                     {otherPosts.map(other => (
                       <Link key={other.slug} to={`/blog/${other.slug}`} className="block group">
                         <div className="flex gap-3">
-                          <img src={other.image} alt={other.title} className="w-16 h-16 rounded-lg object-cover shrink-0" />
+                          <img src={other.image} alt={other.title} loading="lazy" className="w-16 h-16 rounded-lg object-cover shrink-0" />
                           <div className="min-w-0">
                             <p className="text-xs text-red-600 font-bold uppercase tracking-wide mb-1">{other.category}</p>
                             <p className="text-sm font-bold text-blue-950 leading-tight group-hover:text-red-600 transition-colors line-clamp-2">

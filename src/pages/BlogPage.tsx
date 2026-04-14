@@ -45,6 +45,7 @@ export default function BlogPage() {
                 <img
                   src={featured.image}
                   alt={featured.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
@@ -75,7 +76,7 @@ export default function BlogPage() {
                 <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-red-100 bg-white p-0.5 shrink-0">
-                      <img src={featured.authorImg} alt={featured.author} className="w-full h-full object-contain" />
+                      <img src={featured.authorImg} alt={featured.author} loading="lazy" className="w-full h-full object-contain" />
                     </div>
                     <div>
                       <p className="font-bold text-blue-950 text-sm">{featured.author}</p>
@@ -104,6 +105,7 @@ export default function BlogPage() {
                     <img
                       src={post.image}
                       alt={post.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
@@ -130,7 +132,7 @@ export default function BlogPage() {
                     <div className="flex items-center justify-between pt-5 border-t border-slate-100 mt-auto">
                       <div className="flex items-center gap-2.5">
                         <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-red-100 bg-white p-0.5 shrink-0">
-                          <img src={post.authorImg} alt={post.author} className="w-full h-full object-contain" />
+                          <img src={post.authorImg} alt={post.author} loading="lazy" className="w-full h-full object-contain" />
                         </div>
                         <p className="font-bold text-blue-950 text-sm">{post.author}</p>
                       </div>

@@ -25,8 +25,15 @@ export default function SiteHeader() {
         <div className="flex justify-between items-center h-20">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0">
-            <img src={logoPaysageCouleur} alt="Direct Colis" className="h-11 w-auto object-contain" />
+          <Link to="/" className="flex items-center shrink-0" aria-label="Direct Colis — Retour à l'accueil">
+            <img
+              src={logoPaysageCouleur}
+              alt="Direct Colis"
+              width="173"
+              height="44"
+              decoding="async"
+              className="h-11 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -53,10 +60,14 @@ export default function SiteHeader() {
           {/* Right */}
           <div className="flex items-center gap-3">
             {/* Phone */}
-            <div className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100">
+            <a
+              href="tel:+221785421733"
+              aria-label="Appeler Direct Colis au +221 78 542 17 33"
+              className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 hover:bg-red-50 hover:border-red-200 transition-colors"
+            >
               <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
               <span className="text-xs">+221 78 542 17 33</span>
-            </div>
+            </a>
 
             {/* Se connecter */}
             <a
@@ -78,6 +89,10 @@ export default function SiteHeader() {
 
             {/* Mobile burger */}
             <button
+              type="button"
+              aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
               className="md:hidden p-2 text-slate-600 hover:text-blue-950 transition-colors"
               onClick={() => setOpen(!open)}
             >
@@ -91,6 +106,7 @@ export default function SiteHeader() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

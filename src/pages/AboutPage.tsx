@@ -198,7 +198,7 @@ export default function AboutPage() {
                       className="absolute top-0 left-0"
                       style={{ width: 'calc(100% / 0.82)', height: 'calc(100% / 0.75)' }}
                     >
-                      <img src={content.image} alt={content.title} className="w-full h-full object-cover" />
+                      <img src={content.image} alt={content.title} loading="lazy" className="w-full h-full object-cover" />
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/25 via-transparent to-transparent pointer-events-none" />
                   </motion.div>
@@ -215,7 +215,7 @@ export default function AboutPage() {
                       className="absolute bottom-0 right-0"
                       style={{ width: 'calc(100% / 0.58)', height: 'calc(100% / 0.48)' }}
                     >
-                      <img src={content.image} alt="" className="w-full h-full object-cover" />
+                      <img src={content.image} alt="" aria-hidden="true" loading="lazy" className="w-full h-full object-cover" />
                     </div>
                   </motion.div>
 

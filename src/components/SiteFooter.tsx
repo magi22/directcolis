@@ -52,7 +52,15 @@ export default function SiteFooter() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-12">
             <div className="sm:col-span-2 md:col-span-1">
               <div className="mb-6">
-                <img src={logoPaysageBlanc} alt="Direct Colis" className="h-12 w-auto object-contain" />
+                <img
+                  src={logoPaysageBlanc}
+                  alt="Direct Colis"
+                  width="192"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-12 w-auto object-contain"
+                />
               </div>
               <p className="text-blue-200/60 text-sm leading-relaxed font-light">
                 {t.footer.tagline}
@@ -62,10 +70,10 @@ export default function SiteFooter() {
             <div>
               <h4 className="text-white font-bold mb-5">{t.footer.solution}</h4>
               <ul className="space-y-3">
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.tracking}</Link></li>
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.proof}</Link></li>
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.enterprise}</Link></li>
-                <li><Link to="/services" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.api}</Link></li>
+                <li><Link to="/services/suivi-livraison" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.tracking}</Link></li>
+                <li><Link to="/services/preuve-livraison" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.proof}</Link></li>
+                <li><Link to="/services/gestion-grands-comptes" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.enterprise}</Link></li>
+                <li><Link to="/services/pilotage-operations" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.api}</Link></li>
               </ul>
             </div>
 
@@ -82,11 +90,15 @@ export default function SiteFooter() {
             <div>
               <h4 className="text-white font-bold mb-5">{t.footer.contactCol}</h4>
               <ul className="space-y-3">
-                <li className="text-blue-200/60 text-sm flex items-center gap-2">
-                  <PhoneCall className="w-4 h-4 shrink-0" /> +221 78 542 17 33
+                <li>
+                  <a href="tel:+221785421733" className="text-blue-200/60 hover:text-white text-sm flex items-center gap-2 transition-colors">
+                    <PhoneCall className="w-4 h-4 shrink-0" /> +221 78 542 17 33
+                  </a>
                 </li>
-                <li className="text-blue-200/60 text-sm flex items-center gap-2">
-                  <Globe className="w-4 h-4 shrink-0" /> contact@directcolis.sn
+                <li>
+                  <a href="mailto:contact@directcolis.sn" className="text-blue-200/60 hover:text-white text-sm flex items-center gap-2 transition-colors">
+                    <Globe className="w-4 h-4 shrink-0" /> contact@directcolis.sn
+                  </a>
                 </li>
                 <li className="text-blue-200/60 text-sm mt-5">
                   <Link to="/contact" className="text-red-400 hover:text-red-300 font-medium transition-colors flex items-center gap-1 group">

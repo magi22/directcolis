@@ -1,20 +1,104 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#dc2626" />
+
+    <!-- Icons / PWA -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="theme-color" content="#dc2626" />
-    <meta name="description" content="Direct Colis — Solution logistique moderne pour le suivi, la gestion et la livraison sécurisée de vos expéditions au Sénégal." />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- SEO primary -->
+    <title>Direct Colis — Livraison & Suivi de colis au Sénégal</title>
+    <meta name="description" content="Direct Colis — Solution logistique moderne pour le suivi en temps réel, la gestion et la livraison sécurisée de vos colis au Sénégal. Dakar, Thiès, Mbour, Saint-Louis." />
+    <meta name="keywords" content="livraison colis Sénégal, logistique Dakar, suivi colis, preuve de livraison, livraison Thiès, livraison Mbour, transporteur Sénégal, coursier Dakar, livraison express Sénégal, Direct Colis" />
+    <meta name="author" content="Direct Colis" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://directcolis.vercel.app/" />
+
+    <!-- Open Graph (Facebook / LinkedIn / WhatsApp) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Direct Colis" />
+    <meta property="og:locale" content="fr_SN" />
+    <meta property="og:url" content="https://directcolis.vercel.app/" />
     <meta property="og:title" content="Direct Colis — Livraison & Suivi de colis au Sénégal" />
     <meta property="og:description" content="Suivi en temps réel, preuve de livraison sécurisée, couverture nationale. La solution logistique de référence au Sénégal." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/favicon.png" />
-    <title>Direct Colis — Livraison & Suivi de colis au Sénégal</title>
+    <meta property="og:image" content="https://directcolis.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Direct Colis — Livraison et suivi de colis au Sénégal" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Direct Colis — Livraison & Suivi de colis au Sénégal" />
+    <meta name="twitter:description" content="Suivi en temps réel, preuve de livraison sécurisée, couverture nationale. La solution logistique de référence au Sénégal." />
+    <meta name="twitter:image" content="https://directcolis.vercel.app/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Direct Colis — Livraison et suivi de colis au Sénégal" />
+
+    <!-- Structured data: LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://directcolis.vercel.app/#organization",
+      "name": "Direct Colis",
+      "description": "Solution logistique moderne pour le suivi en temps réel, la gestion et la livraison sécurisée de colis au Sénégal.",
+      "url": "https://directcolis.vercel.app/",
+      "logo": "https://directcolis.vercel.app/favicon.png",
+      "image": "https://directcolis.vercel.app/og-image.jpg",
+      "telephone": "+221785421733",
+      "email": "contact@directcolis.sn",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dakar",
+        "addressCountry": "SN"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Dakar" },
+        { "@type": "City", "name": "Thiès" },
+        { "@type": "City", "name": "Mbour" },
+        { "@type": "City", "name": "Saint-Louis" },
+        { "@type": "City", "name": "Kaolack" },
+        { "@type": "City", "name": "Ziguinchor" }
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "sameAs": []
+    }
+    </script>
+
+    <!-- Structured data: Organization + website -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://directcolis.vercel.app/",
+      "name": "Direct Colis",
+      "inLanguage": "fr",
+      "publisher": { "@id": "https://directcolis.vercel.app/#organization" }
+    }
+    </script>
+
+    <!-- Remove no-js class as soon as JS runs -->
+    <script>document.documentElement.classList.remove('no-js');</script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <div style="padding: 2rem; font-family: sans-serif; text-align: center;">
+          <h1>Direct Colis</h1>
+          <p>Ce site nécessite JavaScript pour fonctionner correctement. Veuillez l'activer dans votre navigateur.</p>
+          <p>Contact : <a href="tel:+221785421733">+221 78 542 17 33</a> · <a href="mailto:contact@directcolis.sn">contact@directcolis.sn</a></p>
+        </div>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

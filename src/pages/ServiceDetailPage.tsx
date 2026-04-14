@@ -66,7 +66,7 @@ export default function ServiceDetailPage() {
               <article className="min-w-0">
                 {/* Cover image */}
                 <div className="rounded-3xl overflow-hidden shadow-xl aspect-[16/9] bg-slate-100 mb-10">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                  <img src={service.image} alt={service.title} loading="lazy" className="w-full h-full object-cover" />
                 </div>
 
                 {/* Detail paragraphs */}

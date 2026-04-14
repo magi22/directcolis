@@ -36,6 +36,28 @@ button:disabled,
   cursor: not-allowed;
 }
 
+/* Accessibility: respect prefers-reduced-motion. Force all Framer Motion
+   elements visible and disable transitions/animations so content is never
+   hidden behind disabled JS animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fallback: if JavaScript is disabled, ensure Framer Motion elements
+   initialized with opacity: 0 stay visible. */
+.no-js [style*="opacity: 0"],
+.no-js [style*="opacity:0"] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ─── GLOW UTILITIES ──────────────────────────────────────── */
 .glow-red {
   box-shadow: 0 0 20px rgba(220, 38, 38, 0.35), 0 0 60px rgba(220, 38, 38, 0.15);

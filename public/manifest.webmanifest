@@ -1,0 +1,19 @@
+{
+  "name": "Direct Colis — Livraison & Suivi de colis au Sénégal",
+  "short_name": "Direct Colis",
+  "description": "Solution logistique moderne pour le suivi en temps réel, la gestion et la livraison sécurisée de colis au Sénégal.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

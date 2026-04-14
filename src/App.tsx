@@ -161,8 +161,15 @@ export default function App() {
           <div className="flex justify-between items-center h-20">
 
             {/* Logo */}
-            <a href="#accueil" className="flex items-center shrink-0">
-              <img src={logoPaysageCouleur} alt="Direct Colis" className="h-11 w-auto object-contain" />
+            <a href="#accueil" className="flex items-center shrink-0" aria-label="Direct Colis — Retour à l'accueil">
+              <img
+                src={logoPaysageCouleur}
+                alt="Direct Colis"
+                width="173"
+                height="44"
+                decoding="async"
+                className="h-11 w-auto object-contain"
+              />
             </a>
 
             {/* Desktop Nav */}
@@ -189,10 +196,14 @@ export default function App() {
             {/* Right side */}
             <div className="flex items-center gap-3">
               {/* Phone — large screens only */}
-              <div className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100">
+              <a
+                href="tel:+221785421733"
+                aria-label="Appeler Direct Colis au +221 78 542 17 33"
+                className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 hover:bg-red-50 hover:border-red-200 transition-colors"
+              >
                 <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
                 <span className="text-xs">+221 78 542 17 33</span>
-              </div>
+              </a>
 
               {/* Se connecter */}
               <a
@@ -211,6 +222,10 @@ export default function App() {
 
               {/* Mobile burger */}
               <button
+                type="button"
+                aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="home-mobile-nav"
                 className="md:hidden p-2 text-slate-600 hover:text-blue-950 transition-colors"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
@@ -224,6 +239,7 @@ export default function App() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
+              id="home-mobile-nav"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -415,16 +431,20 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: customEase }}
             >
-              <p className="text-slate-500 text-sm font-semibold uppercase tracking-widest text-center mb-3">
+              <label htmlFor="home-tracking-id" className="block text-slate-500 text-sm font-semibold uppercase tracking-widest text-center mb-3">
                 {t.trackBar.title}
-              </p>
+              </label>
               <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.08)] border border-slate-200">
                 <div className="relative flex-1 group">
                   <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                     <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-950 transition-colors" />
                   </div>
                   <input
+                    id="home-tracking-id"
+                    name="trackingId"
                     type="text"
+                    autoComplete="off"
+                    aria-label={t.trackBar.title}
                     className="block w-full pl-14 pr-5 py-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-0 transition-all text-base font-medium border-0"
                     placeholder={t.trackBar.placeholder}
                   />
@@ -465,6 +485,7 @@ export default function App() {
                     <img
                       src={aboutImg}
                       alt="Livraison Sénégal"
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -483,7 +504,9 @@ export default function App() {
                   >
                     <img
                       src={aboutImg}
-                      alt="Livraison Direct Colis"
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -500,7 +523,7 @@ export default function App() {
                   {/* Avatars */}
                   <div className="flex -space-x-3 mb-3">
                     {[testimonial1, testimonial2, testimonial3, testimonial4].map((src, i) => (
-                      <img key={i} className="w-10 h-10 rounded-full border-2 border-red-600 object-cover" src={src} alt="Client" />
+                      <img key={i} loading="lazy" className="w-10 h-10 rounded-full border-2 border-red-600 object-cover" src={src} alt="Client" />
                     ))}
                   </div>
                   {/* Stars */}
@@ -511,7 +534,10 @@ export default function App() {
                   {/* Big stat */}
                   <div className="flex items-center gap-3 mb-5">
                     <span className="text-5xl font-black tracking-tight leading-none">10+</span>
-                    <span className="text-xs leading-snug font-medium opacity-90">Ans<br/>d'Expérience</span>
+                    <span className="text-xs leading-snug font-medium opacity-90" aria-label="Ans d'Expérience">
+                      <span className="block" aria-hidden="true">Ans</span>
+                      <span className="block" aria-hidden="true">d'Expérience</span>
+                    </span>
                   </div>
                   {/* Play */}
                   <button className="flex items-center gap-3 text-sm font-bold hover:opacity-80 transition-opacity group">
@@ -648,6 +674,7 @@ export default function App() {
                       <img
                         src={testimonial1}
                         alt="Amadou Fall"
+                        loading="lazy"
                         className="w-full h-full rounded-full object-cover border-2 border-white shadow"
                       />
                     </div>
@@ -691,11 +718,9 @@ export default function App() {
                   <div className="w-1 h-1 rounded-full bg-red-600"></div>
                 </div>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
-                {t.servicesSection.titleA}
-              </h2>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 leading-tight">
-                {t.servicesSection.titleB}
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                <span className="text-blue-950">{t.servicesSection.titleA}</span>{' '}
+                <span className="text-red-600">{t.servicesSection.titleB}</span>
               </h2>
             </motion.div>
 
@@ -769,11 +794,9 @@ export default function App() {
                 </div>
                 <Car className="w-5 h-5" />
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-950 mb-2 leading-tight">
-                {t.process.titleA}
-              </h2>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 leading-tight">
-                {t.process.titleB}
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                <span className="text-blue-950">{t.process.titleA}</span>{' '}
+                <span className="text-red-600">{t.process.titleB}</span>
               </h2>
             </motion.div>
 
@@ -852,6 +875,7 @@ export default function App() {
                   <img
                     src={numeroImg}
                     alt="Numérotation Direct Colis"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -861,7 +885,7 @@ export default function App() {
         </section>
 
         {/* 7. Section "Pourquoi choisir Direct Colis" — masqué sur mobile */}
-        <section className="hidden md:block py-24 bg-blue-950 text-white relative overflow-hidden bg-grid-dark">
+        <section className="py-16 sm:py-24 bg-blue-950 text-white relative overflow-hidden bg-grid-dark">
           {/* Elegant subtle gradient overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/40 via-blue-950 to-blue-950"></div>
           {/* Neon corner accents */}
@@ -931,7 +955,7 @@ export default function App() {
         </section>
 
         {/* 8. Section fonctionnalités clés — masqué sur mobile */}
-        <section className="hidden md:block py-24 bg-white">
+        <section className="py-16 sm:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial="hidden"
@@ -984,7 +1008,7 @@ export default function App() {
         </section>
 
         {/* 9. Section grands comptes / entreprises — masqué sur mobile */}
-        <section className="hidden md:block py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
+        <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <motion.div
@@ -1125,6 +1149,9 @@ export default function App() {
                     className="border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-blue-950/20 transition-colors duration-300"
                   >
                     <button
+                      type="button"
+                      aria-expanded={openFaqIndex === i}
+                      aria-controls={`faq-answer-${i}`}
                       className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                       onClick={() => toggleFaq(i)}
                     >
@@ -1139,6 +1166,7 @@ export default function App() {
                     <AnimatePresence>
                       {openFaqIndex === i && (
                         <motion.div
+                          id={`faq-answer-${i}`}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -1154,13 +1182,13 @@ export default function App() {
                 ))}
               </motion.div>
 
-              {/* Colonne 2 — masquée sur mobile */}
+              {/* Colonne 2 */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="hidden md:block space-y-3"
+                className="space-y-3 mt-3 md:mt-0"
               >
                 {[
                   {
@@ -1194,6 +1222,9 @@ export default function App() {
                     className="border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-blue-950/20 transition-colors duration-300"
                   >
                     <button
+                      type="button"
+                      aria-expanded={openFaqIndex2 === i}
+                      aria-controls={`faq-answer-2-${i}`}
                       className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                       onClick={() => toggleFaq2(i)}
                     >
@@ -1208,6 +1239,7 @@ export default function App() {
                     <AnimatePresence>
                       {openFaqIndex2 === i && (
                         <motion.div
+                          id={`faq-answer-2-${i}`}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -1227,7 +1259,7 @@ export default function App() {
         </section>
 
         {/* 10.5 Blog & News Section — masqué sur mobile (accessible via /blog) */}
-        <section className="hidden md:block py-24 bg-slate-50 relative overflow-hidden">
+        <section className="py-16 sm:py-24 bg-slate-50 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
               initial="hidden"
@@ -1277,6 +1309,7 @@ export default function App() {
                     <img
                       src={post.image}
                       alt={post.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     {/* Category Badge - top left */}
@@ -1315,7 +1348,7 @@ export default function App() {
                     <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-red-100 bg-white p-0.5 shrink-0">
-                          <img src={post.authorImg} alt={post.author} className="w-full h-full object-contain rounded-full" />
+                          <img src={post.authorImg} alt={post.author} loading="lazy" className="w-full h-full object-contain rounded-full" />
                         </div>
                         <div>
                           <p className="font-bold text-blue-950 text-sm">{post.author}</p>
