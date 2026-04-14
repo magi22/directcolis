@@ -111,12 +111,12 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
       initial={{ opacity: 0, y: 20 }}
       animate={visible ? { opacity: 1, y: 0 } : {}}
       transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="text-center px-6 py-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+      className="text-center px-2 sm:px-4 py-4 sm:py-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow min-w-0"
     >
-      <p className="text-3xl font-black text-blue-950 tabular-nums">
+      <p className="text-lg sm:text-2xl lg:text-3xl font-black text-blue-950 tabular-nums whitespace-nowrap overflow-hidden">
         {count.toLocaleString('fr-FR')}{suffix}
       </p>
-      <p className="text-xs text-slate-500 font-medium mt-1 uppercase tracking-wider">{label}</p>
+      <p className="text-[10px] sm:text-xs text-slate-500 font-medium mt-1 uppercase tracking-wider leading-tight">{label}</p>
     </motion.div>
   );
 }
@@ -170,8 +170,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden">
-      {/* Scan line futuriste (subtil) */}
-      <div className="scan-line" aria-hidden="true" />
+      {/* Scan line futuriste (subtil) — masqué sur mobile */}
+      <div className="scan-line hidden md:block" aria-hidden="true" />
 
       {/* Chatbot flottant */}
       <Chatbot />
@@ -287,7 +287,7 @@ export default function App() {
 
       <main className="pt-20">
         {/* 2. Hero */}
-        <section id="accueil" className="relative pt-20 pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
+        <section id="accueil" className="relative pt-10 pb-16 sm:pt-20 sm:pb-24 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50/50 to-white bg-grid">
           <div className="hidden md:block"><Particles /></div>
           {/* Background orbs - hidden on small mobile for perf */}
           <div className="hidden sm:block absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-blue-50/60 rounded-full blur-3xl -z-10"></div>
@@ -345,8 +345,8 @@ export default function App() {
                 </motion.div>
               </motion.div>
 
-              {/* Hero Visual / Mockup - Elegant Version */}
-              <motion.div 
+              {/* Hero Visual / Mockup */}
+              <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: customEase, delay: 0.2 }}
@@ -360,10 +360,10 @@ export default function App() {
                   transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                   className="bg-white border border-slate-100 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-8 relative overflow-hidden"
                 >
-                  <div className="flex items-center justify-between mb-6 pb-5 border-b border-slate-100">
+                  <div className="flex items-center justify-between gap-2 mb-4 sm:mb-6 pb-4 sm:pb-5 border-b border-slate-100">
                     <div>
-                      <p className="text-sm text-slate-500 font-medium mb-1">Colis #DC-84729</p>
-                      <h3 className="text-xl font-bold text-blue-950">En cours de livraison</h3>
+                      <p className="text-xs sm:text-sm text-slate-500 font-medium mb-1">Colis #DC-84729</p>
+                      <h3 className="text-base sm:text-xl font-bold text-blue-950">En cours de livraison</h3>
                     </div>
                     <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold uppercase tracking-wider">
                       <span className="relative flex h-2 w-2">
@@ -403,7 +403,7 @@ export default function App() {
                       <motion.div animate={{ right: ['-10%', '110%'] }} transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }} className="absolute top-0 bottom-0 w-0.5 bg-red-500 shadow-[0_0_10px_2px_rgba(239,68,68,0.5)] z-20" />
                       
                       <div className="absolute inset-0 bg-blue-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <QrCode className="h-24 w-24 text-blue-950 opacity-80 mb-4" />
+                      <QrCode className="h-16 w-16 sm:h-24 sm:w-24 text-blue-950 opacity-80 mb-4" />
                       <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-500 bg-white px-3 py-1.5 rounded shadow-sm border border-slate-200">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
                         SCAN
@@ -465,7 +465,7 @@ export default function App() {
         </section>
 
         {/* 2.5 About Us / Expertise — redesigned */}
-        <section id="a-propos" className="py-28 bg-white overflow-hidden relative">
+        <section id="a-propos" className="py-16 sm:py-24 lg:py-28 bg-white overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
@@ -696,7 +696,7 @@ export default function App() {
         </section>
 
         {/* 5. Section services */}
-        <section id="services" className="py-24 bg-slate-50/30">
+        <section id="services" className="py-16 sm:py-24 bg-slate-50/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial="hidden"
@@ -726,7 +726,7 @@ export default function App() {
               </h2>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -737,32 +737,38 @@ export default function App() {
                 {
                   icon: <Search className="h-8 w-8 text-white" />,
                   title: "Suivi de colis",
-                  desc: "Un accès simple au statut, à l'historique et aux informations de livraison en temps réel pour vous et vos clients."
+                  desc: "Un accès simple au statut, à l'historique et aux informations de livraison en temps réel pour vous et vos clients.",
+                  mobile: true,
                 },
                 {
                   icon: <Truck className="h-8 w-8 text-white" />,
                   title: "Collecte & Acheminement",
-                  desc: "Une gestion claire du colis, de la prise en charge jusqu'au dernier kilomètre avec une flotte adaptée au terrain."
+                  desc: "Une gestion claire du colis, de la prise en charge jusqu'au dernier kilomètre avec une flotte adaptée au terrain.",
+                  mobile: true,
                 },
                 {
                   icon: <FileSignature className="h-8 w-8 text-white" />,
                   title: "Preuve de livraison",
-                  desc: "Validation par OTP, photo, signature et géolocalisation pour sécuriser chaque remise au destinataire."
+                  desc: "Validation par OTP, photo, signature et géolocalisation pour sécuriser chaque remise au destinataire.",
+                  mobile: true,
                 },
                 {
                   icon: <AlertTriangle className="h-8 w-8 text-white" />,
                   title: "Gestion des échecs",
-                  desc: "Motif détaillé, photo justificative, retour entrepôt sécurisé et reprogrammation fluide des tentatives."
+                  desc: "Motif détaillé, photo justificative, retour entrepôt sécurisé et reprogrammation fluide des tentatives.",
+                  mobile: false,
                 },
                 {
                   icon: <Users className="h-8 w-8 text-white" />,
                   title: "Gestion grands comptes",
-                  desc: "Import Excel/CSV, double identifiant, génération d'étiquettes QR et reporting complet pour les volumes importants."
+                  desc: "Import Excel/CSV, double identifiant, génération d'étiquettes QR et reporting complet pour les volumes importants.",
+                  mobile: false,
                 },
                 {
                   icon: <LayoutDashboard className="h-8 w-8 text-white" />,
                   title: "Pilotage des opérations",
-                  desc: "Visibilité totale sur les missions en cours, l'activité des livreurs et les performances globales de livraison."
+                  desc: "Visibilité totale sur les missions en cours, l'activité des livreurs et les performances globales de livraison.",
+                  mobile: false,
                 }
               ].map((service, i) => (
                 <motion.div
@@ -770,7 +776,7 @@ export default function App() {
                   variants={fadeInUp}
                   whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border"
+                  className={`${service.mobile ? '' : 'hidden md:flex'} bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] transition-all duration-300 px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 pt-12 sm:pt-14 relative text-center flex flex-col items-center group gradient-border`}
                   style={{ transformStyle: 'preserve-3d', perspective: 800 }}
                 >
                   {/* Dark gradient overlay on hover */}
@@ -790,7 +796,7 @@ export default function App() {
         </section>
 
         {/* 6. Section "Comment ça marche" */}
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <section className="py-16 sm:py-24 bg-slate-50 relative overflow-hidden">
           {/* Subtle dot pattern background */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '30px 30px' }}></div>
 
@@ -936,8 +942,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* 7. Section "Pourquoi choisir Direct Colis" */}
-        <section className="py-24 bg-blue-950 text-white relative overflow-hidden bg-grid-dark">
+        {/* 7. Section "Pourquoi choisir Direct Colis" — masqué sur mobile */}
+        <section className="hidden md:block py-24 bg-blue-950 text-white relative overflow-hidden bg-grid-dark">
           {/* Elegant subtle gradient overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/40 via-blue-950 to-blue-950"></div>
           {/* Neon corner accents */}
@@ -1006,8 +1012,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* 8. Section fonctionnalités clés */}
-        <section className="py-24 bg-white">
+        {/* 8. Section fonctionnalités clés — masqué sur mobile */}
+        <section className="hidden md:block py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial="hidden"
@@ -1059,8 +1065,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* 9. Section grands comptes / entreprises */}
-        <section className="py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
+        {/* 9. Section grands comptes / entreprises — masqué sur mobile */}
+        <section className="hidden md:block py-24 bg-slate-50 border-y border-slate-100 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <motion.div
@@ -1148,7 +1154,7 @@ export default function App() {
         </section>
 
         {/* 10. FAQ */}
-        <section id="faq" className="py-24 bg-white">
+        <section id="faq" className="py-16 sm:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial="hidden"
@@ -1230,13 +1236,13 @@ export default function App() {
                 ))}
               </motion.div>
 
-              {/* Colonne 2 */}
+              {/* Colonne 2 — masquée sur mobile */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="space-y-3"
+                className="hidden md:block space-y-3"
               >
                 {[
                   {
@@ -1302,8 +1308,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* 10.5 Blog & News Section */}
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
+        {/* 10.5 Blog & News Section — masqué sur mobile (accessible via /blog) */}
+        <section className="hidden md:block py-24 bg-slate-50 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div 
               initial="hidden"
@@ -1435,8 +1441,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* 10.8 Live ticker */}
-        <div className="bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
+        {/* 10.8 Live ticker — masqué sur mobile */}
+        <div className="hidden md:block bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
           <motion.div
             animate={{ x: ['0%', '-50%'] }}
             transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
@@ -1470,7 +1476,7 @@ export default function App() {
         </div>
 
         {/* 11. CTA final */}
-        <section className="py-24 bg-blue-950 relative overflow-hidden bg-grid-dark">
+        <section className="py-16 sm:py-24 bg-blue-950 relative overflow-hidden bg-grid-dark">
           {/* Elegant subtle background */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/50 via-blue-950 to-blue-950"></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
