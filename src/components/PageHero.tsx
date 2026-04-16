@@ -27,9 +27,19 @@ const stagger = {
 export default function PageHero({ badge, badgeIcon: BadgeIcon = Sparkles, title, subtitle, children }: PageHeroProps) {
   return (
     <section className="relative py-16 sm:py-24 lg:py-28 bg-[#0a1128] overflow-hidden">
-      {/* Couche 1 — dégradés radiaux chauds */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(220,38,38,0.28),_transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(30,58,138,0.4),_transparent_55%)]" />
+      {/* Couche 1 — dégradés radiaux animés */}
+      <motion.div
+        aria-hidden
+        animate={{ opacity: [0.6, 1, 0.6], scale: [1, 1.12, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(220,38,38,0.32),_transparent_60%)] pointer-events-none"
+      />
+      <motion.div
+        aria-hidden
+        animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.08, 1] }}
+        transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(30,58,138,0.45),_transparent_55%)] pointer-events-none"
+      />
 
       {/* Grille de fond animée */}
       <div

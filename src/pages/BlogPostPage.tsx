@@ -6,6 +6,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { blogPosts } from '../data/blogPosts';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -18,6 +19,9 @@ export default function BlogPostPage() {
   const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) return <Navigate to="/blog" replace />;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useSEO({ title: `${post.title} — Direct Colis`, canonical: `/blog/${post.slug}` });
 
   const otherPosts = blogPosts.filter(p => p.slug !== slug);
 
@@ -39,7 +43,7 @@ export default function BlogPostPage() {
               <ChevronRight className="w-3 h-3" />
               <Link to="/blog" className="hover:text-white transition-colors">{t.common.blog}</Link>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-red-300 truncate">{post.category}</span>
+              <span className="text-red-300 truncate">{post.title}</span>
             </motion.nav>
 
             <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
@@ -111,7 +115,7 @@ export default function BlogPostPage() {
                 </div>
 
                 {/* CTA */}
-                <div className="mt-10 bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
+                <div className="mt-10 bg-gradient-to-br from-blue-950 via-blue-900 to-red-950 animated-gradient rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-red-600/20 rounded-full blur-3xl" />
                   <div className="relative">
                     <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-4">{post.cta.title}</h3>

@@ -7,6 +7,7 @@ import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { blogPosts } from '../data/blogPosts';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -15,6 +16,7 @@ const fadeInUp = {
 
 export default function BlogPage() {
   const { t } = useLang();
+  useSEO({ title: 'Actualités & Conseils — Direct Colis', canonical: '/blog' });
   const [featured, ...rest] = blogPosts;
 
   return (

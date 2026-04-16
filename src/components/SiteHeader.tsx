@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { PhoneCall, Menu, X, User } from 'lucide-react';
-import logoPaysageCouleur from '../assets/images/logo-paysage-couleur.png';
+import logoPaysageCouleur from '../assets/svg/Direct colis_Plan de travail 1 copie.svg';
 import { useLang } from '../i18n/LanguageContext';
 
 export default function SiteHeader() {

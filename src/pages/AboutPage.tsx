@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 import aboutImg from '../assets/images/le3.jpg';
 import blog2 from '../assets/images/2.jpg';
 import blog3 from '../assets/images/3.jpg';
+import logoComprimerBlanc from '../assets/svg/Direct colis-06.svg';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -101,6 +103,7 @@ const statValues = ['1M+', '98%', '50+', '10+'];
 
 export default function AboutPage() {
   const { t } = useLang();
+  useSEO({ title: 'À propos — Direct Colis', canonical: '/a-propos' });
   const [activeTab, setActiveTab] = useState('qui');
   const [testimonialIdx, setTestimonialIdx] = useState(0);
 
@@ -215,7 +218,7 @@ export default function AboutPage() {
                       className="absolute bottom-0 right-0"
                       style={{ width: 'calc(100% / 0.58)', height: 'calc(100% / 0.48)' }}
                     >
-                      <img src={content.image} alt="" aria-hidden="true" loading="lazy" className="w-full h-full object-cover" />
+                      <img src={content.image} alt="" role="presentation" loading="lazy" className="w-full h-full object-cover" />
                     </div>
                   </motion.div>
 
@@ -230,16 +233,19 @@ export default function AboutPage() {
                     <span className="text-sm font-bold whitespace-nowrap">{content.badge}</span>
                   </motion.div>
 
-                  {/* Rotating badge */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                    className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full border-2 border-dashed border-red-600/40 z-30 hidden md:flex items-center justify-center bg-white shadow-xl"
-                  >
-                    <div className="w-14 h-14 rounded-full bg-blue-950 flex items-center justify-center">
-                      <Truck className="w-6 h-6 text-white" />
+                  {/* Rotating badge — logo Direct Colis */}
+                  <div className="absolute -bottom-4 -left-4 w-24 h-24 z-30 hidden md:flex items-center justify-center">
+                    {/* Anneau pointillé rotatif */}
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                      className="absolute inset-0 rounded-full border-2 border-dashed border-red-600/40"
+                    />
+                    {/* Centre fixe avec logo */}
+                    <div className="w-16 h-16 rounded-full bg-blue-950 flex items-center justify-center shadow-xl">
+                      <img src={logoComprimerBlanc} alt="Direct Colis" className="w-10 h-10 object-contain" />
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Text side */}
@@ -359,7 +365,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 relative overflow-hidden">
+        <section className="py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-red-900 animated-gradient relative overflow-hidden">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}

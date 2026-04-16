@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { PhoneCall, Globe, ArrowRight, Instagram, Twitter } from 'lucide-react';
-import logoPaysageBlanc from '../assets/images/logo-paysage-blanc.png';
+import logoPaysageBlanc from '../assets/svg/Direct colis_Plan de travail 1.svg';
 import { useLang } from '../i18n/LanguageContext';
 
 const ticker = [
@@ -60,7 +60,13 @@ export default function SiteFooter() {
                   loading="lazy"
                   decoding="async"
                   className="h-12 w-auto object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = 'block';
+                  }}
                 />
+                <span className="hidden text-white font-extrabold text-xl tracking-tight">Direct Colis</span>
               </div>
               <p className="text-blue-200/60 text-sm leading-relaxed font-light">
                 {t.footer.tagline}
@@ -70,10 +76,10 @@ export default function SiteFooter() {
             <div>
               <h4 className="text-white font-bold mb-5">{t.footer.solution}</h4>
               <ul className="space-y-3">
-                <li><Link to="/services/suivi-livraison" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.tracking}</Link></li>
-                <li><Link to="/services/preuve-livraison" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.proof}</Link></li>
-                <li><Link to="/services/gestion-grands-comptes" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.enterprise}</Link></li>
-                <li><Link to="/services/pilotage-operations" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.api}</Link></li>
+                <li><Link to="/services/livraison-b2b" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.tracking}</Link></li>
+                <li><Link to="/services/mise-a-disposition" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.proof}</Link></li>
+                <li><Link to="/services/entreposage-stockage" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.enterprise}</Link></li>
+                <li><Link to="/services/transport-aibd" className="text-blue-200/60 hover:text-white text-sm transition-colors">{t.footer.links.api}</Link></li>
               </ul>
             </div>
 

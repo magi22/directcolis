@@ -6,6 +6,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import { services } from '../data/services';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -17,6 +18,9 @@ export default function ServiceDetailPage() {
   const { slug } = useParams();
   const service = services.find(s => s.slug === slug);
   if (!service) return <Navigate to="/services" replace />;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useSEO({ title: `${service.shortTitle} — Direct Colis`, canonical: `/services/${service.slug}` });
 
   const others = services.filter(s => s.slug !== slug);
   const Icon = service.icon;
@@ -114,7 +118,7 @@ export default function ServiceDetailPage() {
                 </div>
 
                 {/* CTA */}
-                <div className="bg-gradient-to-br from-blue-950 to-blue-900 rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
+                <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-red-950 animated-gradient rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-red-600/20 rounded-full blur-3xl" />
                   <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-500/15 rounded-full blur-3xl" />
                   <div className="relative">
@@ -168,7 +172,7 @@ export default function ServiceDetailPage() {
                   </div>
 
                   {/* Contact block */}
-                  <div className="bg-gradient-to-br from-blue-950 to-blue-900 text-white rounded-2xl p-6 relative overflow-hidden">
+                  <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-red-950 animated-gradient text-white rounded-2xl p-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/20 rounded-full blur-2xl" />
                     <div className="relative">
                       <h3 className="font-extrabold text-lg mb-2">{t.servicesSection.sidebarContactTitle}</h3>

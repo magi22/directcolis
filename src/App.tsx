@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import logoPaysageCouleur from './assets/images/logo-paysage-couleur.png';
-import logoPaysageBlanc from './assets/images/logo-paysage-blanc.png';
+import logoPaysageCouleur from './assets/svg/Direct colis_Plan de travail 1 copie.svg';
+import logoPaysageBlanc from './assets/svg/Direct colis_Plan de travail 1.svg';
 import aboutImg from './assets/images/le3.jpg';
 import testimonial1 from './assets/images/testimonial 1.jpg';
 import testimonial2 from './assets/images/testimonial 2.jpg';
@@ -22,7 +22,7 @@ import {
   PhoneCall, PackageOpen, Calendar, MessageSquare, Bike, Car,
   Instagram, Twitter, User
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
 import { useLang } from './i18n/LanguageContext';
@@ -135,6 +135,7 @@ function Particles() {
 
 export default function App() {
   const { lang, setLang, t } = useLang();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [openFaqIndex2, setOpenFaqIndex2] = useState<number | null>(null);
@@ -148,7 +149,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white font-sans text-slate-900">
       {/* Scan line futuriste (subtil) — masqué sur mobile */}
       <div className="scan-line hidden md:block" aria-hidden="true" />
 
@@ -434,7 +435,15 @@ export default function App() {
               <label htmlFor="home-tracking-id" className="block text-slate-500 text-sm font-semibold uppercase tracking-widest text-center mb-3">
                 {t.trackBar.title}
               </label>
-              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.08)] border border-slate-200">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const fd = new FormData(e.currentTarget);
+                  const id = (fd.get('trackingId') as string)?.trim();
+                  navigate(id ? `/suivi?id=${encodeURIComponent(id)}` : '/suivi');
+                }}
+                className="flex flex-col sm:flex-row gap-0 w-full rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.08)] border border-slate-200"
+              >
                 <div className="relative flex-1 group">
                   <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                     <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-950 transition-colors" />
@@ -540,8 +549,8 @@ export default function App() {
                     </span>
                   </div>
                   {/* Play */}
-                  <button className="flex items-center gap-3 text-sm font-bold hover:opacity-80 transition-opacity group">
-                    <div className="w-10 h-10 bg-white text-red-600 rounded-full flex items-center justify-center shadow group-hover:scale-110 transition-transform">
+                  <button disabled aria-disabled="true" className="flex items-center gap-3 text-sm font-bold opacity-50 cursor-not-allowed">
+                    <div className="w-10 h-10 bg-white text-red-600 rounded-full flex items-center justify-center shadow">
                       <Play className="w-4 h-4 ml-0.5 fill-current" />
                     </div>
                     Voir la vidéo
@@ -701,7 +710,7 @@ export default function App() {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="text-center mb-24"
             >
@@ -728,7 +737,7 @@ export default function App() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
             >
               {services.map((service, i) => {
@@ -769,7 +778,7 @@ export default function App() {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="text-center mb-20"
             >
@@ -805,7 +814,7 @@ export default function App() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 relative z-10"
               >
                 {t.process.steps.map((step, i) => {
@@ -846,7 +855,7 @@ export default function App() {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="mt-12 md:mt-24 bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-center shadow-2xl"
             >
@@ -896,7 +905,7 @@ export default function App() {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="max-w-3xl mb-16"
             >
@@ -908,7 +917,7 @@ export default function App() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-x-10 md:gap-y-10 lg:gap-x-12 lg:gap-y-12"
             >
               {[
@@ -960,7 +969,7 @@ export default function App() {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="text-center max-w-3xl mx-auto mb-16"
             >
@@ -971,7 +980,7 @@ export default function App() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {[
@@ -1014,7 +1023,7 @@ export default function App() {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 variants={staggerContainer}
               >
                 <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 leading-tight tracking-tight">
@@ -1044,7 +1053,7 @@ export default function App() {
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ duration: 0.8, ease: customEase }}
                 className="relative"
               >
@@ -1101,7 +1110,7 @@ export default function App() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="text-center mb-16"
             >
@@ -1114,7 +1123,7 @@ export default function App() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 className="space-y-3"
               >
                 {[
@@ -1187,7 +1196,7 @@ export default function App() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, amount: 0.05 }}
                 className="space-y-3 mt-3 md:mt-0"
               >
                 {[
@@ -1264,7 +1273,7 @@ export default function App() {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
               className="text-center max-w-3xl mx-auto mb-16"
             >
@@ -1369,7 +1378,7 @@ export default function App() {
         {/* 10.8 Live ticker — masqué sur mobile */}
         <div className="hidden md:block bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
           <motion.div
-            animate={{ x: ['0%', '-50%'] }}
+            animate={{ x: ['-50%', '0%'] }}
             transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
             className="flex items-center gap-12 whitespace-nowrap"
           >
@@ -1409,7 +1418,7 @@ export default function App() {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, amount: 0.05 }}
             variants={staggerContainer}
             className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center"
           >

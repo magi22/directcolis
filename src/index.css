@@ -10,8 +10,14 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+/* Prevent browser default list-style from bleeding onto <p> elements */
+p {
+  list-style: none;
 }
 
 /* Restore native pointer cursor on clickable elements.
@@ -81,6 +87,16 @@ button:disabled,
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── ANIMATED GRADIENT BACKGROUND ───────────────────────── */
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+.animated-gradient {
+  background-size: 300% 300%;
+  animation: gradient-flow 14s ease infinite;
 }
 
 /* ─── ANIMATED GRADIENT BORDER ────────────────────────────── */

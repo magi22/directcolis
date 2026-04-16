@@ -5,6 +5,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
@@ -13,6 +14,7 @@ const fadeInUp = {
 
 export default function ContactPage() {
   const { t } = useLang();
+  useSEO({ title: 'Contactez-nous — Direct Colis', canonical: '/contact' });
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
 
@@ -67,17 +69,17 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.name} *</label>
+                        <label htmlFor="contact-name" className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.name} *</label>
                         <input
-                          name="name" required value={form.name} onChange={handleChange}
+                          id="contact-name" name="name" required value={form.name} onChange={handleChange}
                           placeholder={t.contactPage.labels.namePlaceholder}
                           className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-400 bg-slate-50 text-slate-800 placeholder-slate-400"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.email} *</label>
+                        <label htmlFor="contact-email" className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.email} *</label>
                         <input
-                          name="email" type="email" required value={form.email} onChange={handleChange}
+                          id="contact-email" name="email" type="email" required value={form.email} onChange={handleChange}
                           placeholder={t.contactPage.labels.emailPlaceholder}
                           className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-400 bg-slate-50 text-slate-800 placeholder-slate-400"
                         />
@@ -86,17 +88,17 @@ export default function ContactPage() {
 
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.phone}</label>
+                        <label htmlFor="contact-phone" className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.phone}</label>
                         <input
-                          name="phone" value={form.phone} onChange={handleChange}
+                          id="contact-phone" name="phone" value={form.phone} onChange={handleChange}
                           placeholder={t.contactPage.labels.phonePlaceholder}
                           className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-400 bg-slate-50 text-slate-800 placeholder-slate-400"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.subject} *</label>
+                        <label htmlFor="contact-subject" className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.subject} *</label>
                         <select
-                          name="subject" required value={form.subject} onChange={handleChange}
+                          id="contact-subject" name="subject" required value={form.subject} onChange={handleChange}
                           className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-400 bg-slate-50 text-slate-800"
                         >
                           <option value="">{t.contactPage.labels.subjectChoose}</option>
@@ -110,9 +112,9 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.message} *</label>
+                      <label htmlFor="contact-message" className="block text-sm font-semibold text-slate-700 mb-2">{t.contactPage.labels.message} *</label>
                       <textarea
-                        name="message" required value={form.message} onChange={handleChange}
+                        id="contact-message" name="message" required value={form.message} onChange={handleChange}
                         rows={5} placeholder={t.contactPage.labels.messagePlaceholder}
                         className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-400 bg-slate-50 text-slate-800 placeholder-slate-400 resize-none"
                       />

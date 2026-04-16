@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
-  QrCode, ShieldCheck, Navigation, Camera, CheckCircle, ArrowRight,
-  Package, Clock, RefreshCcw, FileSpreadsheet, Printer, BarChart3, Sparkles, Zap, Users
+  ShieldCheck, Navigation, CheckCircle, ArrowRight,
+  Clock, RefreshCcw, FileSpreadsheet, BarChart3, Sparkles, Zap, Users,
+  Eye, MapPin, Lock, Truck, Package, Globe
 } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { services } from '../data/services';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -21,22 +23,46 @@ const stagger = {
 };
 
 const fonctionnalites = [
-  { icon: QrCode, label: 'QR Code unique' },
-  { icon: ShieldCheck, label: 'OTP de validation' },
-  { icon: Navigation, label: 'Suivi GPS' },
-  { icon: Camera, label: 'Preuve visuelle' },
-  { icon: Clock, label: 'Historique étapes' },
-  { icon: RefreshCcw, label: 'Retour entrepôt' },
-  { icon: FileSpreadsheet, label: 'Import CSV/Excel' },
-  { icon: Printer, label: 'Étiquettes auto' },
-  { icon: BarChart3, label: 'Reporting complet' },
-  { icon: Package, label: 'Double identifiant' },
-  { icon: CheckCircle, label: 'Preuve livraison' },
-  { icon: Users, label: 'Multi-utilisateurs' },
+  { icon: Navigation, label: 'Suivi des livraisons' },
+  { icon: CheckCircle, label: 'Preuve de livraison numérique' },
+  { icon: ShieldCheck, label: 'Validation OTP' },
+  { icon: Clock, label: 'Historique des étapes' },
+  { icon: Package, label: 'Traçabilité des missions' },
+  { icon: RefreshCcw, label: 'Gestion des retours' },
+  { icon: FileSpreadsheet, label: 'Import CSV / Excel' },
+  { icon: BarChart3, label: 'Reporting opérationnel' },
+  { icon: Users, label: 'Accès multi-utilisateurs' },
+  { icon: Eye, label: 'Visibilité client' },
+  { icon: MapPin, label: 'Suivi terrain' },
+  { icon: Lock, label: 'Remise sécurisée' },
+];
+
+const pourquoi = [
+  {
+    icon: Truck,
+    title: 'Une logistique pensée pour le terrain',
+    desc: 'Nos services sont conçus pour répondre aux réalités opérationnelles des entreprises, avec une exécution claire et structurée.',
+  },
+  {
+    icon: Users,
+    title: 'Des équipes et moyens adaptés',
+    desc: 'Livreurs, chauffeurs, flotte, stockage et coordination : nous mettons à disposition les ressources nécessaires selon vos besoins.',
+  },
+  {
+    icon: Eye,
+    title: 'Plus de visibilité sur vos opérations',
+    desc: 'Suivi, preuve de livraison et traçabilité viennent renforcer la qualité du service et la confiance à chaque étape.',
+  },
+  {
+    icon: Globe,
+    title: 'Une offre flexible selon votre activité',
+    desc: 'Livraison, stockage, mise à disposition, mobilité, aéroportuaire ou restauration : chaque besoin trouve une réponse adaptée.',
+  },
 ];
 
 export default function ServicesPage() {
   const { t } = useLang();
+  useSEO({ title: 'Nos services logistiques — Direct Colis', canonical: '/services' });
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <SiteHeader />
@@ -50,10 +76,10 @@ export default function ServicesPage() {
           {/* Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
             {[
-              { label: 'Traçabilité', icon: Navigation },
-              { label: 'Sécurité', icon: ShieldCheck },
-              { label: 'Rapidité', icon: Zap },
-              { label: 'Fiabilité', icon: CheckCircle },
+              { label: 'Livraison B2B', icon: Truck },
+              { label: 'Entreposage', icon: Navigation },
+              { label: 'Réactivité', icon: Zap },
+              { label: 'Traçabilité', icon: CheckCircle },
             ].map((tag, i) => {
               const Icon = tag.icon;
               return (
@@ -235,8 +261,40 @@ export default function ServicesPage() {
           </div>
         </section>
 
+        {/* Pourquoi section */}
+        <section className="py-16 sm:py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-10 sm:mb-14">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 mb-3">
+                Pourquoi choisir <span className="text-red-600">Direct Colis ?</span>
+              </h2>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {pourquoi.map(({ icon: Icon, title, desc }, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeInUp}
+                  className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-red-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-red-50 group-hover:bg-red-600 flex items-center justify-center mb-4 transition-colors duration-300">
+                    <Icon className="w-6 h-6 text-red-600 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-base font-extrabold text-blue-950 mb-2 leading-tight">{title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
         {/* CTA */}
-        <section className="py-16 sm:py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-red-950 relative overflow-hidden">
+        <section className="py-16 sm:py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-red-950 animated-gradient relative overflow-hidden">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
@@ -247,9 +305,14 @@ export default function ServicesPage() {
               {t.servicesSection.ctaTitle} <span className="text-red-400">{t.servicesSection.ctaTitleHighlight}</span> {t.servicesSection.ctaTitleEnd}
             </motion.h2>
             <p className="text-blue-100/70 mb-8 text-base sm:text-lg">{t.servicesSection.ctaSubtitle}</p>
-            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-2xl shadow-red-600/40">
-              {t.common.requestDemo} <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-2xl shadow-red-600/40">
+                Demander un devis <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 text-white font-bold rounded-xl transition-all duration-300 backdrop-blur-md">
+                Nous contacter
+              </Link>
+            </div>
           </div>
         </section>
       </main>

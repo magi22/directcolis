@@ -1,7 +1,7 @@
-import blog1 from '../assets/images/1.jpg';
-import blog2 from '../assets/images/2.jpg';
-import blog3 from '../assets/images/3.jpg';
-import logoComprimerCouleur from '../assets/images/logo-comprimer-couleur.png';
+import blog1 from '../assets/images/blog 1.png';
+import blog2 from '../assets/images/blog 2.png';
+import blog3 from '../assets/images/blog 3.png';
+import logoComprimerCouleur from '../assets/svg/Direct colis-02.svg';
 
 export type BlogSection = {
   heading: string;
@@ -32,182 +32,164 @@ const AUTHOR = 'Équipe Direct Colis';
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'comment-direct-colis-suit-un-colis',
+    slug: 'optimiser-livraisons-b2b-dakar',
     image: blog1,
-    category: 'Workflow',
+    category: 'Livraison B2B',
     date: '12 février 2026',
-    title: 'Comment Direct Colis suit un colis de la création à la livraison finale',
+    title: 'Comment optimiser vos livraisons B2B et dernier kilomètre à Dakar',
     excerpt:
-      "Création, assignation, collecte, entrepôt, sortie, livraison, preuve : découvrez comment chaque colis traverse la plateforme Direct Colis, étape par étape.",
+      "Collecte, acheminement, traçabilité, preuve de remise : les clés pour structurer une logistique B2B fiable et efficace dans la région de Dakar.",
     author: AUTHOR,
     authorImg: logoComprimerCouleur,
     readTime: '6 min',
-    tags: ['Workflow', 'Tracking', 'QR Code'],
+    tags: ['Livraison B2B', 'Dernier kilomètre', 'Dakar'],
     intro:
-      "Chez Direct Colis, chaque colis suit un parcours clair et structuré, conçu pour laisser le moins de place possible à l'improvisation. De la création de l'envoi jusqu'à la preuve de livraison, chaque étape est tracée, horodatée et intégrée dans un workflow cohérent. Voici comment ça fonctionne concrètement.",
+      "La livraison B2B en milieu urbain dense comme Dakar pose des défis concrets : trafic imprévisible, adresses difficiles à localiser, clients exigeants sur les délais et la traçabilité. Pourtant, avec une organisation solide et les bons outils, il est possible de transformer cette contrainte en avantage compétitif.",
     sections: [
       {
-        heading: "Étape 1 — Création et assignation du colis",
+        heading: "Planifier la collecte pour gagner du temps dès le départ",
         paragraphs: [
-          "Tout démarre par la création du colis dans la plateforme. Un colis peut être créé manuellement par le client, ou importé en masse via un fichier Excel ou CSV pour les grands comptes. À ce moment-là, chaque colis reçoit un identifiant unique et un QR code associé.",
-          "L'assignation au livreur prend en compte la disponibilité, la zone géographique et la capacité du véhicule. Une règle métier bloque même automatiquement un envoi si le poids n'est pas compatible avec le type de véhicule (par exemple, un colis de plus de 5 kg ne peut pas partir en scooter).",
+          "L'optimisation d'une tournée de livraison commence bien avant que le livreur monte sur son véhicule. Une collecte bien planifiée, avec des créneaux définis et des colis déjà prêts à l'enlèvement, permet de gagner un temps précieux et de réduire les allers-retours inutiles.",
+          "Chez Direct Colis, nous travaillons avec nos clients B2B pour définir des fenêtres de collecte adaptées à leurs rythmes de production ou d'expédition. Cette coordination en amont est souvent ce qui fait la différence entre une journée fluide et une journée chaotique.",
         ],
       },
       {
-        heading: "Étape 2 — Collecte et scan d'entrée",
+        heading: "Adapter les véhicules aux typologies de colis",
         paragraphs: [
-          "Lors de la collecte, le livreur scanne le QR code du colis. Ce scan fait passer le colis au statut « collecté » et crée une trace horodatée dans l'historique. Plus besoin de se baser sur des déclarations orales : chaque prise en charge est confirmée techniquement.",
+          "À Dakar, un scooter peut être plus efficace qu'un camion pour naviguer en centre-ville — mais il ne peut pas transporter tous les types de colis. La clé est d'affecter le bon véhicule au bon envoi dès l'assignation.",
+          "Notre système applique automatiquement des règles métier : en dessous d'un certain poids, les envois sont assignés à des deux-roues ; au-delà, des véhicules adaptés prennent le relais. Cela élimine les erreurs d'attribution et garantit que chaque colis arrive en bon état.",
         ],
       },
       {
-        heading: "Étape 3 — Entrée en entrepôt et tri",
+        heading: "Le suivi en temps réel comme outil de relation client",
         paragraphs: [
-          "Le colis est ensuite scanné à son arrivée en entrepôt. Il peut être trié, regroupé avec d'autres envois de la même zone, puis préparé pour la sortie. L'équipe opérationnelle a à tout moment une vue claire des colis en attente de livraison, triés par priorité ou par destination.",
+          "Vos clients B2B ne veulent pas appeler votre service client pour savoir où est leur livraison. Ils veulent une visibilité immédiate, sans effort. Un système de suivi en temps réel, avec notifications aux étapes clés, répond exactement à ce besoin.",
+          "Direct Colis active le suivi GPS au moment où le colis part pour le dernier kilomètre. Le client peut voir l'avancement en temps réel et anticiper la réception. Ce niveau de transparence renforce la confiance et réduit considérablement les appels entrants.",
         ],
       },
       {
-        heading: "Étape 4 — Sortie pour le dernier kilomètre",
+        heading: "La preuve de livraison : clôturer chaque mission proprement",
         paragraphs: [
-          "Au moment où le colis part pour la livraison finale, il passe au statut « En livraison ». C'est à ce moment précis que le suivi GPS s'active, avec une mise à jour de la position toutes les 30 secondes. Le client peut alors voir que son colis est en cours de remise, sans que le GPS tourne inutilement pendant toute la journée.",
+          "Une livraison sans preuve est une livraison qui peut être contestée. OTP, photo, signature électronique et position GPS : ces quatre éléments combinés créent un dossier de remise incontestable pour chaque colis.",
+          "Pour les entreprises qui gèrent des volumes importants, cette documentation systématique devient vite un outil de gestion à part entière : moins de litiges, un service client plus rapide et une image professionnelle renforcée.",
         ],
       },
       {
-        heading: "Étape 5 — Remise au destinataire avec preuve",
+        heading: "Ce que ça change pour vos opérations",
         paragraphs: [
-          "À la remise, le livreur enregistre la preuve de livraison : OTP, photo, signature, et position GPS du lieu de remise. Ces éléments sont directement rattachés au colis et consultables dans la plateforme. C'est cette étape qui transforme une livraison en un dossier documenté.",
-          "Une fois le colis marqué comme livré, le suivi GPS se désactive automatiquement et l'historique lié à la mission reste conservé pendant 30 jours.",
-        ],
-      },
-      {
-        heading: "Pourquoi ce workflow fait la différence",
-        paragraphs: [
-          "La force du système, ce n'est pas un seul outil isolé, mais l'enchaînement de toutes ces étapes. Chaque scan, chaque statut, chaque preuve s'empile pour constituer un dossier logistique complet. Résultat : moins de zones d'ombre, moins de litiges, et beaucoup plus de clarté pour les équipes comme pour les clients.",
+          "Optimiser votre logistique B2B ne demande pas forcément de tout réinventer. Souvent, c'est une meilleure organisation des collectes, une meilleure affectation des véhicules et un meilleur suivi des livraisons qui font la différence. Direct Colis vous accompagne sur ces trois axes pour vous aider à livrer mieux, plus vite et avec plus de sérénité.",
         ],
       },
     ],
     cta: {
-      title: 'Voir le workflow en action',
-      button: 'Suivre un colis',
+      title: 'Améliorez vos livraisons B2B dès aujourd\'hui',
+      button: 'Demander un devis',
     },
   },
   {
-    slug: 'pourquoi-preuve-livraison-indispensable',
+    slug: 'externaliser-logistique-mise-a-disposition',
     image: blog2,
-    category: 'Sécurité',
+    category: 'Externalisation',
     date: '3 mars 2026',
-    title: 'Pourquoi la preuve de livraison est devenue indispensable',
+    title: 'Pourquoi externaliser sa logistique avec un service de mise à disposition',
     excerpt:
-      "OTP, photo, signature, géolocalisation : quatre éléments simples qui transforment une remise en un dossier documenté et réduisent drastiquement les litiges.",
+      "Livreurs dédiés, flotte gérée, contrats flexibles : découvrez pourquoi de plus en plus d'entreprises choisissent la mise à disposition pour gagner en agilité logistique.",
     author: AUTHOR,
     authorImg: logoComprimerCouleur,
     readTime: '5 min',
-    tags: ['Preuve', 'Sécurité', 'Litiges'],
+    tags: ['Mise à disposition', 'Externalisation', 'Flotte dédiée'],
     intro:
-      "Dans la livraison, un mot revient souvent : « contestation ». Un colis marqué comme livré que le destinataire dit ne pas avoir reçu. Une remise que personne ne peut confirmer. Un service client qui navigue à l'aveugle. La preuve de livraison a été pensée pour résoudre exactement ce problème.",
+      "Gérer une équipe de livreurs, entretenir une flotte de véhicules, gérer le carburant, les assurances, les remplacements en cas d'absence... La logistique interne est souvent plus complexe qu'elle n'y paraît. De plus en plus d'entreprises choisissent d'externaliser tout ou partie de cette charge avec un service de mise à disposition.",
     sections: [
       {
-        heading: "Ce qu'est concrètement une preuve de livraison chez Direct Colis",
+        heading: "Ce que recouvre vraiment la mise à disposition",
         paragraphs: [
-          "Au moment où le livreur remet le colis, la plateforme enregistre plusieurs éléments rattachés à cette remise : un code OTP saisi par le destinataire, une photo de la remise ou du colis sur place, une signature électronique si elle est demandée, et la position GPS exacte de la livraison.",
-          "Tous ces éléments sont attachés au colis dans la base de données. Quand un client ou un responsable ouvre le dossier du colis, il retrouve immédiatement ces preuves.",
+          "Un service de mise à disposition, ce n'est pas simplement louer un véhicule ou recruter un livreur temporaire. C'est confier à un prestataire la gestion complète d'une ressource — humaine ou matérielle — qui opère selon vos standards et vos processus.",
+          "Chez Direct Colis, la mise à disposition inclut le recrutement et la formation des livreurs et chauffeurs, la fourniture et l'entretien des véhicules, la gestion du carburant et le suivi opérationnel au quotidien. Vous bénéficiez d'une ressource dédiée sans en porter la gestion.",
         ],
       },
       {
-        heading: "Pourquoi ces quatre éléments suffisent",
-        paragraphs: [
-          "Pris séparément, aucun de ces éléments n'est parfait. L'OTP peut être partagé, une photo peut être floue, une signature peut être illisible. Mais ensemble, ils forment un faisceau de preuves extrêmement difficile à contester.",
-        ],
+        heading: "Les avantages concrets pour votre entreprise",
         bullets: [
-          "OTP : prouve que le destinataire (ou son représentant) était joignable au moment de la livraison",
-          "Photo : prouve l'état du colis et le contexte de la remise",
-          "Signature : prouve l'acceptation formelle",
-          "GPS : prouve que la remise a eu lieu à la bonne adresse",
+          "Réduction des coûts fixes liés à la gestion RH et à l'entretien de la flotte",
+          "Flexibilité pour adapter les ressources à votre saisonnalité",
+          "Moins de temps perdu sur des tâches administratives non productives",
+          "Des ressources qualifiées, formées à vos exigences spécifiques",
+          "Un interlocuteur unique pour toutes les questions logistiques",
         ],
       },
       {
-        heading: "Ce que ça change pour le service client",
+        heading: "Quand la mise à disposition fait vraiment sens",
         paragraphs: [
-          "Avant, un litige pouvait durer des jours : aller-retours avec le livreur, recherche dans les historiques, demande de confirmation au client final. Avec la preuve de livraison, un responsable ouvre le dossier et tranche en quelques secondes.",
-          "Pour un client grand compte qui gère plusieurs centaines d'envois par jour, ce gain de temps représente un vrai retour sur investissement : moins d'appels entrants, moins de remboursements injustifiés, et une relation client plus apaisée.",
+          "Ce service est particulièrement pertinent pour les entreprises qui ont une activité logistique régulière mais ne souhaitent pas créer un service transport interne complet. C'est aussi une réponse efficace aux pics saisonniers : Ramadan, fêtes de fin d'année, lancements de produits — des périodes où vous avez besoin de plus de ressources sans vous engager sur la durée.",
+          "Elle est aussi adaptée aux structures en croissance rapide qui ont besoin de déployer des capacités logistiques vite, sans passer des mois à recruter et à équiper une équipe.",
         ],
       },
       {
-        heading: "Un signal de sérieux pour vos clients",
+        heading: "Le modèle contractuel : flexibilité sans rigidité",
         paragraphs: [
-          "La preuve de livraison n'est pas qu'un outil défensif contre les litiges. C'est aussi un signal fort envoyé à vos clients : « nous savons exactement où, quand et comment votre colis a été remis ». Ce type de transparence devient vite un argument commercial.",
+          "L'un des avantages majeurs de la mise à disposition est la souplesse contractuelle. Contrairement à un recrutement ou à un achat de flotte, les contrats peuvent être adaptés à votre besoin réel : durée, volume, type de ressource. Vous ne payez que ce que vous utilisez, et vous pouvez ajuster au fil du temps.",
         ],
       },
       {
-        heading: "En résumé",
+        heading: "Ce que Direct Colis apporte en plus",
         paragraphs: [
-          "La preuve de livraison ne remplace pas une bonne organisation logistique, mais elle en est le point final. Elle sécurise ce qui a été fait, documente ce qui a été remis, et clôt chaque mission de manière nette. Chez Direct Colis, c'est un élément non négociable de chaque livraison.",
+          "Au-delà des ressources mises à disposition, nos clients bénéficient de notre plateforme logistique pour suivre les missions, tracer les livraisons et accéder aux rapports d'activité. La mise à disposition devient ainsi une solution logistique complète, appuyée par la technologie.",
         ],
       },
     ],
     cta: {
-      title: 'Sécurisez chaque remise',
-      button: 'Découvrir le service',
+      title: 'Externalisez votre logistique avec Direct Colis',
+      button: 'Nous contacter',
     },
   },
   {
-    slug: 'grands-comptes-outils-direct-colis',
+    slug: 'services-logistiques-stockage-aibd-restauration',
     image: blog3,
-    category: 'Grands comptes',
+    category: 'Logistique',
     date: '21 mars 2026',
-    title: "Comment Direct Colis accompagne les clients grands comptes",
+    title: 'Entreposage, navettes AIBD, restauration : des solutions logistiques pour chaque activité',
     excerpt:
-      "Import Excel/CSV, double identifiant, reporting, export, cloisonnement des données : ce que gagne une entreprise qui gère des volumes importants avec Direct Colis.",
+      "Stockage sécurisé, liaisons aéroportuaires 24h/7j, livraisons isothermes : Direct Colis adapte ses services aux réalités de chaque secteur.",
     author: AUTHOR,
     authorImg: logoComprimerCouleur,
     readTime: '6 min',
-    tags: ['B2B', 'Import CSV', 'Reporting'],
+    tags: ['Entreposage', 'AIBD', 'Restauration', 'Logistique spécialisée'],
     intro:
-      "Quand une entreprise passe de 10 à 500 colis par jour, elle ne peut plus se permettre de créer chaque envoi manuellement, ni de chercher un numéro de suivi dans un tableur partagé. Direct Colis a été pensé pour absorber ce changement d'échelle, avec des outils adaptés aux grands volumes.",
+      "La logistique n'est pas un service uniforme. Un restaurateur n'a pas les mêmes contraintes qu'un importateur, qui n'a pas les mêmes besoins qu'une entreprise qui expédie des marchandises depuis et vers l'aéroport. Direct Colis a développé des solutions adaptées à ces différentes réalités.",
     sections: [
       {
-        heading: "Import Excel / CSV : créer des colis en masse",
+        heading: "Entreposage & Stockage : maîtriser ses flux physiques",
         paragraphs: [
-          "Au lieu de créer chaque envoi un par un, les grands comptes peuvent importer une liste complète de colis via un fichier Excel ou CSV. La plateforme lit le fichier, valide les adresses, crée les colis avec leurs identifiants et génère les QR codes en lot.",
-          "Résultat : ce qui prenait plusieurs heures le matin prend quelques minutes. Les équipes peuvent se concentrer sur les cas particuliers plutôt que sur la saisie.",
+          "Avoir un bon prestataire de livraison ne suffit pas si votre organisation du stockage est défaillante. Un entrepôt mal géré génère des erreurs d'expédition, des ruptures de stock et des délais allongés. Direct Colis propose des solutions d'entreposage sécurisé avec un suivi d'inventaire en temps réel.",
+          "Chaque entrée et sortie de marchandises est tracée, et nos services de picking et conditionnement permettent d'externaliser la préparation de commandes directement dans nos entrepôts. Pour les entreprises qui importent ou exportent régulièrement, nous proposons également des solutions adaptées au stockage temporaire entre deux expéditions.",
         ],
       },
       {
-        heading: "Double identifiant : vos références à vous",
+        heading: "Transport & Navettes AIBD : fiabilité autour du hub aéroportuaire",
         paragraphs: [
-          "Un colis dans Direct Colis a toujours un identifiant système (le numéro de suivi Direct Colis). Mais les grands comptes peuvent aussi associer leur propre référence interne — celle qui existe dans leur ERP, leur boutique en ligne ou leur système de gestion.",
-          "Ce double identifiant permet de chercher un colis avec n'importe laquelle des deux références. Le service client n'a plus à demander « vous avez le numéro Direct Colis ? » : il peut chercher directement avec la référence de commande du client.",
+          "L'Aéroport International Blaise Diagne est un point de passage obligé pour de nombreuses entreprises sénégalaises. Fret urgent, transferts professionnels, liaisons régulières : les besoins autour de l'AIBD sont multiples et ne tolèrent pas l'improvisation.",
+          "Notre service de navettes AIBD est disponible 24 heures sur 24, 7 jours sur 7, pour s'adapter aux horaires de vols et aux urgences. Nos chauffeurs qualifiés assurent des trajets sécurisés et ponctuels, que ce soit pour du transport de personnes en déplacement professionnel ou pour du fret urgent à acheminer rapidement.",
         ],
       },
       {
-        heading: "Cloisonnement des données : chacun voit ce qui lui appartient",
+        heading: "Logistique Restauration : des livraisons qui respectent vos standards",
         paragraphs: [
-          "Chaque client grand compte ne voit que ses propres colis, ses propres statistiques et ses propres historiques. Pas de fuite, pas de confusion entre clients. Cette séparation est appliquée au niveau du dashboard, des exports et des recherches.",
+          "Le secteur de la restauration impose des contraintes que les services de livraison classiques ne peuvent pas toujours honorer : températures à maintenir, délais très courts, hygiène irréprochable et gestion des pics d'activité aux heures de repas.",
+          "Direct Colis a développé une offre dédiée avec des caissons isothermes homologués, des livreurs formés aux exigences d'hygiène et une organisation pensée pour les créneaux de rush. Résultat : vos plats arrivent chauds, dans les délais et dans des conditions conformes aux attentes de vos clients.",
         ],
       },
       {
-        heading: "Reporting et export : piloter au lieu de subir",
+        heading: "Une logistique pensée pour chaque métier",
         paragraphs: [
-          "La plateforme propose des tableaux de bord détaillés avec les volumes expédiés, les taux de succès, les délais moyens, les motifs d'échec. Ces données peuvent être exportées en Excel pour être intégrées dans les reporting internes de l'entreprise.",
-          "Pour les directions financières, le suivi du paiement à la livraison (COD) est également centralisé : encaissements, historiques, clôture caisse par livreur avec validation responsable.",
-        ],
-      },
-      {
-        heading: "Étiquettes QR par lot",
-        paragraphs: [
-          "Une fois les colis créés, la plateforme génère toutes les étiquettes d'un coup, prêtes à imprimer. Plus besoin de relancer l'impression colis par colis : un PDF, une impression, et l'équipe d'expédition peut coller les étiquettes à la chaîne.",
-        ],
-      },
-      {
-        heading: "Ce que ça change au quotidien",
-        paragraphs: [
-          "L'ensemble de ces outils transforme la manière dont une entreprise gère sa logistique. Moins de temps perdu en saisie, moins d'erreurs, un meilleur reporting, et surtout une capacité à grandir sans que l'équipe opérationnelle soit noyée sous le travail administratif.",
-          "C'est pour ça que Direct Colis n'est pas seulement un service de livraison, mais une vraie plateforme logistique pensée pour les structures qui expédient sérieusement.",
+          "Ce qui distingue Direct Colis, c'est la capacité à adapter notre organisation aux réalités concrètes de chaque secteur. Nous ne proposons pas une solution générique : nous travaillons avec vous pour comprendre vos contraintes, vos volumes et vos exigences, puis nous déployons les ressources et les processus qui correspondent.",
+          "Qu'il s'agisse de stocker des marchandises, d'assurer des navettes aéroportuaires ou de livrer des repas, notre engagement reste le même : fiabilité, traçabilité et qualité de service.",
         ],
       },
     ],
     cta: {
-      title: 'Vous gérez un volume important ?',
-      button: 'Demander un devis',
+      title: 'Trouvez la solution logistique adaptée à votre activité',
+      button: 'Découvrir nos services',
     },
   },
 ];

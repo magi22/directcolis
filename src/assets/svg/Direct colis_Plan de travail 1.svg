@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.89 214.19">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .01em;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        letter-spacing: .03em;
+      }
+
+      .cls-7, .cls-8, .cls-9 {
+        fill: #fff;
+      }
+
+      .cls-10 {
+        letter-spacing: .01em;
+      }
+
+      .cls-11 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        font-family: AcuminConcept-WideSemiboldItalic, 'Acumin Variable Concept';
+        font-size: 23.34px;
+        font-variation-settings: 'wght' 600, 'wdth' 115, 'slnt' 12;
+        font-weight: 600;
+      }
+
+      .cls-8, .cls-9 {
+        font-style: italic;
+      }
+
+      .cls-12 {
+        letter-spacing: .05em;
+      }
+
+      .cls-9 {
+        font-family: Ethnocentric-Italic, Ethnocentric;
+        font-size: 74.37px;
+      }
+
+      .cls-13 {
+        letter-spacing: 0em;
+      }
+
+      .cls-14 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-15 {
+        letter-spacing: 0em;
+      }
+
+      .cls-16 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <path class="cls-7" d="M204.09,136.05c.36,3.7-.23,6.86-4.53,6.98-1.5.04-14.58-.93-16.02-.96-21.18-.45-30.59-1.64-51.68-2.32l-81.34-.52c.18-.97,2.1-3.19,2.93-3.19h150.64Z"/>
+  <path class="cls-7" d="M766.68,71.28c.42-.65.67-1.07.5-1.89-1.63-2.38-43.12-2.38-48.81-2.16-8.5.33-17.08,1.62-25.58,2.15-.64.04-4,.21-4-.26,6.42-1.12,12.97-2.29,19.47-2.93,16.1-1.59,32.6-1.52,48.79-1.61.2-.89-.28-1.08-.81-1.59-2.09-2.03-5.48-3.83-7.19-6.14-.31-.42-1.08-.92-.25-1.35l46.65,11.75-42.38,18.66"/>
+  <text class="cls-9" transform="translate(46.44 122.64)"><tspan x="0" y="0">DIRECT COLIS</tspan></text>
+  <text class="cls-8" transform="translate(215.33 152.12)"><tspan class="cls-3" x="0" y="0">C</tspan><tspan class="cls-2" x="18.16" y="0">H</tspan><tspan class="cls-6" x="37.07" y="0">E</tspan><tspan x="53.99" y="0">Z </tspan><tspan class="cls-5" x="76.7" y="0">V</tspan><tspan class="cls-15" x="93.74" y="0">O</tspan><tspan class="cls-16" x="113.35" y="0">U</tspan><tspan class="cls-5" x="131.39" y="0">S</tspan><tspan x="148.08" y="0"> </tspan><tspan class="cls-1" x="154.74" y="0">E</tspan><tspan class="cls-12" x="171.17" y="0">T</tspan><tspan x="187.41" y="0"> </tspan><tspan class="cls-14" x="194.07" y="0">À</tspan><tspan x="210.52" y="0"> </tspan><tspan class="cls-2" x="217.17" y="0">T</tspan><tspan class="cls-13" x="232.51" y="0">E</tspan><tspan class="cls-10" x="248.52" y="0">M</tspan><tspan class="cls-11" x="270.82" y="0">P</tspan><tspan class="cls-4" x="287.81" y="0">S</tspan></text>
+</svg>

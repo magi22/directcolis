@@ -6,6 +6,7 @@ import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
 import { useLang } from '../i18n/LanguageContext';
+import { useSEO } from '../hooks/useSEO';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -83,6 +84,7 @@ function AccordionItem({ q, a, open, onToggle }: { q: string; a: string; open: b
 
 export default function FAQPage() {
   const { t } = useLang();
+  useSEO({ title: 'Questions fréquentes — Direct Colis', canonical: '/faq' });
   const [activeCategory, setActiveCategory] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [query, setQuery] = useState('');
