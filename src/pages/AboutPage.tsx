@@ -9,6 +9,12 @@ import aboutImg from '../assets/images/le3.jpg';
 import blog2 from '../assets/images/2.jpg';
 import blog3 from '../assets/images/3.jpg';
 import logoComprimerBlanc from '../assets/svg/Direct colis-06.svg';
+import service1 from '../assets/images/service 1.png';
+import service2 from '../assets/images/service 2.png';
+import service3 from '../assets/images/service 3.png';
+import service4 from '../assets/images/service 4.png';
+import service5 from '../assets/images/service 5.png';
+import service6 from '../assets/images/service 6.jpg';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import PageHero, { HeroHighlight } from '../components/PageHero';
@@ -100,6 +106,223 @@ const testimonials = [
 
 const statIcons = [Truck, Target, Award, Sparkles];
 const statValues = ['1M+', '98%', '50+', '10+'];
+
+const serviceCards = [
+  {
+    num: '01',
+    image: service1,
+    title: 'Livraison B2B',
+    fullTitle: 'Livraison B2B & Dernier Kilomètre',
+    desc: 'Une solution complète pour collecter, acheminer et livrer vos colis avec fiabilité et traçabilité jusqu\'au destinataire final.',
+    points: ['Collecte programmée', 'Couverture Dakar & grande banlieue', 'Suivi en temps réel', 'Preuve de livraison numérique'],
+    slug: 'livraison-b2b',
+  },
+  {
+    num: '02',
+    image: service2,
+    title: 'Mise à Disposition',
+    fullTitle: 'Mise à Disposition',
+    desc: 'Des livreurs, chauffeurs et véhicules dédiés pour renforcer vos opérations selon vos besoins et vos standards.',
+    points: ['Personnel qualifié', 'Flotte dédiée', 'Gestion opérationnelle', 'Contrats flexibles'],
+    slug: 'mise-a-disposition',
+  },
+  {
+    num: '03',
+    image: service3,
+    title: 'Entreposage',
+    fullTitle: 'Entreposage & Stockage',
+    desc: 'Des solutions de stockage sécurisées pour mieux gérer vos marchandises, vos flux temporaires et vos préparations de commandes.',
+    points: ['Entrepôts sécurisés', 'Suivi d\'inventaire', 'Transit import / export', 'Picking & conditionnement'],
+    slug: 'entreposage-stockage',
+  },
+  {
+    num: '04',
+    image: service4,
+    title: 'Location Véhicules',
+    fullTitle: 'Location de Véhicules Professionnels',
+    desc: 'Une flotte diversifiée pour répondre à vos besoins de transport, du pli urgent aux marchandises plus volumineuses.',
+    points: ['Avec ou sans chauffeur', 'Motos, berlines, utilitaires', 'Véhicules entretenus', 'Tarification dégressive'],
+    slug: 'location-vehicules',
+  },
+  {
+    num: '05',
+    image: service5,
+    title: 'Transport AIBD',
+    fullTitle: 'Transport & Navettes AIBD',
+    desc: 'Une liaison fiable avec l\'Aéroport International Blaise Diagne pour vos colis critiques et vos déplacements professionnels.',
+    points: ['Disponibilité 24h/7j', 'Fret urgent', 'Trajets sécurisés', 'Transport premium'],
+    slug: 'transport-aibd',
+  },
+  {
+    num: '06',
+    image: service6,
+    title: 'Restauration',
+    fullTitle: 'Logistique Restauration',
+    desc: 'Un service spécialisé pour les restaurateurs avec des livraisons rapides, propres et adaptées aux exigences d\'hygiène et de température.',
+    points: ['Caissons isothermes', 'Livraison express', 'Standards d\'hygiène', 'Gestion des pics'],
+    slug: 'logistique-restauration',
+  },
+];
+
+function ServiceCards() {
+  const [hovered, setHovered] = useState<number | null>(null);
+  const activeW = 46;
+  const restW = (100 - activeW) / (serviceCards.length - 1);
+
+  return (
+    <section className="relative overflow-hidden">
+      <div
+        className="flex w-full"
+        style={{ height: 'clamp(340px, 52vw, 580px)' }}
+        onMouseLeave={() => setHovered(null)}
+      >
+        {serviceCards.map((card, i) => {
+          const isActive = hovered === i;
+          const width = hovered === null
+            ? `${100 / serviceCards.length}%`
+            : isActive ? `${activeW}%` : `${restW}%`;
+
+          return (
+            <div
+              key={card.slug}
+              onMouseEnter={() => setHovered(i)}
+              style={{
+                flexBasis: width,
+                flexShrink: 0,
+                transition: 'flex-basis 0.38s cubic-bezier(0.16,1,0.3,1)',
+                position: 'relative',
+                overflow: 'hidden',
+                cursor: 'pointer',
+              }}
+            >
+              {/* Background image */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: `url(${card.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  filter: isActive ? 'grayscale(0)' : 'grayscale(1)',
+                  transition: 'filter 0.38s ease',
+                  transform: isActive ? 'scale(1.04)' : 'scale(1)',
+                  transitionProperty: 'filter, transform',
+                  transitionDuration: '0.38s',
+                }}
+              />
+
+              {/* Dark overlay */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: isActive
+                    ? 'linear-gradient(to top, rgba(5,14,40,0.92) 0%, rgba(5,14,40,0.4) 55%, transparent 100%)'
+                    : 'linear-gradient(to top, rgba(5,14,40,0.65) 0%, rgba(5,14,40,0.2) 60%, transparent 100%)',
+                  transition: 'background 0.38s ease',
+                }}
+              />
+
+              {/* Badge numéro */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 18,
+                  left: 18,
+                  zIndex: 10,
+                  background: '#dc2626',
+                  color: 'white',
+                  borderRadius: '50%',
+                  width: 36,
+                  height: 36,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  boxShadow: '0 4px 14px rgba(220,38,38,0.5)',
+                }}
+              >
+                {card.num}
+              </div>
+
+              {/* Titre vertical (repos) */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 28,
+                  right: 18,
+                  zIndex: 10,
+                  writingMode: 'vertical-rl',
+                  transform: 'rotate(180deg)',
+                  color: 'white',
+                  fontSize: 'clamp(18px, 1.8vw, 26px)',
+                  fontWeight: 800,
+                  whiteSpace: 'nowrap',
+                  opacity: isActive ? 0 : 1,
+                  transition: 'opacity 0.2s ease',
+                  textShadow: '0 2px 8px rgba(0,0,0,0.5)',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {card.title}
+              </div>
+
+              {/* Contenu révélé au hover */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  zIndex: 10,
+                  padding: 'clamp(20px, 2.5vw, 40px)',
+                  color: 'white',
+                  opacity: isActive ? 1 : 0,
+                  transform: isActive ? 'translateY(0)' : 'translateY(16px)',
+                  transition: 'opacity 0.32s ease, transform 0.32s ease',
+                  transitionDelay: isActive ? '0.1s' : '0s',
+                }}
+              >
+                <h3 style={{ fontSize: 'clamp(16px, 1.5vw, 22px)', fontWeight: 800, marginBottom: 10, lineHeight: 1.2 }}>
+                  {card.fullTitle}
+                </h3>
+                <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', lineHeight: 1.6, marginBottom: 14, color: 'rgba(255,255,255,0.82)', maxWidth: 380 }}>
+                  {card.desc}
+                </p>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px 0' }}>
+                  {card.points.map((pt, j) => (
+                    <li key={j} style={{ fontSize: 'clamp(11px, 0.9vw, 13px)', color: 'rgba(255,255,255,0.8)', paddingLeft: 16, position: 'relative', marginBottom: 5 }}>
+                      <span style={{ position: 'absolute', left: 0, color: '#f87171' }}>•</span>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to={`/services/${card.slug}`}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    background: '#dc2626',
+                    color: 'white',
+                    padding: '9px 22px',
+                    borderRadius: 8,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                  }}
+                >
+                  En savoir plus <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 export default function AboutPage() {
   const { t } = useLang();
@@ -286,6 +509,9 @@ export default function AboutPage() {
             </AnimatePresence>
           </div>
         </section>
+
+        {/* Services accordion cards */}
+        <ServiceCards />
 
         {/* Testimonial carousel */}
         <section className="py-20 bg-gradient-to-b from-slate-50 to-white border-t border-slate-100 relative overflow-hidden">
