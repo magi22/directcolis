@@ -29,7 +29,7 @@ const FAQ: { q: string; a: string; linkUrl?: string; linkLabel?: string }[] = [
   },
   {
     q: 'Comment créer un envoi ?',
-    a: 'Demandez une démo via le bouton en haut de la page. Notre équipe vous configure un accès à la plateforme et vous accompagne dans la prise en main.',
+    a: 'Contactez-nous via le formulaire ou WhatsApp. Notre équipe vous proposera un devis adapté et vous accompagnera dans la mise en place du service.',
   },
   {
     q: 'Comment est confirmée la livraison ?',

@@ -76,10 +76,10 @@ export default function ServicesPage() {
           {/* Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
             {[
-              { label: 'Livraison B2B', icon: Truck },
-              { label: 'Entreposage', icon: Navigation },
-              { label: 'Réactivité', icon: Zap },
-              { label: 'Traçabilité', icon: CheckCircle },
+              { label: 'Traçabilité', icon: Navigation },
+              { label: 'Sécurité', icon: ShieldCheck },
+              { label: 'Rapidité', icon: Zap },
+              { label: 'Fiabilité', icon: CheckCircle },
             ].map((tag, i) => {
               const Icon = tag.icon;
               return (
