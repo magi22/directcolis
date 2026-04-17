@@ -105,7 +105,7 @@ const testimonials = [
 ];
 
 const statIcons = [Truck, Target, Award, Sparkles];
-const statValues = ['6', '24h', '15+', '100%'];
+const statValues = ['6', '24h', 'Dakar', '100%'];
 
 const serviceCards = [
   {

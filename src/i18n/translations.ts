@@ -113,10 +113,10 @@ export const translations = {
       badge: 'PROCESSUS DE TRAVAIL',
       titleA: 'Un processus optimisé pour',
       titleB: 'vos livraisons',
-      bannerTitleA: "Reconnu comme l'un des leaders de la",
-      bannerTitleB: 'Logistique !',
+      bannerTitleA: 'Acteur majeur de la',
+      bannerTitleB: 'logistique au Sénégal',
       bannerDesc:
-        "Direct Colis joue un rôle central dans l'écosystème de la chaîne d'approvisionnement en gérant efficacement le mouvement des marchandises.",
+        "Direct Colis accompagne les entreprises et particuliers de Dakar dans la gestion de leurs livraisons avec fiabilité, traçabilité et réactivité.",
       steps: [
         { title: 'Création & Assignation', desc: "Ce processus est dédié à l'enregistrement et l'attribution efficace des colis." },
         { title: 'Collecte & Scan', desc: 'Ce processus garantit la prise en charge et la traçabilité dès le premier kilomètre.' },
@@ -218,8 +218,8 @@ export const translations = {
       stats: {
         delivered: 'Services logistiques',
         success: 'Délai livraison Dakar',
-        cities: 'Villes couvertes',
-        years: 'Livraisons traçables',
+        cities: 'Zone de couverture',
+        years: 'Traçabilité garantie',
       },
       tabs: {
         who: 'Qui sommes-nous',
@@ -399,8 +399,8 @@ export const translations = {
       badge: 'WORK PROCESS',
       titleA: 'An optimized process for',
       titleB: 'your deliveries',
-      bannerTitleA: 'Recognized as one of the leaders in',
-      bannerTitleB: 'Logistics!',
+      bannerTitleA: 'A major logistics player',
+      bannerTitleB: 'in Senegal',
       bannerDesc:
         'Direct Colis plays a central role in the supply chain ecosystem by efficiently managing the movement of goods.',
       steps: [
@@ -504,8 +504,8 @@ export const translations = {
       stats: {
         delivered: 'Logistics services',
         success: 'Dakar delivery time',
-        cities: 'Cities covered',
-        years: 'Traceable deliveries',
+        cities: 'Coverage area',
+        years: 'Guaranteed traceability',
       },
       tabs: {
         who: 'Who we are',
