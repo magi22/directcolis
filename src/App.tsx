@@ -896,28 +896,32 @@ export default function App() {
                       </div>
                     ))}
                   </div>
-                  <Link to="/a-propos" className="inline-flex items-center gap-3 bg-red-600 text-white text-sm pl-5 pr-1.5 py-1.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group shadow-lg shadow-red-600/30">
+                  <Link to="/a-propos" className="self-start inline-flex items-center gap-2 bg-red-600 text-white text-sm pl-4 pr-1 py-1 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group shadow-lg shadow-red-600/30">
                     {t.common.learnMore}
-                    <div className="w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <ArrowRight className="w-4 h-4 text-white" />
+                    <div className="w-7 h-7 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
+                      <ArrowRight className="w-3.5 h-3.5 text-white" />
                     </div>
                   </Link>
                 </div>
 
-                {/* Double-line separator */}
-                <div className="hidden md:flex flex-col items-center justify-center gap-1.5 py-10 shrink-0">
-                  <div className="w-px bg-white/20" style={{ height: '120px' }} />
-                  <div className="w-px bg-white/20" style={{ height: '48px' }} />
-                </div>
-
-                {/* Right — image, no color overlay */}
-                <div className="md:flex-1 relative h-60 sm:h-80 md:h-auto overflow-hidden">
-                  <img
-                    src={numeroImg}
-                    alt="Numérotation Direct Colis"
-                    loading="lazy"
-                    className="w-full h-full object-cover object-center"
-                  />
+                {/* Right — image with diagonal cut on left edge */}
+                <div className="md:flex-1 relative h-60 sm:h-80 md:h-auto">
+                  {/* Image clipped diagonally */}
+                  <div className="absolute inset-0 overflow-hidden" style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0% 100%)' }}>
+                    <img
+                      src={numeroImg}
+                      alt="Numérotation Direct Colis"
+                      loading="lazy"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                  {/* Glowing diagonal lines along the cut */}
+                  <div className="absolute inset-0 pointer-events-none hidden md:block">
+                    <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100" fill="none">
+                      <line x1="10" y1="0" x2="0" y2="100" stroke="white" strokeWidth="0.4" strokeOpacity="0.7"/>
+                      <line x1="11.5" y1="0" x2="1.5" y2="100" stroke="#ef4444" strokeWidth="0.25" strokeOpacity="0.5"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </motion.div>
