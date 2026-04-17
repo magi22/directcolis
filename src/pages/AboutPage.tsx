@@ -510,6 +510,54 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Services intro header */}
+        <section className="py-16 sm:py-20 bg-slate-50/60">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+              className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-0"
+            >
+              {/* Gauche — badge + titre */}
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-col gap-5"
+              >
+                <span className="inline-flex items-center self-start bg-red-600 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-md">
+                  Nos Services
+                </span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-950 leading-tight">
+                  Des solutions logistiques<br />
+                  <span className="text-red-600">pour chaque besoin</span>
+                </h2>
+              </motion.div>
+
+              {/* Centre — ligne rouge avec flèche */}
+              <motion.div
+                variants={fadeInUp}
+                className="hidden md:flex flex-col items-center mx-12"
+              >
+                <div className="w-px flex-1 bg-red-600" style={{ height: 120 }} />
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="mt-1">
+                  <path d="M10 0 L10 16 M4 10 L10 16 L16 10" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+
+              {/* Droite — sous-titre + description */}
+              <motion.div variants={fadeInUp} className="flex flex-col gap-4">
+                <p className="text-blue-950 font-bold text-lg sm:text-xl leading-snug">
+                  Choisissez la solution adaptée à votre activité, vos volumes et vos contraintes terrain.
+                </p>
+                <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
+                  Direct Colis accompagne les entreprises avec une offre logistique concrète — de la livraison du dernier kilomètre à la mise à disposition de ressources, en passant par l'entreposage, la location de véhicules, les navettes aéroportuaires et la logistique restauration.
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Services accordion cards */}
         <ServiceCards />
 
