@@ -61,12 +61,12 @@ export default function SiteHeader() {
           <div className="flex items-center gap-3">
             {/* Phone */}
             <a
-              href="tel:+221785421733"
-              aria-label="Appeler Direct Colis au +221 78 542 17 33"
+              href="tel:+221772049283"
+              aria-label="Appeler Direct Colis au +221 77 204 92 83"
               className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 hover:bg-red-50 hover:border-red-200 transition-colors"
             >
               <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
-              <span className="text-xs">+221 78 542 17 33</span>
+              <span className="text-xs">+221 77 204 92 83</span>
             </a>
 
             {/* Se connecter */}

@@ -194,12 +194,12 @@ export default function App() {
             <div className="flex items-center gap-3">
               {/* Phone — large screens only */}
               <a
-                href="tel:+221785421733"
-                aria-label="Appeler Direct Colis au +221 78 542 17 33"
+                href="tel:+221772049283"
+                aria-label="Appeler Direct Colis au +221 77 204 92 83"
                 className="hidden lg:flex items-center gap-2 text-blue-950 font-bold bg-slate-50 px-3 py-2 rounded-lg border border-slate-100 hover:bg-red-50 hover:border-red-200 transition-colors"
               >
                 <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
-                <span className="text-xs">+221 78 542 17 33</span>
+                <span className="text-xs">+221 77 204 92 83</span>
               </a>
 
               {/* Se connecter */}
@@ -848,41 +848,77 @@ export default function App() {
             </div>
 
             {/* Bottom Banner */}
-            <motion.div 
+            <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
-              className="mt-12 md:mt-24 bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-center shadow-2xl"
+              className="mt-12 md:mt-24 rounded-[2rem] overflow-hidden relative shadow-2xl animated-gradient"
+              style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #7f1d1d 100%)' }}
             >
-              {/* Background Map Pattern */}
-              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/world-map.png")' }}></div>
-              
-              {/* Left Content */}
-              <div className="p-6 sm:p-10 md:p-16 md:w-3/5 relative z-10">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                  {t.process.bannerTitleA} <span className="text-red-500">{t.process.bannerTitleB}</span>
-                </h3>
-                <p className="text-slate-300 mb-8 font-light leading-relaxed max-w-md">
-                  {t.process.bannerDesc}
-                </p>
-                <Link to="/a-propos" className="flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group">
-                  {t.common.learnMore}
-                  <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                    <ArrowRight className="w-5 h-5 text-white" />
-                  </div>
-                </Link>
-              </div>
+              {/* Subtle dot grid overlay */}
+              <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+              {/* Glow accents */}
+              <div className="absolute -top-20 -left-20 w-72 h-72 bg-red-600/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              {/* Right Content */}
-              <div className="md:w-2/5 relative h-56 sm:h-72 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
-                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden">
-                  <img
-                    src={numeroImg}
-                    alt="Numérotation Direct Colis"
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
+              <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
+                {/* Left — text */}
+                <div className="flex-1 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-red-400 mb-5">
+                    <span className="w-5 h-px bg-red-400" />
+                    Direct Colis
+                  </span>
+                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-5">
+                    {t.process.bannerTitleA}{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
+                      {t.process.bannerTitleB}
+                    </span>
+                  </h3>
+                  <p className="text-slate-300/80 leading-relaxed mb-8 max-w-lg">
+                    {t.process.bannerDesc}
+                  </p>
+                  {/* Mini stats row */}
+                  <div className="flex flex-wrap gap-6 mb-10">
+                    {[
+                      { value: '15+', label: 'Villes couvertes' },
+                      { value: '24h', label: 'Délai livraison Dakar' },
+                      { value: '100%', label: 'Livraisons traçables' },
+                    ].map((s) => (
+                      <div key={s.label} className="flex flex-col">
+                        <span className="text-2xl font-extrabold text-white">{s.value}</span>
+                        <span className="text-xs text-slate-400 font-medium">{s.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {/* CTAs */}
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-red-600/30"
+                    >
+                      Demander un devis <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <Link
+                      to="/a-propos"
+                      className="inline-flex items-center gap-3 border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white font-bold px-6 py-3 rounded-full transition-all duration-300"
+                    >
+                      {t.common.learnMore}
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right — image */}
+                <div className="lg:w-[42%] relative min-h-[280px] sm:min-h-[340px]">
+                  <div className="absolute inset-0 lg:rounded-l-[80px] overflow-hidden">
+                    <img
+                      src={numeroImg}
+                      alt="Numérotation Direct Colis"
+                      loading="lazy"
+                      className="w-full h-full object-cover mix-blend-luminosity opacity-70"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent lg:via-[#1e3a5f]/10" />
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -1202,7 +1238,7 @@ export default function App() {
                   },
                   {
                     q: "Comment contacter le support client ?",
-                    a: "Notre équipe est joignable par téléphone au +221 78 542 17 33 ou par email à contact@directcolis.sn."
+                    a: "Notre équipe est joignable par téléphone au +221 77 204 92 83 ou par email à groupefayassine@gmail.com."
                   },
                   {
                     q: "Puis-je intégrer Direct Colis à mon système ?",

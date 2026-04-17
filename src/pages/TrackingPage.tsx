@@ -145,8 +145,8 @@ export default function TrackingPage() {
             <h2 className="text-2xl font-bold text-white mb-3">{t.trackingPage.needHelp}</h2>
             <p className="text-blue-100/70 mb-8">{t.trackingPage.needHelpDesc}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+221785421733" className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-blue-950 font-bold rounded-xl hover:-translate-y-0.5 transition-all duration-300 shadow">
-                <PhoneCall className="w-5 h-5 text-red-600" /> +221 78 542 17 33
+              <a href="tel:+221772049283" className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-blue-950 font-bold rounded-xl hover:-translate-y-0.5 transition-all duration-300 shadow">
+                <PhoneCall className="w-5 h-5 text-red-600" /> +221 77 204 92 83
               </a>
               <Link to="/contact" className="flex items-center justify-center gap-2 px-7 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-red-600/30">
                 {t.faqSection.contactSupport}

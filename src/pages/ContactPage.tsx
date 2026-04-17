@@ -19,10 +19,10 @@ export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
 
   const contactInfo = [
-    { icon: PhoneCall, label: t.contactPage.info.phone, value: '+221 78 542 17 33', sub: t.contactPage.info.phoneHours },
-    { icon: Globe, label: t.contactPage.info.email, value: 'contact@directcolis.sn', sub: t.contactPage.info.emailHours },
-    { icon: MapPin, label: t.contactPage.info.address, value: 'Dakar, Sénégal', sub: t.contactPage.info.addressSub },
-    { icon: MessageSquare, label: t.contactPage.info.whatsapp, value: '+221 78 542 17 33', sub: t.contactPage.info.whatsappSub },
+    { icon: PhoneCall, label: t.contactPage.info.phone, value: '+221 77 204 92 83', sub: t.contactPage.info.phoneHours },
+    { icon: Globe, label: t.contactPage.info.email, value: 'groupefayassine@gmail.com', sub: t.contactPage.info.emailHours },
+    { icon: MapPin, label: t.contactPage.info.address, value: 'Médina rue 43x30, Dakar', sub: t.contactPage.info.addressSub },
+    { icon: MessageSquare, label: t.contactPage.info.whatsapp, value: '+221 77 204 92 83', sub: t.contactPage.info.whatsappSub },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -30,7 +30,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const wa = `https://wa.me/221785421733?text=${encodeURIComponent(
+    const wa = `https://wa.me/221772049283?text=${encodeURIComponent(
       `Nom: ${form.name}\nEmail: ${form.email}\nTéléphone: ${form.phone}\nSujet: ${form.subject}\n\n${form.message}`
     )}`;
     window.open(wa, '_blank');
@@ -150,7 +150,7 @@ export default function ContactPage() {
 
                 {/* WhatsApp CTA */}
                 <a
-                  href="https://wa.me/221785421733?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20Direct%20Colis."
+                  href="https://wa.me/221772049283?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20Direct%20Colis."
                   target="_blank" rel="noopener noreferrer"
                   className="mt-8 flex items-center justify-center gap-3 w-full px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-green-600/20"
                 >

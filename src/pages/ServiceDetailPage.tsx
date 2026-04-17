@@ -192,10 +192,10 @@ export default function ServiceDetailPage() {
                           <Mail className="w-4 h-4" /> {t.common.contactUs}
                         </Link>
                         <a
-                          href="tel:+221785421733"
+                          href="tel:+221772049283"
                           className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm rounded-lg transition-colors"
                         >
-                          <PhoneCall className="w-4 h-4" /> +221 78 542 17 33
+                          <PhoneCall className="w-4 h-4" /> +221 77 204 92 83
                         </a>
                       </div>
                     </div>

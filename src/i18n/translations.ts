@@ -216,10 +216,10 @@ export const translations = {
       titleB: 'Direct Colis',
       subtitle: 'La solution logistique de référence pour le suivi et la livraison de colis au Sénégal.',
       stats: {
-        delivered: 'Colis livrés',
-        success: 'Taux de succès',
+        delivered: 'Services logistiques',
+        success: 'Délai livraison Dakar',
         cities: 'Villes couvertes',
-        years: "Ans d'expérience",
+        years: 'Livraisons traçables',
       },
       tabs: {
         who: 'Qui sommes-nous',
@@ -502,10 +502,10 @@ export const translations = {
       titleB: 'Direct Colis',
       subtitle: 'The reference logistics solution for parcel tracking and delivery in Senegal.',
       stats: {
-        delivered: 'Parcels delivered',
-        success: 'Success rate',
+        delivered: 'Logistics services',
+        success: 'Dakar delivery time',
         cities: 'Cities covered',
-        years: 'Years of experience',
+        years: 'Traceable deliveries',
       },
       tabs: {
         who: 'Who we are',

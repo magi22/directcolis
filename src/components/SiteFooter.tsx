@@ -97,13 +97,13 @@ export default function SiteFooter() {
               <h4 className="text-white font-bold mb-5">{t.footer.contactCol}</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="tel:+221785421733" className="text-blue-200/60 hover:text-white text-sm flex items-center gap-2 transition-colors">
-                    <PhoneCall className="w-4 h-4 shrink-0" /> +221 78 542 17 33
+                  <a href="tel:+221772049283" className="text-blue-200/60 hover:text-white text-sm flex items-center gap-2 transition-colors">
+                    <PhoneCall className="w-4 h-4 shrink-0" /> +221 77 204 92 83
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:contact@directcolis.sn" className="text-blue-200/60 hover:text-white text-sm flex items-center gap-2 transition-colors">
-                    <Globe className="w-4 h-4 shrink-0" /> contact@directcolis.sn
+                  <a href="mailto:groupefayassine@gmail.com" className="text-blue-200/60 hover:text-white text-sm flex items-center gap-2 transition-colors">
+                    <Globe className="w-4 h-4 shrink-0" /> groupefayassine@gmail.com
                   </a>
                 </li>
                 <li className="text-blue-200/60 text-sm mt-5">

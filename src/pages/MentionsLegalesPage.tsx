@@ -35,11 +35,11 @@ export default function MentionsLegalesPage() {
               <ul className="text-slate-600 leading-relaxed space-y-1 mb-6 list-disc pl-6">
                 <li><strong>Dénomination sociale :</strong> Direct Colis</li>
                 <li><strong>Forme juridique :</strong> Société à Responsabilité Limitée (SARL)</li>
-                <li><strong>Siège social :</strong> Liberté 6, Dakar, Sénégal</li>
+                <li><strong>Siège social :</strong> Médina rue 43x30, Dakar, Sénégal</li>
                 <li><strong>NINEA :</strong> [en cours d'enregistrement]</li>
                 <li><strong>RCCM :</strong> [en cours d'enregistrement]</li>
-                <li><strong>Téléphone :</strong> +221 78 542 17 33</li>
-                <li><strong>Email :</strong> contact@directcolis.sn</li>
+                <li><strong>Téléphone :</strong> +221 77 204 92 83</li>
+                <li><strong>Email :</strong> groupefayassine@gmail.com</li>
                 <li><strong>Directeur de la publication :</strong> Amadou Fall, Fondateur &amp; CEO</li>
               </ul>
 
@@ -91,7 +91,7 @@ export default function MentionsLegalesPage() {
                 Les données collectées sont conservées pour une durée n'excédant pas celle nécessaire aux finalités pour lesquelles elles ont été collectées. Les données de navigation (logs) sont conservées pendant une durée maximale de 12 mois conformément aux exigences légales applicables.
               </p>
               <p className="text-slate-600 leading-relaxed mb-4">
-                Pour exercer vos droits ou pour toute question relative à l'utilisation de vos données personnelles, vous pouvez nous contacter à l'adresse : <strong>contact@directcolis.sn</strong> ou par courrier à l'adresse du siège social.
+                Pour exercer vos droits ou pour toute question relative à l'utilisation de vos données personnelles, vous pouvez nous contacter à l'adresse : <strong>groupefayassine@gmail.com</strong> ou par courrier à l'adresse du siège social.
               </p>
 
               {/* ── 6. Sécurité des données ── */}
@@ -148,7 +148,7 @@ export default function MentionsLegalesPage() {
                 L'utilisation de l'outil public de suivi de colis disponible sur le site est soumise aux présentes mentions légales ainsi qu'aux conditions particulières acceptées par l'expéditeur lors du dépôt de l'envoi.
               </p>
               <p className="text-slate-600 leading-relaxed mb-4">
-                En cas de perte, détérioration ou retard dans la livraison d'un colis, les réclamations doivent être adressées à Direct Colis par email à <strong>contact@directcolis.sn</strong> dans un délai de 7 jours ouvrés suivant la date de livraison prévue, accompagnées de tout justificatif utile (numéro de suivi, preuve d'envoi, photos le cas échéant).
+                En cas de perte, détérioration ou retard dans la livraison d'un colis, les réclamations doivent être adressées à Direct Colis par email à <strong>groupefayassine@gmail.com</strong> dans un délai de 7 jours ouvrés suivant la date de livraison prévue, accompagnées de tout justificatif utile (numéro de suivi, preuve d'envoi, photos le cas échéant).
               </p>
 
               {/* ── 11. Accessibilité ── */}
@@ -175,9 +175,9 @@ export default function MentionsLegalesPage() {
                 Pour toute question relative aux présentes mentions légales, pour signaler un problème rencontré sur le site, pour exercer vos droits relatifs à vos données personnelles, ou pour adresser une réclamation, vous pouvez contacter Direct Colis aux coordonnées suivantes :
               </p>
               <ul className="text-slate-600 leading-relaxed space-y-1 mb-6 list-disc pl-6">
-                <li><strong>Email :</strong> contact@directcolis.sn</li>
+                <li><strong>Email :</strong> groupefayassine@gmail.com</li>
                 <li><strong>Téléphone :</strong> +221 78 542 17 33 (du lundi au samedi, 8h–18h)</li>
-                <li><strong>Adresse :</strong> Liberté 6, Dakar, Sénégal</li>
+                <li><strong>Adresse :</strong> Médina rue 43x30, Dakar, Sénégal</li>
                 <li><strong>WhatsApp :</strong> +221 78 542 17 33</li>
               </ul>
               <p className="text-slate-600 leading-relaxed mb-4">

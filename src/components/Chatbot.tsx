@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, ChevronRight, Headset } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const WHATSAPP_NUMBER = '221785421733';
+const WHATSAPP_NUMBER = '221772049283';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%20Direct%20Colis%2C%20je%20souhaite%20parler%20%C3%A0%20un%20Charg%C3%A9%20de%20client%C3%A8le.`;
 
 interface Message {
