@@ -853,36 +853,67 @@ export default function App() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.05 }}
               variants={fadeInUp}
-              className="mt-12 md:mt-24 bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-center shadow-2xl"
+              className="mt-12 md:mt-24 relative"
             >
-              {/* Background Map Pattern */}
-              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/world-map.png")' }}></div>
+              {/* Corner arc — top-left (short, follows border-radius) */}
+              <svg className="absolute top-0 left-0 w-16 h-16 text-red-600 pointer-events-none z-20" viewBox="0 0 64 64" fill="none">
+                <path d="M64 8 Q64 0 56 0 L8 0" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                <path d="M0 8 L0 56 Q0 64 8 64" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              </svg>
+              {/* Corner arc — bottom-right */}
+              <svg className="absolute bottom-0 right-0 w-16 h-16 text-red-600 pointer-events-none z-20 rotate-180" viewBox="0 0 64 64" fill="none">
+                <path d="M64 8 Q64 0 56 0 L8 0" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none"/>
+                <path d="M0 8 L0 56 Q0 64 8 64" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none"/>
+              </svg>
 
-              {/* Left Content */}
-              <div className="p-6 sm:p-10 md:p-16 md:w-3/5 relative z-10">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                  {t.process.bannerTitleA} <span className="text-red-500">{t.process.bannerTitleB}</span>
-                </h3>
-                <p className="text-slate-300 mb-8 font-light leading-relaxed max-w-md">
-                  {t.process.bannerDesc}
-                </p>
-                <Link to="/a-propos" className="inline-flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group">
-                  {t.common.learnMore}
-                  <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                    <ArrowRight className="w-5 h-5 text-white" />
+              <div className="bg-blue-950 rounded-[2rem] overflow-hidden relative flex flex-col md:flex-row items-stretch shadow-2xl">
+                {/* Background dot pattern */}
+                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+
+                {/* Left Content */}
+                <div className="p-8 sm:p-12 md:p-14 md:w-[58%] relative z-10 flex flex-col justify-center">
+                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-red-400 mb-5">
+                    <span className="w-4 h-px bg-red-500" />
+                    Direct Colis — Dakar
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+                    {t.process.bannerTitleA}{' '}
+                    <span className="text-red-500">{t.process.bannerTitleB}</span>
+                  </h3>
+                  <p className="text-slate-300/80 mb-8 leading-relaxed max-w-md">
+                    {t.process.bannerDesc}
+                  </p>
+                  {/* Mini stats */}
+                  <div className="flex flex-wrap gap-8 mb-10 border-t border-white/10 pt-6">
+                    {[
+                      { value: '6', label: 'Services logistiques' },
+                      { value: '24h', label: 'Délai livraison Dakar' },
+                      { value: '100%', label: 'Traçabilité garantie' },
+                    ].map((s) => (
+                      <div key={s.label} className="flex flex-col">
+                        <span className="text-2xl font-extrabold text-white">{s.value}</span>
+                        <span className="text-xs text-slate-400 mt-0.5">{s.label}</span>
+                      </div>
+                    ))}
                   </div>
-                </Link>
-              </div>
+                  <Link to="/a-propos" className="inline-flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group shadow-lg shadow-red-600/30">
+                    {t.common.learnMore}
+                    <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <ArrowRight className="w-5 h-5 text-white" />
+                    </div>
+                  </Link>
+                </div>
 
-              {/* Right Content */}
-              <div className="md:w-2/5 relative h-56 sm:h-72 md:h-auto md:absolute md:right-0 md:top-0 md:bottom-0 w-full">
-                <div className="absolute inset-0 bg-red-600 md:rounded-l-[120px] overflow-hidden">
+                {/* Right — image flush, no color overlay */}
+                <div className="md:w-[42%] relative h-60 sm:h-80 md:h-auto overflow-hidden">
                   <img
                     src={numeroImg}
                     alt="Numérotation Direct Colis"
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
+                  {/* Fade edge toward text */}
+                  <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-blue-950 to-transparent" />
                 </div>
               </div>
             </motion.div>
