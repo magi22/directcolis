@@ -44,6 +44,7 @@ const FAQ: { q: string; a: string; linkUrl?: string; linkLabel?: string }[] = [
 ];
 
 export default function Chatbot() {
+  const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -55,6 +56,11 @@ export default function Chatbot() {
   const [showQuestions, setShowQuestions] = useState(true);
   const [hasGreeted, setHasGreeted] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 60_000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -86,29 +92,37 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating button */}
-      <motion.button
-        onClick={() => (open ? setOpen(false) : handleOpen())}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-[200] w-14 h-14 rounded-full bg-red-600 text-white shadow-[0_0_24px_rgba(220,38,38,0.5)] flex items-center justify-center transition-all duration-300"
-        aria-label="Ouvrir le chat"
-      >
-        <AnimatePresence mode="wait">
-          {open ? (
-            <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <X className="w-6 h-6" />
-            </motion.div>
-          ) : (
-            <motion.div key="chat" initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.7, opacity: 0 }} transition={{ duration: 0.2 }}>
-              <MessageSquare className="w-6 h-6" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {!open && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
+      {/* Floating button — shown after 60s */}
+      <AnimatePresence>
+        {visible && (
+          <motion.button
+            onClick={() => (open ? setOpen(false) : handleOpen())}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="fixed bottom-6 right-6 z-[200] w-14 h-14 rounded-full bg-red-600 text-white shadow-[0_0_24px_rgba(220,38,38,0.5)] flex items-center justify-center"
+            aria-label="Ouvrir le chat"
+          >
+            <AnimatePresence mode="wait">
+              {open ? (
+                <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <X className="w-6 h-6" />
+                </motion.div>
+              ) : (
+                <motion.div key="chat" initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.7, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <MessageSquare className="w-6 h-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {!open && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
+            )}
+          </motion.button>
         )}
-      </motion.button>
+      </AnimatePresence>
 
       {/* Chat panel */}
       <AnimatePresence>

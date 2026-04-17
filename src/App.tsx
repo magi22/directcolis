@@ -10,7 +10,6 @@ import blog1 from './assets/images/1.jpg';
 import blog2 from './assets/images/2.jpg';
 import blog3 from './assets/images/3.jpg';
 import numeroImg from './assets/images/numero.png';
-import Chatbot from './components/Chatbot';
 import SiteFooter from './components/SiteFooter';
 import {
   Package, MapPin, CheckCircle, ShieldCheck, Smartphone,
@@ -152,9 +151,6 @@ export default function App() {
     <div className="min-h-screen bg-white font-sans text-slate-900">
       {/* Scan line futuriste (subtil) — masqué sur mobile */}
       <div className="scan-line hidden md:block" aria-hidden="true" />
-
-      {/* Chatbot flottant */}
-      <Chatbot />
 
       {/* 1. Header — fixed */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100/60 shadow-[0_1px_24px_rgba(0,0,0,0.06)]">
