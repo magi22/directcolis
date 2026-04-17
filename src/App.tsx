@@ -896,24 +896,28 @@ export default function App() {
                       </div>
                     ))}
                   </div>
-                  <Link to="/a-propos" className="inline-flex items-center gap-4 bg-red-600 text-white pl-6 pr-2 py-2 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group shadow-lg shadow-red-600/30">
+                  <Link to="/a-propos" className="inline-flex items-center gap-3 bg-red-600 text-white text-sm pl-5 pr-1.5 py-1.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 group shadow-lg shadow-red-600/30">
                     {t.common.learnMore}
-                    <div className="w-10 h-10 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <ArrowRight className="w-5 h-5 text-white" />
+                    <div className="w-8 h-8 bg-blue-950 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <ArrowRight className="w-4 h-4 text-white" />
                     </div>
                   </Link>
                 </div>
 
-                {/* Right — image flush, no color overlay */}
-                <div className="md:w-[42%] relative h-60 sm:h-80 md:h-auto overflow-hidden">
+                {/* Double-line separator */}
+                <div className="hidden md:flex flex-col items-center justify-center gap-1.5 py-10 shrink-0">
+                  <div className="w-px bg-white/20" style={{ height: '120px' }} />
+                  <div className="w-px bg-white/20" style={{ height: '48px' }} />
+                </div>
+
+                {/* Right — image, no color overlay */}
+                <div className="md:flex-1 relative h-60 sm:h-80 md:h-auto overflow-hidden">
                   <img
                     src={numeroImg}
                     alt="Numérotation Direct Colis"
                     loading="lazy"
                     className="w-full h-full object-cover object-center"
                   />
-                  {/* Fade edge toward text */}
-                  <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-blue-950 to-transparent" />
                 </div>
               </div>
             </motion.div>
