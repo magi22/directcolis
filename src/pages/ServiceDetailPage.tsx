@@ -54,7 +54,9 @@ export default function ServiceDetailPage() {
                 <span className="inline-flex items-center gap-1.5 bg-red-600/20 border border-red-500/40 text-red-300 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
                   Service {service.num} · {service.tag}
                 </span>
-                <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 leading-[1.15]">{service.title}</h1>
+                <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 leading-[1.15]">
+                  {service.heroTitle ?? service.title}
+                </h1>
                 <p className="text-blue-100/80 text-base sm:text-lg leading-relaxed max-w-2xl">{service.intro}</p>
               </div>
             </motion.div>
@@ -122,7 +124,10 @@ export default function ServiceDetailPage() {
                   <div className="absolute top-0 right-0 w-48 h-48 bg-red-600/20 rounded-full blur-3xl" />
                   <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-500/15 rounded-full blur-3xl" />
                   <div className="relative">
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-6">{service.cta.title}</h3>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mb-3">{service.cta.title}</h3>
+                    {service.cta.subtitle && (
+                      <p className="text-blue-100/70 text-sm sm:text-base mb-6 max-w-xl mx-auto">{service.cta.subtitle}</p>
+                    )}
                     <div className="flex flex-wrap justify-center gap-3">
                       <Link
                         to={service.cta.primary.to}
