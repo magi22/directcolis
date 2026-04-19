@@ -89,9 +89,9 @@ export const translations = {
       gridTitleHighlight: '6 services',
       gridSubtitle:
         "Cliquez sur « En savoir plus » pour découvrir le détail de chaque service, ses avantages et la manière dont Direct Colis peut l'adapter à votre organisation.",
-      allFeaturesTitle: 'Des outils et garanties inclus dans nos opérations',
-      allFeaturesSubtitle: "Au-delà de l'exécution logistique, Direct Colis s'appuie sur des outils de suivi et de traçabilité qui renforcent la qualité du service à chaque étape.",
-      allFeaturesBadge: 'Outils inclus',
+      allFeaturesTitle: 'Ce qui est inclus dans chaque mission de livraison',
+      allFeaturesSubtitle: "Chaque livraison Direct Colis est accompagnée de suivi, de preuve et de traçabilité — sans supplément, dès le premier colis.",
+      allFeaturesBadge: 'Inclus dans le service',
       ctaTitle: 'Parlons de vos',
       ctaTitleHighlight: 'besoins logistiques',
       ctaTitleEnd: '',
@@ -118,10 +118,10 @@ export const translations = {
       bannerDesc:
         "Direct Colis accompagne les entreprises et particuliers de Dakar dans la gestion de leurs livraisons avec fiabilité, traçabilité et réactivité.",
       steps: [
-        { title: 'Création & Assignation', desc: "Ce processus est dédié à l'enregistrement et l'attribution efficace des colis." },
-        { title: 'Collecte & Scan', desc: 'Ce processus garantit la prise en charge et la traçabilité dès le premier kilomètre.' },
-        { title: 'Transit & Hub', desc: 'Ce processus assure le suivi et le contrôle lors des passages en entrepôt.' },
-        { title: 'Livraison & Preuve', desc: 'Ce processus sécurise la remise finale avec une validation fiable et géolocalisée.' },
+        { title: 'Création & Assignation', desc: "Votre colis est enregistré et attribué à un livreur dès réception de la mission." },
+        { title: 'Collecte & Scan', desc: 'Nos équipes récupèrent le colis et le scannent pour garantir la traçabilité dès le départ.' },
+        { title: 'Transit & Hub', desc: 'Le colis transite par notre entrepôt, contrôlé et préparé avant la livraison finale.' },
+        { title: 'Livraison & Preuve', desc: 'Le destinataire reçoit son colis contre validation — photo, signature ou code OTP.' },
       ],
     },
     // ─── FAQ ─────────────────────────────────────────────
@@ -375,9 +375,9 @@ export const translations = {
       gridTitleHighlight: '6 services',
       gridSubtitle:
         'Click on "Learn more" to discover the detailed operation of each service, its benefits and its usefulness in your organization.',
-      allFeaturesTitle: 'All features included',
-      allFeaturesSubtitle: 'Full access to all our tools, with no extra fee.',
-      allFeaturesBadge: 'All included',
+      allFeaturesTitle: 'Included in every delivery',
+      allFeaturesSubtitle: 'Every Direct Colis delivery comes with tracking, proof, and traceability — no extras, from day one.',
+      allFeaturesBadge: 'Included in the service',
       ctaTitle: 'Ready to',
       ctaTitleHighlight: 'boost',
       ctaTitleEnd: 'your deliveries?',

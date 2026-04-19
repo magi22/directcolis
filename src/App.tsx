@@ -1008,7 +1008,7 @@ export default function App() {
               variants={fadeInUp}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 tracking-tight">Les fonctionnalités qui renforcent vos livraisons</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 tracking-tight">Tout ce qu'on met en place pour chaque colis</h2>
             </motion.div>
 
             <motion.div 
@@ -1025,12 +1025,12 @@ export default function App() {
                 { title: "Suivi GPS", icon: Navigation, desc: "Localisation précise des livreurs pendant leurs tournées." },
                 { title: "OTP de validation", icon: ShieldCheck, desc: "Code de sécurité requis pour la remise du colis." },
                 { title: "Preuve visuelle", icon: Camera, desc: "Photo ou signature électronique à la livraison." },
-                { title: "Gestion des échecs", icon: AlertTriangle, desc: "Processus clair en cas d'absence ou de refus." },
-                { title: "Retour entrepôt", icon: RefreshCcw, desc: "Suivi rigoureux des colis non livrés jusqu'au retour." },
-                { title: "Import Excel / CSV", icon: FileSpreadsheet, desc: "Création de colis en masse simplifiée." },
-                { title: "Impression", icon: Printer, desc: "Génération automatique des étiquettes d'expédition." },
-                { title: "Double identifiant", icon: Package, desc: "Recherche par ID système ou référence client." },
-                { title: "Reporting", icon: BarChart3, desc: "Tableaux de bord et export complet des données." }
+                { title: "Gestion des absences", icon: AlertTriangle, desc: "Protocole structuré en cas d'absence ou de refus du destinataire." },
+                { title: "Retour entrepôt", icon: RefreshCcw, desc: "Chaque colis non remis est retourné et enregistré à notre dépôt." },
+                { title: "Commandes en lot", icon: FileSpreadsheet, desc: "Déposez un fichier pour créer plusieurs missions en une fois." },
+                { title: "Étiquettes d'expédition", icon: Printer, desc: "Impression automatique des bons de livraison et étiquettes." },
+                { title: "Référence client", icon: Package, desc: "Retrouvez chaque colis par votre propre référence ou notre identifiant." },
+                { title: "Bilan des tournées", icon: BarChart3, desc: "Consultez et exportez les résultats de vos livraisons." }
               ].map((feature, i) => (
                 <motion.div 
                   key={i} 
@@ -1062,20 +1062,20 @@ export default function App() {
                 variants={staggerContainer}
               >
                 <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold text-blue-950 mb-6 leading-tight tracking-tight">
-                  Pensé pour les entreprises qui veulent mieux piloter leurs expéditions
+                  Fait pour les entreprises qui livrent au quotidien
                 </motion.h2>
                 <motion.p variants={fadeInUp} className="text-lg text-slate-600 mb-10 leading-relaxed font-light">
-                  Direct Colis aide les structures qui gèrent des volumes réguliers à mieux organiser leurs flux, suivre leurs colis, accéder à leurs preuves de livraison et exploiter leurs données en toute sécurité.
+                  Direct Colis accompagne les structures qui gèrent des volumes réguliers : collecte organisée, tournées encadrées, preuves de remise systématiques et visibilité à chaque étape pour vos équipes et vos clients.
                 </motion.p>
-                
+
                 <ul className="space-y-5">
                   {[
-                    "Import en masse",
-                    "Étiquettes QR par lot",
-                    "Suivi par ID système ou référence client",
-                    "Données cloisonnées par client",
-                    "Statistiques et export Excel",
-                    "Reporting opérationnel"
+                    "Traitement de commandes en volume",
+                    "Étiquettes et bons de livraison par lot",
+                    "Retrouvez chaque colis par votre référence",
+                    "Flux séparés par compte client",
+                    "Bilan et export de vos livraisons",
+                    "Suivi des performances terrain"
                   ].map((point, i) => (
                     <motion.li key={i} variants={fadeInUp} className="flex items-start gap-3">
                       <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-red-600 shrink-0"></div>
