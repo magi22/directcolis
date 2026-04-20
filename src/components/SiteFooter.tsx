@@ -122,9 +122,9 @@ export default function SiteFooter() {
                   &copy; {new Date().getFullYear()} Direct Colis. {t.footer.rights}
                 </p>
                 <p className="text-blue-200/30 text-xs">
-                  {t.footer.devBy}{' '}
-                  <a href="https://wiicode.dev" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors">
-                    Wiicode
+                  par{' '}
+                  <a href="http://wiicode.org/" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors font-bold tracking-wide">
+                    WIICODE
                   </a>
                 </p>
               </div>
