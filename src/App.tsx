@@ -904,22 +904,19 @@ export default function App() {
                   </Link>
                 </div>
 
-                {/* Right — image with diagonal cut on left edge */}
-                <div className="md:flex-1 relative h-60 sm:h-80 md:h-auto">
-                  {/* Image clipped diagonally */}
-                  <div className="absolute inset-0 overflow-hidden" style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0% 100%)' }}>
-                    <img
-                      src={numeroImg}
-                      alt="Numérotation Direct Colis"
-                      loading="lazy"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-                  {/* Glowing diagonal lines along the cut */}
-                  <div className="absolute inset-0 pointer-events-none hidden md:block">
-                    <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100" fill="none">
-                      <line x1="10" y1="0" x2="0" y2="100" stroke="white" strokeWidth="0.4" strokeOpacity="0.7"/>
-                      <line x1="11.5" y1="0" x2="1.5" y2="100" stroke="#ef4444" strokeWidth="0.25" strokeOpacity="0.5"/>
+                {/* Right — image, clean */}
+                <div className="md:flex-1 relative h-60 sm:h-80 md:h-auto overflow-hidden">
+                  <img
+                    src={numeroImg}
+                    alt="Numérotation Direct Colis"
+                    loading="lazy"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  {/* Separator: two diagonal SVG lines on the left edge */}
+                  <div className="absolute inset-y-0 left-0 w-10 pointer-events-none hidden md:block">
+                    <svg className="h-full w-full" viewBox="0 0 40 400" preserveAspectRatio="none" fill="none">
+                      <line x1="28" y1="0" x2="4" y2="400" stroke="white" strokeWidth="1.5" strokeOpacity="0.5"/>
+                      <line x1="34" y1="0" x2="10" y2="400" stroke="#ef4444" strokeWidth="0.8" strokeOpacity="0.35"/>
                     </svg>
                   </div>
                 </div>
