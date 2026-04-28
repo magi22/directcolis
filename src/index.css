@@ -98,6 +98,10 @@ button:disabled,
   animation: ticker-scroll 32s linear infinite;
   will-change: transform;
 }
+.ticker-track-reverse {
+  animation: ticker-scroll 32s linear infinite reverse;
+  will-change: transform;
+}
 
 /* ─── ANIMATED GRADIENT BACKGROUND ───────────────────────── */
 @keyframes gradient-flow {

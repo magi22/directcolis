@@ -20,17 +20,13 @@ export default function SiteFooter() {
 
   return (
     <>
-      {/* Live ticker */}
+      {/* Live ticker — direction inversée */}
       <div className="hidden md:block bg-blue-950 py-3 overflow-hidden relative border-y border-white/5">
-        <motion.div
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-          className="flex items-center gap-12 whitespace-nowrap"
-        >
+        <div className="ticker-track-reverse flex items-center whitespace-nowrap">
           {[...Array(2)].map((_, rep) => (
             <React.Fragment key={rep}>
               {ticker.map((item, i) => (
-                <span key={i} className="inline-flex items-center gap-3 text-sm text-blue-200/70">
+                <span key={i} className="inline-flex items-center gap-3 text-sm text-blue-200/70 mx-6">
                   <span className={`font-bold ${item.status.includes('✓') ? 'text-green-400' : 'text-red-400'}`}>
                     {item.status}
                   </span>
@@ -43,7 +39,7 @@ export default function SiteFooter() {
               ))}
             </React.Fragment>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Footer */}
